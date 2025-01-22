@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
             splitScreenMode: true,
             builder: (_, child) {
               return GetMaterialApp(
-                title: AppConstants.APP_NAME,
+                title: AppConstants.APPNAME,
                 debugShowCheckedModeBanner: false,
                 navigatorKey: Get.key,
                 // theme: themeController.darkTheme ? dark() : light(),

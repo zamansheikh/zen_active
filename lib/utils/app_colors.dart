@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 
 class AppColors {
+  //Splash Screen
+  static Color splashColor = const Color(0xFF37B5FF);
+  static Color splashBackgrond = const Color(0xFFFFFFFF);
+  static Color splashTextColor = const Color(0xFF124A6A);
+
   static Color primaryColor = const Color(0xFF2683EB);
   static Color backgroundColor = const Color(0xFF010101);
   static Color cardColor = const Color(0xFF2F2F2F);
@@ -21,8 +26,4 @@ class AppColors {
     color: shadowColor,
     offset: const Offset(0, 2),
   );
-
-  //Calendar widget colors
-  static Color calendarBackgroundColor = const Color(0xFF010101);
-  static Color calendarSelectedDayColor = const Color(0xFFC8779C);
 }
