@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:zen_active/views/base/bottom_menu..dart';
+import 'package:zen_active/views/components/bottom_menu..dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

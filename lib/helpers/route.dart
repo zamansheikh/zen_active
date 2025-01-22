@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:zen_active/views/screen/Home/home_screen.dart';
+import 'package:zen_active/views/screen/home/home_screen.dart';
 
-import '../views/screen/Splash/splash_screen.dart';
+import '../views/screen/splash/splash_screen.dart';
 
 class AppRoutes {
   static String splashScreen = "/splash_screen";
