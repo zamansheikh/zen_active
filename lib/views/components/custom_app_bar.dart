@@ -1,10 +1,44 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
+import 'package:zen_active/utils/app_colors.dart';
+import 'package:zen_active/utils/uitls.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key});
+  final String? title;
+  const CustomAppBar({super.key, this.title});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+      height: 64,
+      decoration: BoxDecoration(
+        color: AppColors.scaffoldBackgroundColor,
+      ),
+      child: Row(
+        children: [
+          const SizedBox(width: 24),
+          GestureDetector(
+            onTap: () {
+              Get.back();
+            },
+            child: svgViewer(asset: "assets/svg/arrow_back.svg"),
+          ),
+          const Spacer(),
+          Text(
+            title ?? "",
+            style: kTextStyle.copyWith(
+              fontSize: 20,
+              color: Color(0xff222222),
+            ),
+            textAlign: TextAlign.center,
+            textHeightBehavior: TextHeightBehavior(
+              applyHeightToFirstAscent: false,
+            ),
+          ),
+          const Spacer(),
+          const SizedBox(width: 48),
+        ],
+      ),
+    );
   }
 }

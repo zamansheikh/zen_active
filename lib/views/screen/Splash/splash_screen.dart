@@ -6,9 +6,8 @@ import 'package:get/get.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/utils/uitls.dart';
-import 'package:zen_active/views/components/fcustom_button.dart';
+import 'package:zen_active/views/components/custom_button.dart';
 import 'package:zen_active/views/screen/auth/sign_in_screen.dart';
-import 'package:zen_active/views/screen/auth/signup_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -171,7 +170,7 @@ class SplashTwo extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20.h),
-                FCustomButton(
+                CustomButton(
                   buttonName: "Let's Go!",
                   onPressed: () {
                     Get.offAll(

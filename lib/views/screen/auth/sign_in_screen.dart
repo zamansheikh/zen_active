@@ -5,7 +5,7 @@ import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/utils/uitls.dart';
-import 'package:zen_active/views/components/fcustom_button.dart';
+import 'package:zen_active/views/components/custom_button.dart';
 import 'package:zen_active/views/components/fcustom_text_field.dart';
 
 class SigninScreen extends StatefulWidget {
@@ -56,7 +56,7 @@ class _SigninScreenState extends State<SigninScreen> {
                   ),
                 ),
               ),
-              FCustomButton(buttonName: 'Sign In', onPressed: () {}),
+              CustomButton(buttonName: 'Sign In', onPressed: () {}),
               SizedBox(height: 10.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

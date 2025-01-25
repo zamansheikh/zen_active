@@ -5,7 +5,7 @@ import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/utils/uitls.dart';
-import 'package:zen_active/views/components/fcustom_button.dart';
+import 'package:zen_active/views/components/custom_button.dart';
 import 'package:zen_active/views/components/fcustom_text_field.dart';
 
 class ForgetPassword extends StatefulWidget {
@@ -60,7 +60,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   ),
                 ),
               ),
-              FCustomButton(buttonName: 'Sign In', onPressed: () {}),
+              CustomButton(buttonName: 'Sign In', onPressed: () {}),
               SizedBox(height: 10.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/utils/uitls.dart';
-import 'package:zen_active/views/components/fcustom_button.dart';
+import 'package:zen_active/views/components/custom_button.dart';
 import 'package:zen_active/views/components/fcustom_text_field.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -45,7 +45,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 svgIcon: AppConstants.lockIcon,
               ),
               SizedBox(height: 20.h),
-              FCustomButton(buttonName: 'Sign Up', onPressed: () {}),
+              CustomButton(buttonName: 'Sign Up', onPressed: () {}),
               SizedBox(height: 10.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

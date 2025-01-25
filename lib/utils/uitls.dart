@@ -7,14 +7,18 @@ Widget svgViewer({
   double width = 24.0,
   Color? color,
 }) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 8),
-    child: SvgPicture.asset(
-      asset,
-      height: height,
-      width: width,
-      colorFilter:
-          color != null ? ColorFilter.mode(color, BlendMode.srcIn) : null,
-    ),
+  return SvgPicture.asset(
+    asset,
+    height: height,
+    width: width,
+    colorFilter:
+        color != null ? ColorFilter.mode(color, BlendMode.srcIn) : null,
   );
 }
+
+const TextStyle kTextStyle = TextStyle(
+  fontFamily: "Khula",
+  color: Color(0xff222222),
+  fontSize: 16,
+  fontWeight: FontWeight.w600,
+);
