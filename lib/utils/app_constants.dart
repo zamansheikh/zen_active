@@ -1,9 +1,15 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, constant_identifier_names
 import '../models/language_model.dart';
 
 class AppConstants {
   static String APPNAME = "ZenActive";
   static String logo = "assets/logo/zen_logo.png";
+  static String splashImage = "assets/svg/splash.svg";
+
+  //Icons
+  static String mailIcon = "assets/svg/mail.svg";
+  static String eyeOff = "assets/svg/eye-off.svg";
+  static String lockIcon = "assets/svg/lock.svg";
 
   // share preference Key
   static String THEME = "theme";
@@ -23,4 +29,9 @@ class AppConstants {
     LanguageModel(
         languageName: 'Spanish', countryCode: 'ES', languageCode: 'es'),
   ];
+
+  //Splash Screen Texts
+  static String SPLASH_HEADER = "Achieve Your Fitness Goals!";
+  static String SPLASH_SUB_HEADER =
+      "Track your progress, take on challenges, and connect with a community of achievers";
 }

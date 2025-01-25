@@ -74,7 +74,7 @@ extension Loggable on Object {
   /// Ensures the current object is safely converted to a string for logging.
   String _safeToString() {
     try {
-      return this.toString();
+      return toString();
     } catch (e) {
       return 'Error converting object to string: $e';
     }

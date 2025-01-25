@@ -13,7 +13,6 @@ class HomeController extends GetxController implements GetxService {
 
   @override
   void onReady() {
-    // TODO: implement onReady
     debugPrint("On onReady  $title");
     super.onReady();
   }

@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "zen_active",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--no-enable-impeller"
+            ],
+        },
+        {
+            "name": "zen_active (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "args": [
+                "--no-enable-impeller"
+            ],
+        },
+        {
+            "name": "zen_active (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "args": [
+                "--no-enable-impeller"
+            ],
+        }
+    ]
+}
