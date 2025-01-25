@@ -12,12 +12,12 @@ class AppColors {
   //Basic Colors
   static Color backgroundColor = const Color(0xFFFFFFFF);
   static Color textInputBorderColor = const Color(0xFF79CDFF);
+  static Color textColorSub = const Color(0xFF2781B5);
 
   static Color primaryColor = const Color(0xFF2683EB);
   static Color cardColor = const Color(0xFF2F2F2F);
   static Color cardLightColor = const Color(0xFF555555);
   static Color borderColor = const Color(0xFF2683EB);
-  static Color textColor = const Color(0xFFFFFFFF);
   static Color subTextColor = const Color(0xFFE8E8E8);
   static Color hintColor = const Color(0xFF8B8B8B);
   static Color greyColor = const Color(0xFFB5B5B5);

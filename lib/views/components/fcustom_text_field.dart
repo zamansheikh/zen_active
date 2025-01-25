@@ -6,13 +6,13 @@ import 'package:zen_active/utils/uitls.dart';
 
 class FCustomTextField extends StatefulWidget {
   final String hintText;
-  final IconData icon;
+  final String svgIcon;
   final bool isPassword;
 
   const FCustomTextField({
     super.key,
     required this.hintText,
-    required this.icon,
+    required this.svgIcon,
     this.isPassword = false,
   });
 
@@ -25,51 +25,52 @@ class FCustomTextFieldState extends State<FCustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.h),
-      child: TextField(
-        obscureText: widget.isPassword ? _obscureText : false,
-        decoration: InputDecoration(
-          prefixIcon: svgViewer(asset: AppConstants.lockIcon),
-          prefixIconConstraints: BoxConstraints(
-            minWidth: 40.w,
-            minHeight: 40.h,
+    return TextField(
+      obscureText: widget.isPassword ? _obscureText : false,
+      decoration: InputDecoration(
+        prefixIcon: svgViewer(asset: widget.svgIcon),
+        prefixIconConstraints: BoxConstraints(
+          minWidth: 50.w,
+          minHeight: 35.h,
+        ),
+        suffixIcon: widget.isPassword
+            ? IconButton(
+                icon: _obscureText
+                    ? svgViewer(asset: AppConstants.eyeOff)
+                    : svgViewer(asset: AppConstants.eyeOff),
+                onPressed: () {
+                  setState(() {
+                    _obscureText = !_obscureText;
+                  });
+                },
+              )
+            : null,
+        suffixIconConstraints: BoxConstraints(
+          minWidth: 50.w,
+          minHeight: 35.h,
+        ),
+        hintText: widget.hintText,
+        hintStyle: TextStyle(
+          color: AppColors.hintColor,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(width: 1.w, color: AppColors.textInputBorderColor),
+          borderRadius: BorderRadius.circular(8.h),
+        ),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 1.w,
+            color: AppColors.textInputBorderColor,
           ),
-          suffixIcon: widget.isPassword
-              ? IconButton(
-                  icon: Icon(
-                    _obscureText ? Icons.visibility : Icons.visibility_off,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      _obscureText = !_obscureText;
-                    });
-                  },
-                )
-              : null,
-          hintText: widget.hintText,
-          hintStyle: TextStyle(
-            color: AppColors.hintColor,
+          borderRadius: BorderRadius.circular(8.h),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            width: 2.w,
+            color: AppColors.textInputBorderColor,
           ),
-          enabledBorder: OutlineInputBorder(
-            borderSide:
-                BorderSide(width: 1.w, color: AppColors.textInputBorderColor),
-            borderRadius: BorderRadius.circular(8.h),
-          ),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              width: 1.w,
-              color: AppColors.textInputBorderColor,
-            ),
-            borderRadius: BorderRadius.circular(8.h),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              width: 2.w,
-              color: AppColors.textInputBorderColor,
-            ),
-            borderRadius: BorderRadius.circular(8.h),
-          ),
+          borderRadius: BorderRadius.circular(8.h),
         ),
       ),
     );

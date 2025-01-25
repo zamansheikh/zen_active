@@ -10,6 +10,8 @@ class AppConstants {
   static String mailIcon = "assets/svg/mail.svg";
   static String eyeOff = "assets/svg/eye-off.svg";
   static String lockIcon = "assets/svg/lock.svg";
+  static String appLogo = "assets/svg/logo.svg";
+  static String backIcon = "assets/svg/backIcon.svg";
 
   // share preference Key
   static String THEME = "theme";
