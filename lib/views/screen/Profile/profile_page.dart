@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/uitls.dart';
+import 'package:zen_active/views/screen/Profile/leaderboard_page.dart';
 import 'package:zen_active/views/screen/Profile/profile_information_screen.dart';
 import 'package:zen_active/views/screen/Profile/subscription_page.dart';
 
@@ -92,6 +93,7 @@ class ProfilePage extends StatelessWidget {
                       profileOptions(
                         iconPath: "assets/svg/leaderboard.svg",
                         title: "Leaderboard",
+                        onTap: ()=> Get.to(LeaderboardPage()),
                       ),
                       profileOptions(
                         iconPath: "assets/svg/rewards_store.svg",
