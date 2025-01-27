@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/screen/Profile/profile_information_screen.dart';
+import 'package:zen_active/views/screen/Profile/subscription_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -86,6 +87,7 @@ class ProfilePage extends StatelessWidget {
                       profileOptions(
                         iconPath: "assets/svg/subscription.svg",
                         title: "Subscription",
+                        onTap: () => Get.to(SubscriptionPage()),
                       ),
                       profileOptions(
                         iconPath: "assets/svg/leaderboard.svg",
