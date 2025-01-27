@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:zen_active/themes/light_theme.dart';
 import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/utils/message.dart';
 import 'controllers/localization_controller.dart';
 import 'controllers/theme_controller.dart';
 import 'helpers/di.dart' as di;
 import 'helpers/route.dart';
+import 'views/screen/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
     return GetBuilder<ThemeController>(builder: (themeController) {
       return GetBuilder<LocalizationController>(builder: (localizeController) {
         return ScreenUtilInit(
-            designSize: const Size(393, 852),
+            designSize: const Size(402, 852),
             minTextAdapt: true,
             splitScreenMode: true,
             builder: (_, child) {
@@ -35,15 +35,18 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 navigatorKey: Get.key,
                 // theme: themeController.darkTheme ? dark() : light(),
-                theme: light(),
+                theme: ThemeData(
+                  fontFamily: "Khula",
+                ),
                 defaultTransition: Transition.topLevel,
                 locale: localizeController.locale,
                 translations: Messages(languages: languages),
                 fallbackLocale: Locale(AppConstants.languages[0].languageCode,
                     AppConstants.languages[0].countryCode),
                 transitionDuration: const Duration(milliseconds: 500),
-                getPages: AppRoutes.page,
-                initialRoute: AppRoutes.splashScreen,
+                // getPages: AppRoutes.page,
+                // initialRoute: AppRoutes.splashScreen,
+                home: const App(),
               );
             });
       });
