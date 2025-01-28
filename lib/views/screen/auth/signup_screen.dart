@@ -55,6 +55,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     style: TextStyle(
                       color: AppColors.splashSubTextColor,
                       fontSize: 14.sp,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   TextButton(
@@ -66,6 +67,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       style: TextStyle(
                         color: AppColors.primaryColor,
                         fontSize: 14.sp,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),

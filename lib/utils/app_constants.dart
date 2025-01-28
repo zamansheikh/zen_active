@@ -9,6 +9,7 @@ class AppConstants {
   //Icons
   static String mailIcon = "assets/svg/mail.svg";
   static String eyeOff = "assets/svg/eye-off.svg";
+  static String eyeOn = "assets/svg/eye-empty.svg";
   static String lockIcon = "assets/svg/lock.svg";
   static String appLogo = "assets/svg/logo.svg";
   static String backIcon = "assets/svg/backIcon.svg";

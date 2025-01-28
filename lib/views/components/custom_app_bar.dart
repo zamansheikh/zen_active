@@ -5,14 +5,15 @@ import 'package:zen_active/utils/uitls.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String? title;
-  const CustomAppBar({super.key, this.title});
+  final Color? backgroundColor;
+  const CustomAppBar({super.key, this.title, this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 64,
       decoration: BoxDecoration(
-        color: AppColors.scaffoldBackgroundColor,
+        color: backgroundColor ?? AppColors.scaffoldBackgroundColor,
       ),
       child: Row(
         children: [
@@ -28,7 +29,9 @@ class CustomAppBar extends StatelessWidget {
             title ?? "",
             style: kTextStyle.copyWith(
               fontSize: 20,
-              color: Color(0xff222222),
+              color: (backgroundColor != null)
+                  ? Color(0xff525252)
+                  : Color(0xff222222),
             ),
             textAlign: TextAlign.center,
             textHeightBehavior: TextHeightBehavior(
