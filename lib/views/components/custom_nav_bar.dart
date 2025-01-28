@@ -20,7 +20,7 @@ class CustomNavBar extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2),
+            color: Colors.black.withAlpha(50),
             blurRadius: 14,
             spreadRadius: 0,
           ),

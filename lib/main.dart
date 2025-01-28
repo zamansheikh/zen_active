@@ -7,6 +7,7 @@ import 'package:zen_active/utils/message.dart';
 import 'controllers/localization_controller.dart';
 import 'controllers/theme_controller.dart';
 import 'helpers/di.dart' as di;
+// ignore: unused_import
 import 'helpers/route.dart';
 import 'views/screen/app.dart';
 
