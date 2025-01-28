@@ -40,7 +40,9 @@ class SubscriptionPage extends StatelessWidget {
                           "Premium challenges and rewards",
                         ],
                         buttonText: "Subscribe Free",
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(CurrentSubscriptionPage());
+                        },
                       ),
                       SubscriptionWidget(
                         title: "Monthly Subscription",
@@ -69,7 +71,9 @@ class SubscriptionPage extends StatelessWidget {
                           "Save 50% with annual Plan",
                         ],
                         buttonText: "Subscribe Annually",
-                        onTap: () {},
+                        onTap: () {
+                          Get.to(CurrentSubscriptionPage());
+                        },
                       ),
                       const SizedBox(
                         height: 24,

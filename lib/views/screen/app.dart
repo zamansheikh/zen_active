@@ -11,17 +11,42 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   int _index = 0;
+  final int _defaultAnimationDuration = 200;
+  PageController controller = PageController(initialPage: 0);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: CustomAppBar(),
-      // ),
-      body: ProfilePage(),
+      body: PageView(
+        controller: controller,
+        children: [
+          ProfilePage(
+            key: PageStorageKey('a'),
+          ),
+          ProfilePage(
+            key: PageStorageKey('b'),
+          ),
+          ProfilePage(
+            key: PageStorageKey('c'),
+          ),
+          ProfilePage(
+            key: PageStorageKey('d'),
+          ),
+          ProfilePage(
+            key: PageStorageKey('e'),
+          ),
+        ],
+      ),
       bottomNavigationBar: CustomNavBar(
         index: _index,
         onItemTap: (index) {
+          controller.animateToPage(
+            index,
+            duration: Duration(
+              milliseconds: _defaultAnimationDuration * (index - _index).abs(),
+            ),
+            curve: Curves.linear,
+          );
           setState(() {
             _index = index;
           });
