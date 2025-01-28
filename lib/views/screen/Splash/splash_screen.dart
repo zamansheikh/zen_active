@@ -8,6 +8,7 @@ import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_button.dart';
 import 'package:zen_active/views/screen/auth/sign_in_screen.dart';
+import 'package:zen_active/views/screen/auth/user_info_page_stack.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -174,7 +175,7 @@ class SplashTwo extends StatelessWidget {
                   buttonName: "Let's Go!",
                   onPressed: () {
                     Get.offAll(
-                      () => const SigninScreen(),
+                      () => const UserInfoPageStack(),
                     );
                   },
                 )
