@@ -70,7 +70,9 @@ class LeaderboardPage extends StatelessWidget {
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
-                                for (int index = 0; index < list.length; index++)
+                                for (int index = 0;
+                                    index < list.length;
+                                    index++)
                                   Container(
                                     height: 72,
                                     decoration: BoxDecoration(
@@ -85,7 +87,10 @@ class LeaderboardPage extends StatelessWidget {
                                     ),
                                     child: Row(
                                       children: [
-                                        avatar(size: 40),
+                                        avatar(
+                                          size: 40,
+                                          faceNo: 4 + index,
+                                        ),
                                         const SizedBox(
                                           width: 12,
                                         ),
@@ -206,7 +211,7 @@ class LeaderboardPage extends StatelessWidget {
                       color: Color(0xff32A5E8),
                     ),
                   ),
-                  child: avatar(size: 82),
+                  child: avatar(size: 82, faceNo: 3),
                 ),
                 Positioned(
                   bottom: -8,
@@ -283,7 +288,10 @@ class LeaderboardPage extends StatelessWidget {
                       color: Color(0xff32A5E8),
                     ),
                   ),
-                  child: avatar(size: 82),
+                  child: avatar(
+                    size: 82,
+                    faceNo: 2,
+                  ),
                 ),
                 Positioned(
                   bottom: -8,
@@ -359,7 +367,10 @@ class LeaderboardPage extends StatelessWidget {
                       color: Color(0xffFFAA00),
                     ),
                   ),
-                  child: avatar(size: 82),
+                  child: avatar(
+                    size: 82,
+                    faceNo: 1,
+                  ),
                 ),
                 Positioned(
                   bottom: -8,
@@ -417,22 +428,11 @@ class LeaderboardPage extends StatelessWidget {
     );
   }
 
-  Widget avatar({double size = 50}) {
+  Widget avatar({double size = 50, int faceNo = 1}) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(999),
-      child: Image.network(
-        "https://thispersondoesnotexist.com/",
-        loadingBuilder: (context, child, loadingProgress) {
-          if (loadingProgress != null) {
-            return Center(
-              child: Text(
-                "${((loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!) * 100).toInt()}",
-              ),
-            );
-          } else {
-            return child;
-          }
-        },
+      child: Image.asset(
+        "assets/images/faces/$faceNo.png",
         height: size,
         width: size,
       ),
