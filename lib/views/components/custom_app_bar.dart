@@ -37,7 +37,9 @@ class CustomAppBar extends StatelessWidget {
             title ?? "",
             style: kTextStyle.copyWith(
               fontSize: 20,
-              color: Color(0xff222222),
+              color: (backgroundColor != null)
+                  ? Color(0xff525252)
+                  : Color(0xff222222),
             ),
             textAlign: TextAlign.center,
             textHeightBehavior: TextHeightBehavior(

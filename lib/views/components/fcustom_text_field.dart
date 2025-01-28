@@ -26,18 +26,21 @@ class FCustomTextFieldState extends State<FCustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      scrollPadding: EdgeInsets.all(0),
       obscureText: widget.isPassword ? _obscureText : false,
       decoration: InputDecoration(
-        prefixIcon: svgViewer(asset: widget.svgIcon),
+        prefixIcon: svgViewer(
+          asset: widget.svgIcon,
+        ),
         prefixIconConstraints: BoxConstraints(
-          minWidth: 50.w,
-          minHeight: 35.h,
+          minWidth: 60.w,
+          minHeight: 24.h,
         ),
         suffixIcon: widget.isPassword
             ? IconButton(
                 icon: _obscureText
                     ? svgViewer(asset: AppConstants.eyeOff)
-                    : svgViewer(asset: AppConstants.eyeOff),
+                    : svgViewer(asset: AppConstants.eyeOn),
                 onPressed: () {
                   setState(() {
                     _obscureText = !_obscureText;
@@ -46,8 +49,8 @@ class FCustomTextFieldState extends State<FCustomTextField> {
               )
             : null,
         suffixIconConstraints: BoxConstraints(
-          minWidth: 50.w,
-          minHeight: 35.h,
+          minWidth: 60.w,
+          minHeight: 24.h,
         ),
         hintText: widget.hintText,
         hintStyle: TextStyle(

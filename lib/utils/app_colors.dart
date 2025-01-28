@@ -9,6 +9,10 @@ class AppColors {
   static Color splashHeaderTextColor = const Color(0xFF4B4B4B);
   static Color splashButtonColor = const Color(0xFF174C6B);
 
+  //Auth Screen
+  static Color authTitleColor = const Color(0xFF525252);
+  static Color authSubtitleColor = const Color(0xFF525252);
+
   //Basic Colors
   static Color backgroundColor = const Color(0xFFFFFFFF);
   static Color textInputBorderColor = const Color(0xFF79CDFF);
