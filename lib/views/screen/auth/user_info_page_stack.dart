@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:zen_active/controllers/user_info_controller.dart';
 import 'package:zen_active/views/screen/auth/user_info/user_info_five.dart';
 import 'package:zen_active/views/screen/auth/user_info/user_info_four.dart';
 import 'package:zen_active/views/screen/auth/user_info/user_info_one.dart';
@@ -13,7 +15,7 @@ class UserInfoPageStack extends StatefulWidget {
 }
 
 class _UserInfoPageStackState extends State<UserInfoPageStack> {
-  int _index = 0;
+  final controller = Get.put(UserInfoController());
   @override
   void initState() {
     super.initState();
@@ -23,7 +25,7 @@ class _UserInfoPageStackState extends State<UserInfoPageStack> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
-        index: _index,
+        index: controller.currentIndex.value,
         children: [
           UserInfoOne(),
           UserInfoTwo(),

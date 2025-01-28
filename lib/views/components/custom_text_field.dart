@@ -6,12 +6,14 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final bool isDisabled;
   final Function()? onTap;
+  final String? hintText;
   const CustomTextField({
     super.key,
     required this.title,
     this.controller,
     this.isDisabled = false,
     this.onTap,
+    this.hintText,
   });
 
   @override
@@ -39,7 +41,7 @@ class CustomTextField extends StatelessWidget {
               color: Color(0xfffefeff),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                width: 0.5,
+                width: 1.0,
                 color: Color(
                   0xff79CDFF,
                 ),
@@ -55,6 +57,7 @@ class CustomTextField extends StatelessWidget {
                     color: isDisabled ? Color(0xff757575) : Color(0xff4B4B4B),
                   ),
                   decoration: InputDecoration(
+                    hintText: hintText ?? 'Enter your ${title.toLowerCase()}',
                     border: InputBorder.none,
                   ),
                 ),
