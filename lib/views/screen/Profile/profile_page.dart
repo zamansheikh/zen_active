@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/models/reward_model.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/uitls.dart';
+import 'package:zen_active/views/components/custom_button.dart';
+import 'package:zen_active/views/screen/Profile/leaderboard_page.dart';
+import 'package:zen_active/views/screen/Profile/offline_videos_page.dart';
 import 'package:zen_active/views/screen/Profile/profile_information_screen.dart';
+import 'package:zen_active/views/screen/Profile/rewards_store_page.dart';
+import 'package:zen_active/views/screen/Profile/settings_page.dart';
+import 'package:zen_active/views/screen/Profile/subscription_page.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  final RewardModel? reward;
+  const ProfilePage({
+    super.key,
+    this.reward,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +30,30 @@ class ProfilePage extends StatelessWidget {
                 height: 24,
               ),
               Align(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Image.asset(
-                    "assets/images/user.png",
-                    width: 140,
-                    height: 140,
-                    fit: BoxFit.cover,
-                  ),
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.asset(
+                        "assets/images/user.png",
+                        width: 140,
+                        height: 140,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    if (reward != null)
+                      Positioned(
+                        bottom: -10,
+                        left: reward!.isCentered ? 0 : null,
+                        right: reward!.isCentered ? 0 : -10,
+                        child: svgViewer(
+                          asset: reward!.iconPath,
+                          height: 52,
+                          width: 52,
+                        ),
+                      ),
+                  ],
                 ),
               ),
               const SizedBox(
@@ -86,27 +113,99 @@ class ProfilePage extends StatelessWidget {
                       profileOptions(
                         iconPath: "assets/svg/subscription.svg",
                         title: "Subscription",
+                        onTap: () => Get.to(SubscriptionPage()),
                       ),
                       profileOptions(
                         iconPath: "assets/svg/leaderboard.svg",
                         title: "Leaderboard",
+                        onTap: () => Get.to(LeaderboardPage()),
                       ),
                       profileOptions(
                         iconPath: "assets/svg/rewards_store.svg",
                         title: "Rewards Store",
+                        onTap: () => Get.to(RewardsStorePage()),
                       ),
                       profileOptions(
                         iconPath: "assets/svg/offline_videos.svg",
                         title: "Offline Videos",
+                        onTap: () => Get.to(OfflineVideosPage()),
                       ),
                       profileOptions(
                         iconPath: "assets/svg/settings.svg",
                         title: "Settings",
+                        onTap: () => Get.to(SettingsPage()),
                       ),
                       profileOptions(
                         iconPath: "assets/svg/logout.svg",
                         title: "Log Out",
                         isLast: true,
+                        onTap: () {
+                          showModalBottomSheet(
+                              context: context,
+                              backgroundColor: Color(0xffFAFAFA),
+                              // barrierColor: Color(0xff79CDFF),
+                              builder: (_) {
+                                return SafeArea(
+                                  child: SizedBox(
+                                    // height: 500,
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        const SizedBox(
+                                          height: 75,
+                                        ),
+                                        Text(
+                                          "Are you sure you want to",
+                                          style: TextStyle(
+                                            color: Color(0xff4E4E4E),
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                            height: 1,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        Text(
+                                          "Logout?",
+                                          style: TextStyle(
+                                            color: Color(0xff1e648c),
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.w600,
+                                            height: 1,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 32,
+                                        ),
+                                        Row(
+                                          children: [
+                                            const SizedBox(width: 24),
+                                            CustomButton(
+                                              buttonName: "Logout",
+                                              isSecondary: true,
+                                              width: 170,
+                                            ),
+                                            const Spacer(),
+                                            CustomButton(
+                                              buttonName: "Cancel",
+                                              width: 170,
+                                              onPressed: () {
+                                                Get.back();
+                                              },
+                                            ),
+                                            const SizedBox(width: 24),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 75,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              });
+                        },
                       ),
                     ],
                   ),

@@ -46,6 +46,7 @@ dependencies:
   shared_preferences: ^2.4.0
   intl: ^0.20.2
   pinput: ^5.0.1
+  flutter_slidable: ^4.0.0
 
 dev_dependencies:
   flutter_test:
@@ -74,7 +75,10 @@ flutter:
     - assets/language/
     - assets/logo/
     - assets/svg/
+    - assets/svg/rewards/
     - assets/images/
+    - assets/images/faces/
+    - assets/images/offline_videos/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

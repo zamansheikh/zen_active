@@ -20,22 +20,27 @@ class CustomNavBar extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2),
+            color: Colors.black.withAlpha(50),
             blurRadius: 14,
             spreadRadius: 0,
           ),
         ],
       ),
       child: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            navItem("assets/svg/home.svg", "Home", 0),
-            navItem("assets/svg/challenges.svg", "Challenges", 1),
-            navItem("assets/svg/community.svg", "Community", 2),
-            navItem("assets/svg/workouts.svg", "Workouts", 3),
-            navItem("assets/svg/profile.svg", "Profile", 4),
-          ],
+        child: IntrinsicWidth(
+          child: Row(
+            // mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Expanded(child: navItem("assets/svg/home.svg", "Home", 0)),
+              Expanded(
+                  child: navItem("assets/svg/challenges.svg", "Challenges", 1)),
+              Expanded(
+                  child: navItem("assets/svg/community.svg", "Community", 2)),
+              Expanded(
+                  child: navItem("assets/svg/workouts.svg", "Workouts", 3)),
+              Expanded(child: navItem("assets/svg/profile.svg", "Profile", 4)),
+            ],
+          ),
         ),
       ),
     );
@@ -47,23 +52,23 @@ class CustomNavBar extends StatelessWidget {
       onTap: () {
         onItemTap(itemIndex);
       },
-      child: SizedBox(
-        width: isSelected ? 60 : 40,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(height: 16),
-            svgViewer(
-                asset: iconPath,
-                color: isSelected ? Color(0xff222222) : Color(0xff8B8B8B)),
-            if (isSelected)
-              Text(
-                title,
-                style: kTextStyle.copyWith(fontSize: 11),
-              ),
-          ],
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(
+            height: 16,
+          ),
+          svgViewer(
+            asset: iconPath,
+            color: isSelected ? Color(0xff222222) : Color(0xff8B8B8B),
+          ),
+          if (isSelected)
+            Text(
+              title,
+              style: kTextStyle.copyWith(fontSize: 11),
+            ),
+        ],
       ),
     );
   }

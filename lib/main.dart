@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/utils/message.dart';
 import 'controllers/localization_controller.dart';
 import 'controllers/theme_controller.dart';
 import 'helpers/di.dart' as di;
+// ignore: unused_import
 import 'helpers/route.dart';
 import 'views/screen/app.dart';
 
@@ -37,6 +39,7 @@ class MyApp extends StatelessWidget {
                 // theme: themeController.darkTheme ? dark() : light(),
                 theme: ThemeData(
                   fontFamily: "Khula",
+                  scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
                 ),
                 defaultTransition: Transition.topLevel,
                 locale: localizeController.locale,

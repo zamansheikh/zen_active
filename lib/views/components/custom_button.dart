@@ -4,6 +4,8 @@ import '../../utils/app_colors.dart';
 
 class CustomButton extends StatefulWidget {
   final String buttonName;
+  final Color? buttonColor;
+  final Color? textColor;
   final double height;
   final double width;
   final double? textSize;
@@ -18,6 +20,8 @@ class CustomButton extends StatefulWidget {
     this.textSize,
     this.isSecondary = false,
     this.onPressed,
+    this.buttonColor,
+    this.textColor,
   });
 
   @override
@@ -37,17 +41,27 @@ class FCustomButtonState extends State<CustomButton> {
             color: Color(0xff1E648C),
           ),
           borderRadius: BorderRadius.circular(8.h),
-          color: widget.isSecondary ? Color(0xffebf8ff) : AppColors.splashButtonColor,
+          color: widget.buttonColor ??
+              (
+                widget.isSecondary
+                    ? Color(0xffebf8ff)
+                    : AppColors.splashButtonColor
+              ),
         ),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.only(top: 3,),
+            padding: const EdgeInsets.only(
+              top: 3,
+            ),
             child: Text(
               widget.buttonName,
               style: TextStyle(
-                color: widget.isSecondary ? Color(0xff174C6B) : AppColors.splashBackgrond,
-                fontSize: widget.textSize ?? 20.sp,
+                color: widget.isSecondary
+                    ? widget.textColor ?? Color(0xff174C6B)
+                    : widget.textColor ?? AppColors.splashBackgrond,
+                fontSize: widget.textSize ?? 20,
                 fontFamily: "khula",
+                height: 1,
                 fontWeight: FontWeight.w600,
               ),
             ),
