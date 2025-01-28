@@ -78,6 +78,9 @@ flutter:
     - assets/images/
     - assets/images/faces/
     - assets/images/offline_videos/
+    - assets/images/workout_plans/
+    - assets/images/workout_videos/
+    - assets/images/offline_videos/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

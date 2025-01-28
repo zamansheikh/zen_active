@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zen_active/views/components/custom_nav_bar.dart';
 import 'package:zen_active/views/screen/Profile/profile_page.dart';
+import 'package:zen_active/views/screen/Workout/workout_page.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -29,7 +30,7 @@ class _AppState extends State<App> {
           ProfilePage(
             key: PageStorageKey('c'),
           ),
-          ProfilePage(
+          WorkoutPage(
             key: PageStorageKey('d'),
           ),
           ProfilePage(
