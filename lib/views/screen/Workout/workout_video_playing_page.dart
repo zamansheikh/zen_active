@@ -1,0 +1,120 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:zen_active/views/components/custom_app_bar.dart';
+import 'package:zen_active/views/components/workout_videos.dart';
+import 'package:zen_active/views/screen/Workout/workout_video_comments_page.dart';
+
+class WorkoutVideoPlayingPage extends StatelessWidget {
+  const WorkoutVideoPlayingPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            CustomAppBar(
+              title: "Workout Videos",
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                  ),
+                  child: Column(
+                    spacing: 16,
+                    children: [
+                      Hero(
+                        tag: "playing",
+                        child: WorkoutVideos(
+                          isPlaying: true,
+                          assetPath: "assets/images/workout_videos/1.png",
+                          onTap: () {
+                            Get.to(WorkoutVideoPlayingPage());
+                          },
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(WorkoutVideoCommentsPage());
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                              color: Color(0xffFEFEFF),
+                              borderRadius: BorderRadius.circular(4)),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    "Comments ",
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xff222222),
+                                    ),
+                                  ),
+                                  Text(
+                                    "255",
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xff525252),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(999),
+                                    child: Image.asset(
+                                      "assets/images/faces/2.png",
+                                      height: 24,
+                                      width: 24,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Expanded(
+                                    child: Text(
+                                      "Ask CDCR San Quintin State Prison 2008. We installed Purex dispensers throughout the prison.....",
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w400,
+                                        color: Color(0xff222222),
+                                        height: 1,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      WorkoutVideos(
+                        assetPath: "assets/images/workout_videos/2.png",
+                        onTap: () {
+                          Get.to(WorkoutVideoPlayingPage());
+                        },
+                      ),
+                      WorkoutVideos(
+                        assetPath: "assets/images/workout_videos/3.png",
+                        onTap: () {
+                          Get.to(WorkoutVideoPlayingPage());
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

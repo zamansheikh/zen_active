@@ -7,7 +7,6 @@ import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/views/components/custom_button.dart';
 import 'package:zen_active/views/components/custom_line_bar.dart';
 import 'package:zen_active/views/components/custom_selection_button.dart';
-import 'package:zen_active/views/components/custom_text_field.dart';
 
 class UserInfoTwo extends StatefulWidget {
   const UserInfoTwo({super.key});
