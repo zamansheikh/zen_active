@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/workout_plans.dart';
 import 'package:zen_active/views/components/workout_videos.dart';
@@ -42,7 +43,7 @@ class WorkoutPage extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(WorkoutPlansPage());
+                  Get.toNamed(AppRoutes.workoutPlansPage);
                 },
                 behavior: HitTestBehavior.translucent,
                 child: Row(
@@ -118,7 +119,7 @@ class WorkoutPage extends StatelessWidget {
                 subTitle: "Building foundational strength and endurance.",
                 isHighlighted: true,
                 onTap: () {
-                  Get.to(PlanDetailsPage());
+                  Get.toNamed(AppRoutes.workoutPlansDetailsPage);
                 },
               ),
               const SizedBox(
@@ -130,7 +131,7 @@ class WorkoutPage extends StatelessWidget {
                 subTitle: "Enhance strength and build muscle.",
                 isHighlighted: true,
                 onTap: () {
-                  Get.to(PlanDetailsPage());
+                  Get.toNamed(AppRoutes.workoutPlansDetailsPage);
                 },
               ),
               const SizedBox(
@@ -141,7 +142,7 @@ class WorkoutPage extends StatelessWidget {
                 title: "Cardio Conditioning",
                 subTitle: "Improve stamina and cardiovascular health.",
                 onTap: () {
-                  Get.to(PlanDetailsPage());
+                  Get.toNamed(AppRoutes.workoutPlansDetailsPage);
                 },
               ),
               const SizedBox(
@@ -149,7 +150,7 @@ class WorkoutPage extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(WorkoutVideosPage());
+                  Get.toNamed(AppRoutes.workoutVideosPage);
                 },
                 behavior: HitTestBehavior.translucent,
                 child: Row(
@@ -180,6 +181,7 @@ class WorkoutPage extends StatelessWidget {
               ),
               WorkoutVideos(
                 assetPath: "assets/images/workout_videos/1.png",
+                onTap: () => Get.toNamed(AppRoutes.workoutVideoPlayingPage),
               ),
             ],
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
 import 'package:zen_active/views/components/custom_drop_down.dart';
@@ -52,7 +53,7 @@ class OptimizeTraningPage extends StatelessWidget {
                     buttonName: "Submit",
                     width: 145,
                     onPressed: () {
-                      Get.to(OptimizeTraningCompletionPage());
+                      Get.toNamed(AppRoutes.optimizeTrainingCompletionPage);
                     },
                   ),
                 ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/workout_plans.dart';
@@ -99,7 +100,7 @@ class WorkoutPlansPage extends StatelessWidget {
                         subTitle: data[(index * 2) + 1],
                         isHighlighted: index < 2,
                         onTap: () {
-                          Get.to(PlanDetailsPage());
+                          Get.toNamed(AppRoutes.workoutPlansDetailsPage);
                         },
                       ),
                     );

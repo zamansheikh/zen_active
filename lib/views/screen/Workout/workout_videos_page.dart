@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/workout_videos.dart';
-import 'package:zen_active/views/screen/Workout/workout_video_playing_page.dart';
 
 class WorkoutVideosPage extends StatelessWidget {
   const WorkoutVideosPage({super.key});
@@ -106,19 +106,19 @@ class WorkoutVideosPage extends StatelessWidget {
                       WorkoutVideos(
                         assetPath: "assets/images/workout_videos/1.png",
                         onTap: () {
-                          Get.to(WorkoutVideoPlayingPage());
+                          Get.toNamed(AppRoutes.workoutVideoPlayingPage);
                         },
                       ),
                       WorkoutVideos(
                         assetPath: "assets/images/workout_videos/2.png",
                         onTap: () {
-                          Get.to(WorkoutVideoPlayingPage());
+                          Get.toNamed(AppRoutes.workoutVideoPlayingPage);
                         },
                       ),
                       WorkoutVideos(
                         assetPath: "assets/images/workout_videos/3.png",
                         onTap: () {
-                          Get.to(WorkoutVideoPlayingPage());
+                          Get.toNamed(AppRoutes.workoutVideoPlayingPage);
                         },
                       ),
                     ],

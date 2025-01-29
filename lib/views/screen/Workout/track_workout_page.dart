@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
@@ -263,7 +264,7 @@ class _TrackWorkoutPageState extends State<TrackWorkoutPage> {
           buttonName: "Next",
           width: 124,
           onPressed: () {
-            Get.to(OptimizeTraningPage());
+            Get.toNamed(AppRoutes.optimizeTrainingPage);
           },
         ),
       ],
@@ -288,12 +289,6 @@ class SemiCircularProgressPainter extends CustomPainter {
       ..color = Color(0xff2781B5)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 16
-      ..strokeCap = StrokeCap.round;
-
-    final Paint halfCirclePaint = Paint()
-      ..color = Color(0xffC1E8FF)
-      ..style = PaintingStyle.fill
-      ..strokeWidth = 10
       ..strokeCap = StrokeCap.round;
 
     final center = Offset(size.width / 2, size.height);
