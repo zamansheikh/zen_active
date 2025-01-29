@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/workout_plans.dart';
 import 'package:zen_active/views/components/workout_videos.dart';
+import 'package:zen_active/views/screen/Workout/plan_details_page.dart';
 import 'package:zen_active/views/screen/Workout/workout_plans_page.dart';
 
 class WorkoutPage extends StatelessWidget {
@@ -42,6 +43,7 @@ class WorkoutPage extends StatelessWidget {
                 onTap: () {
                   Get.to(WorkoutPlansPage());
                 },
+                behavior: HitTestBehavior.translucent,
                 child: Row(
                   children: [
                     Text(
@@ -114,6 +116,9 @@ class WorkoutPage extends StatelessWidget {
                 title: "Full-Body Plan",
                 subTitle: "Building foundational strength and endurance.",
                 isHighlighted: true,
+                onTap: () {
+                  Get.to(PlanDetailsPage());
+                },
               ),
               const SizedBox(
                 height: 16,
@@ -123,6 +128,9 @@ class WorkoutPage extends StatelessWidget {
                 title: "Strength Building",
                 subTitle: "Enhance strength and build muscle.",
                 isHighlighted: true,
+                onTap: () {
+                  Get.to(PlanDetailsPage());
+                },
               ),
               const SizedBox(
                 height: 16,
@@ -131,12 +139,16 @@ class WorkoutPage extends StatelessWidget {
                 assetPath: "assets/images/workout_plans/3.png",
                 title: "Cardio Conditioning",
                 subTitle: "Improve stamina and cardiovascular health.",
+                onTap: () {
+                  Get.to(PlanDetailsPage());
+                },
               ),
               const SizedBox(
                 height: 24,
               ),
               GestureDetector(
                 onTap: () {},
+                behavior: HitTestBehavior.translucent,
                 child: Row(
                   children: [
                     Text(

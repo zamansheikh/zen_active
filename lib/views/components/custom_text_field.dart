@@ -5,6 +5,7 @@ class CustomTextField extends StatelessWidget {
   final String title;
   final TextEditingController? controller;
   final bool isDisabled;
+  final bool multiline;
   final Function()? onTap;
   final String? hintText;
   const CustomTextField({
@@ -12,6 +13,7 @@ class CustomTextField extends StatelessWidget {
     required this.title,
     this.controller,
     this.isDisabled = false,
+    this.multiline = false,
     this.onTap,
     this.hintText,
   });
@@ -35,7 +37,10 @@ class CustomTextField extends StatelessWidget {
         GestureDetector(
           onTap: onTap,
           child: Container(
-            height: 52,
+            // height: 52,
+            constraints: BoxConstraints(
+              minHeight: 52,
+            ),
             padding: EdgeInsets.symmetric(horizontal: 12),
             decoration: BoxDecoration(
               color: Color(0xfffefeff),
@@ -52,6 +57,7 @@ class CustomTextField extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 3.0),
                 child: TextField(
                   controller: controller,
+                  maxLines: multiline ? 2 : 1,
                   enabled: !isDisabled,
                   style: kTextStyle.copyWith(
                     color: isDisabled ? Color(0xff757575) : Color(0xff4B4B4B),

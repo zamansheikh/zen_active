@@ -7,7 +7,6 @@ import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_button.dart';
-import 'package:zen_active/views/screen/auth/sign_in_screen.dart';
 import 'package:zen_active/views/screen/auth/user_info_page_stack.dart';
 
 class SplashScreen extends StatefulWidget {

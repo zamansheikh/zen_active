@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
+import 'package:zen_active/views/screen/Workout/track_workout_page.dart';
 
 class PlanDetailsPage extends StatelessWidget {
   const PlanDetailsPage({super.key});
@@ -124,7 +126,9 @@ commodo consequat. Duis aute irure dolor in""",
                       ),
                       CustomButton(
                         buttonName: "Start Workout",
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(TrackWorkoutPage());
+                        },
                       ),
                     ],
                   ),
