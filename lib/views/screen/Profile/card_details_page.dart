@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
 import 'package:zen_active/views/components/custom_text_field.dart';
-import 'package:zen_active/views/screen/Profile/subscription_confirmation_page.dart';
 
 class CardDetailsPage extends StatefulWidget {
   const CardDetailsPage({super.key});
@@ -78,7 +78,7 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
                     CustomButton(
                       buttonName: "Confirm Purchase",
                       onPressed: () {
-                        Get.to(SubscriptionConfirmationPage());
+                        Get.toNamed(AppRoutes.subscriptionConfirmationPage);
                       },
                     ),
                     const SizedBox(

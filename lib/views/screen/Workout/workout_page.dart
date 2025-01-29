@@ -4,9 +4,6 @@ import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/workout_plans.dart';
 import 'package:zen_active/views/components/workout_videos.dart';
-import 'package:zen_active/views/screen/Workout/plan_details_page.dart';
-import 'package:zen_active/views/screen/Workout/workout_plans_page.dart';
-import 'package:zen_active/views/screen/Workout/workout_videos_page.dart';
 
 class WorkoutPage extends StatelessWidget {
   const WorkoutPage({super.key});

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
-import 'package:zen_active/views/screen/Profile/card_details_page.dart';
 
 class PaymentMethodPage extends StatelessWidget {
   const PaymentMethodPage({super.key});
@@ -102,7 +102,7 @@ class PaymentMethodPage extends StatelessWidget {
                     CustomButton(
                       buttonName: "Make Payment",
                       onPressed: () {
-                        Get.to(CardDetailsPage());
+                        Get.toNamed(AppRoutes.cardDetailsPage);
                       },
                     ),
                     const SizedBox(

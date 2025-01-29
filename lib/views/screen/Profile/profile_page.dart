@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/models/reward_model.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_button.dart';
-import 'package:zen_active/views/screen/Profile/leaderboard_page.dart';
-import 'package:zen_active/views/screen/Profile/offline_videos_page.dart';
-import 'package:zen_active/views/screen/Profile/profile_information_screen.dart';
-import 'package:zen_active/views/screen/Profile/rewards_store_page.dart';
-import 'package:zen_active/views/screen/Profile/settings_page.dart';
-import 'package:zen_active/views/screen/Profile/subscription_page.dart';
 
 class ProfilePage extends StatelessWidget {
   final RewardModel? reward;
@@ -108,32 +103,32 @@ class ProfilePage extends StatelessWidget {
                       profileOptions(
                         iconPath: "assets/svg/profile_info.svg",
                         title: "Profile Information",
-                        onTap: () => Get.to(ProfileInformationScreen()),
+                        onTap: () => Get.toNamed(AppRoutes.profileInformationScreen),
                       ),
                       profileOptions(
                         iconPath: "assets/svg/subscription.svg",
                         title: "Subscription",
-                        onTap: () => Get.to(SubscriptionPage()),
+                        onTap: () => Get.toNamed(AppRoutes.subscriptionPage),
                       ),
                       profileOptions(
                         iconPath: "assets/svg/leaderboard.svg",
                         title: "Leaderboard",
-                        onTap: () => Get.to(LeaderboardPage()),
+                        onTap: () => Get.toNamed(AppRoutes.leaderboardPage),
                       ),
                       profileOptions(
                         iconPath: "assets/svg/rewards_store.svg",
                         title: "Rewards Store",
-                        onTap: () => Get.to(RewardsStorePage()),
+                        onTap: () => Get.toNamed(AppRoutes.rewardsStorePage),
                       ),
                       profileOptions(
                         iconPath: "assets/svg/offline_videos.svg",
                         title: "Offline Videos",
-                        onTap: () => Get.to(OfflineVideosPage()),
+                        onTap: () => Get.toNamed(AppRoutes.offlineVideosPage),
                       ),
                       profileOptions(
                         iconPath: "assets/svg/settings.svg",
                         title: "Settings",
-                        onTap: () => Get.to(SettingsPage()),
+                        onTap: () => Get.toNamed(AppRoutes.settingsPage),
                       ),
                       profileOptions(
                         iconPath: "assets/svg/logout.svg",

@@ -7,7 +7,6 @@ import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
-import 'package:zen_active/views/screen/Workout/optimize_traning_page.dart';
 
 class TrackWorkoutPage extends StatefulWidget {
   const TrackWorkoutPage({super.key});

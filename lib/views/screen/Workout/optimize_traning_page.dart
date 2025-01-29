@@ -5,7 +5,6 @@ import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
 import 'package:zen_active/views/components/custom_drop_down.dart';
 import 'package:zen_active/views/components/custom_text_field.dart';
-import 'package:zen_active/views/screen/Workout/optimize_traning_completion_page.dart';
 
 class OptimizeTraningPage extends StatelessWidget {
   const OptimizeTraningPage({super.key});

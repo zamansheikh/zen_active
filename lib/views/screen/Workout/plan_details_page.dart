@@ -4,7 +4,6 @@ import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
-import 'package:zen_active/views/screen/Workout/track_workout_page.dart';
 
 class PlanDetailsPage extends StatelessWidget {
   const PlanDetailsPage({super.key});

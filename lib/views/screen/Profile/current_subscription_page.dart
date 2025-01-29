@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
 import 'package:zen_active/views/components/subscription_widget.dart';
-import 'package:zen_active/views/screen/Profile/payment_method_page.dart';
 
 class CurrentSubscriptionPage extends StatelessWidget {
   const CurrentSubscriptionPage({super.key});
@@ -51,7 +51,7 @@ class CurrentSubscriptionPage extends StatelessWidget {
                       CustomButton(
                         buttonName: "Renew",
                         onPressed: () {
-                          Get.to(PaymentMethodPage());
+                          Get.toNamed(AppRoutes.paymentMethodPage);
                         },
                       ),
                     ],

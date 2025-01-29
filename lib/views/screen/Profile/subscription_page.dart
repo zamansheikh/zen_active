@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/subscription_widget.dart';
-import 'package:zen_active/views/screen/Profile/current_subscription_page.dart';
 
 class SubscriptionPage extends StatelessWidget {
   const SubscriptionPage({super.key});
@@ -41,7 +41,7 @@ class SubscriptionPage extends StatelessWidget {
                         ],
                         buttonText: "Subscribe Free",
                         onTap: () {
-                          Get.to(CurrentSubscriptionPage());
+                          Get.toNamed(AppRoutes.currentSubscriptionPage);
                         },
                       ),
                       SubscriptionWidget(
@@ -60,7 +60,7 @@ class SubscriptionPage extends StatelessWidget {
                         buttonText: "Subscribe Monthly",
                         isDark: true,
                         onTap: () {
-                          Get.to(CurrentSubscriptionPage());
+                          Get.toNamed(AppRoutes.currentSubscriptionPage);
                         },
                       ),
                       SubscriptionWidget(
@@ -72,7 +72,7 @@ class SubscriptionPage extends StatelessWidget {
                         ],
                         buttonText: "Subscribe Annually",
                         onTap: () {
-                          Get.to(CurrentSubscriptionPage());
+                          Get.toNamed(AppRoutes.currentSubscriptionPage);
                         },
                       ),
                       const SizedBox(
