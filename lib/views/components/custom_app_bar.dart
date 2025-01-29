@@ -5,8 +5,16 @@ import 'package:zen_active/utils/uitls.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String? title;
+  final String? tailingIconPath;
+  final Function()? tailingCallback;
   final Color? backgroundColor;
-  const CustomAppBar({super.key, this.title, this.backgroundColor});
+  const CustomAppBar({
+    super.key,
+    this.title,
+    this.backgroundColor,
+    this.tailingIconPath,
+    this.tailingCallback,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +47,18 @@ class CustomAppBar extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          const SizedBox(width: 48),
+          SizedBox(
+            width: 48,
+            child: tailingIconPath != null
+                ? Align(
+                    alignment: Alignment.centerLeft,
+                    child: GestureDetector(
+                      onTap: tailingCallback,
+                      child: svgViewer(asset: tailingIconPath!),
+                    ),
+                  )
+                : Container(),
+          ),
         ],
       ),
     );

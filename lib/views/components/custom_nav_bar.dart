@@ -52,6 +52,7 @@ class CustomNavBar extends StatelessWidget {
       onTap: () {
         onItemTap(itemIndex);
       },
+      behavior: HitTestBehavior.translucent,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
