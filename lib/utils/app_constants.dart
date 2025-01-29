@@ -13,6 +13,14 @@ class AppConstants {
   static String lockIcon = "assets/svg/lock.svg";
   static String appLogo = "assets/svg/logo.svg";
   static String backIcon = "assets/svg/backIcon.svg";
+  static String maleIcon = "assets/svg/male.svg";
+  static String femaleIcon = "assets/svg/female.svg";
+  static String boostIcon = "assets/svg/flash.svg";
+  static String walkIcon = "assets/svg/walk.svg";
+  static String walkWithStyle = "assets/svg/walk_with_style.svg";
+  static String uploadIcon = "assets/svg/upload.svg";
+  static String downloadIcon = "assets/svg/download.svg";
+  static String gymIcon = "assets/svg/gym.svg";
 
   // share preference Key
   static String THEME = "theme";
