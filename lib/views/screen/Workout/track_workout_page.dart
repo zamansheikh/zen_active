@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,12 +19,14 @@ class _TrackWorkoutPageState extends State<TrackWorkoutPage> {
   bool isRunning = true;
   bool isPaused = true;
   late Timer timer;
-  Duration remainingTime = Duration(minutes: 1);
+  Duration requiredTime = Duration(minutes: 10);
+  late Duration remainingTime;
   String timeText = "";
 
   @override
   void initState() {
     super.initState();
+    remainingTime = requiredTime;
     timeText =
         "${remainingTime.inMinutes.toString().padLeft(2, "0")}:${(remainingTime.inSeconds % 60).toString().padLeft(2, "0")}";
     toggleTimer();
@@ -100,33 +103,44 @@ class _TrackWorkoutPageState extends State<TrackWorkoutPage> {
             borderRadius: BorderRadius.circular(8),
           ),
           child: Center(
-            child: Container(
-              width: 275,
-              height: 140,
-              decoration: BoxDecoration(
-                color: Color(0xffC1E8FF),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.elliptical(137.5, 137.5),
-                  topRight: Radius.elliptical(137.5, 137.5),
-                  bottomLeft: Radius.circular(8),
-                  bottomRight: Radius.circular(8),
-                ),
-              ),
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                    top: 30,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: 275,
+                  height: 140,
+                  decoration: BoxDecoration(
+                    color: Color(0xffC1E8FF),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.elliptical(137.5, 137.5),
+                      topRight: Radius.elliptical(137.5, 137.5),
+                      bottomLeft: Radius.circular(8),
+                      bottomRight: Radius.circular(8),
+                    ),
                   ),
-                  child: Text(
-                    timeText,
-                    style: TextStyle(
-                      fontFamily: "Roboto",
-                      fontSize: 64,
-                      fontWeight: FontWeight.w600,
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        top: 30,
+                      ),
+                      child: Text(
+                        timeText,
+                        style: TextStyle(
+                          fontFamily: "Roboto",
+                          fontSize: 64,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+                CustomPaint(
+                  size: Size(324, 135),
+                  painter: SemiCircularProgressPainter(
+                    remainingTime.inSeconds / requiredTime.inSeconds,
+                  ),
+                )
+              ],
             ),
           ),
         ),
@@ -254,5 +268,58 @@ class _TrackWorkoutPageState extends State<TrackWorkoutPage> {
         ),
       ],
     );
+  }
+}
+
+class SemiCircularProgressPainter extends CustomPainter {
+  final double progress;
+
+  SemiCircularProgressPainter(this.progress);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint backgroundPaint = Paint()
+      ..color = Color(0xffC1E8FF)
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..strokeWidth = 16;
+
+    final Paint progressPaint = Paint()
+      ..color = Color(0xff2781B5)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 16
+      ..strokeCap = StrokeCap.round;
+
+    final Paint halfCirclePaint = Paint()
+      ..color = Color(0xffC1E8FF)
+      ..style = PaintingStyle.fill
+      ..strokeWidth = 10
+      ..strokeCap = StrokeCap.round;
+
+    final center = Offset(size.width / 2, size.height);
+    final radius = size.width / 2;
+
+    // Draw background arc
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      pi,
+      pi,
+      false,
+      backgroundPaint,
+    );
+
+    // Draw progress arc
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      pi,
+      pi * progress,
+      false,
+      progressPaint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
   }
 }
