@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_button.dart';
-import 'package:zen_active/views/screen/Challenges/challenge_details_page.dart';
 
 class ChallengesPage extends StatelessWidget {
   const ChallengesPage({super.key});
@@ -80,12 +80,12 @@ class ChallengesPage extends StatelessWidget {
       {bool isCompleted = false}) {
     return GestureDetector(
       onTap: () {
-        Get.to(ChallengeDetailsPage());
+        Get.toNamed(AppRoutes.cardDetailsPage);
       },
       child: Container(
         padding: EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: Color(0xffFEFEFF),
+          color: isCompleted ? Color(0xffC1E8FF) : Color(0xffFEFEFF),
           border: Border.all(
             color: Color(0xff79CDFF),
           ),

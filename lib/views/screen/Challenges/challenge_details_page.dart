@@ -210,7 +210,7 @@ class ChallengeDetailsPage extends StatelessWidget {
                         CustomButton(
                           buttonName: "Take the Challenge",
                           onPressed: () {
-                            Get.toNamed(AppRoutes.trackWorkoutPage);
+                            Get.toNamed(AppRoutes.challengeProgressPage);
                           },
                         ),
                       ],

@@ -1,4 +1,7 @@
 import 'package:get/get.dart';
+import 'package:zen_active/views/screen/Challenges/challenge_details_page.dart';
+import 'package:zen_active/views/screen/Challenges/challenge_progress_page.dart';
+import 'package:zen_active/views/screen/Challenges/challenges_page.dart';
 import 'package:zen_active/views/screen/Workout/workout_progress_page.dart';
 import 'package:zen_active/views/screen/auth/forget_password.dart';
 import 'package:zen_active/views/screen/auth/sign_in_screen.dart';
@@ -9,7 +12,6 @@ import 'package:zen_active/views/screen/splash/splash_screen.dart';
 import 'package:zen_active/views/screen/workout/optimize_traning_completion_page.dart';
 import 'package:zen_active/views/screen/workout/optimize_traning_page.dart';
 import 'package:zen_active/views/screen/workout/plan_details_page.dart';
-import 'package:zen_active/views/screen/workout/track_workout_page.dart';
 import 'package:zen_active/views/screen/workout/workout_page.dart';
 import 'package:zen_active/views/screen/workout/workout_plans_page.dart';
 import 'package:zen_active/views/screen/workout/workout_videos_page.dart';
@@ -25,9 +27,7 @@ import 'package:zen_active/views/screen/profile/payment_method_page.dart';
 import 'package:zen_active/views/screen/profile/privary_policy_page.dart';
 import 'package:zen_active/views/screen/profile/profile_information_screen.dart';
 import 'package:zen_active/views/screen/profile/profile_page.dart';
-// import 'package:zen_active/views/screen/profile/redeem_rewards_store_page.dart';
 import 'package:zen_active/views/screen/profile/rewards_store_page.dart';
-// import 'package:zen_active/views/screen/profile/reward_confirmation_page.dart';
 import 'package:zen_active/views/screen/profile/settings_page.dart';
 import 'package:zen_active/views/screen/profile/subscription_confirmation_page.dart';
 import 'package:zen_active/views/screen/profile/subscription_page.dart';
@@ -39,6 +39,11 @@ class AppRoutes {
   static String signUpScreen = "/sign_up_screen";
   static String signInScreen = "/sign_in_screen";
   static String forgetPassword = "/forget_password";
+
+  // Challenges
+  static String challengesPage = "/challenges_page";
+  static String challengeDetailsPage = '/challenge_details_page';
+  static String challengeProgressPage = '/challenge_progress_page';
 
   // Workout Pages
   static String workoutPage = "/workout_page";
@@ -81,6 +86,11 @@ class AppRoutes {
     GetPage(name: signInScreen, page: () => SigninScreen()),
     GetPage(name: forgetPassword, page: () => ForgetPassword()),
 
+    // Challenges
+    GetPage(name: challengesPage, page: ()=> ChallengesPage()),
+    GetPage(name: challengeDetailsPage, page: ()=> ChallengeDetailsPage()),
+    GetPage(name: challengeProgressPage, page: ()=> ChallengeProgressPage()),
+
     // Workout Pages
     GetPage(name: workoutPage, page: () => WorkoutPage()),
     GetPage(name: workoutPlansPage, page: () => WorkoutPlansPage()),
@@ -89,7 +99,7 @@ class AppRoutes {
     GetPage(
         name: optimizeTrainingCompletionPage,
         page: () => OptimizeTraningCompletionPage()),
-    GetPage(name: workoutProgressPage, page: ()=> WorkoutProgressPage()),
+    GetPage(name: workoutProgressPage, page: () => WorkoutProgressPage()),
     GetPage(name: workoutVideosPage, page: () => WorkoutVideosPage()),
     GetPage(
         name: workoutVideoPlayingPage, page: () => WorkoutVideoPlayingPage()),
