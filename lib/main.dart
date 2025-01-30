@@ -47,9 +47,9 @@ class MyApp extends StatelessWidget {
                 fallbackLocale: Locale(AppConstants.languages[0].languageCode,
                     AppConstants.languages[0].countryCode),
                 transitionDuration: const Duration(milliseconds: 500),
-                getPages: AppRoutes.page,
-                initialRoute: AppRoutes.splashScreen,
-                home: const App(),
+                getPages: AppRoutes.pages,
+                // initialRoute: AppRoutes.splashScreen,
+                home: const App(key: PageStorageKey('app'),),
               );
             });
       });

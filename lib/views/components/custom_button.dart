@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zen_active/utils/uitls.dart';
+import 'package:zen_active/views/components/custom_loading.dart';
 import '../../utils/app_colors.dart';
 
 class CustomButton extends StatefulWidget {
@@ -59,9 +60,7 @@ class FCustomButtonState extends State<CustomButton> {
               top: 3,
             ),
             child: widget.isLoading
-                ? CircularProgressIndicator(
-                    color: Colors.white,
-                  )
+                ? CustomLoading()
                 : Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

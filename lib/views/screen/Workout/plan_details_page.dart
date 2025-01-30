@@ -5,8 +5,21 @@ import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
 
-class PlanDetailsPage extends StatelessWidget {
-  const PlanDetailsPage({super.key});
+class PlanDetailsPage extends StatefulWidget {
+  final bool isJoined;
+  const PlanDetailsPage({
+    super.key,
+    this.isJoined = true,
+  });
+
+  @override
+  State<PlanDetailsPage> createState() => _PlanDetailsPageState();
+}
+
+class _PlanDetailsPageState extends State<PlanDetailsPage> {
+  bool isJoining = false;
+  bool hasJoined = false;
+  bool isJoined = false;
 
   @override
   Widget build(BuildContext context) {
@@ -124,12 +137,45 @@ commodo consequat. Duis aute irure dolor in""",
                       const SizedBox(
                         height: 40,
                       ),
-                      CustomButton(
-                        buttonName: "Start Workout",
-                        onPressed: () {
-                          Get.toNamed(AppRoutes.workoutProgressPage);
-                        },
-                      ),
+                      /* 
+                        Temoporary Solution
+                        Use Switch Case during API-Integration
+                      */
+                      widget.isJoined || isJoined
+                          ? CustomButton(
+                              buttonName: "Start Workout",
+                              onPressed: () {
+                                Get.toNamed(AppRoutes.workoutProgressPage);
+                              },
+                            )
+                          : CustomButton(
+                              buttonName: hasJoined
+                                  ? "You successfully joined this plan"
+                                  : "Join this Plan",
+                              isLoading: isJoining,
+                              leadingIcon: hasJoined
+                                  ? "assets/svg/tick_circled.svg"
+                                  : null,
+                              textSize: hasJoined ? 18 : 20,
+                              onPressed: () async {
+                                setState(() {
+                                  isJoining = true;
+                                });
+                                await Future.delayed(
+                                  const Duration(seconds: 1),
+                                );
+                                setState(() {
+                                  isJoining = false;
+                                  hasJoined = true;
+                                });
+                                await Future.delayed(
+                                  const Duration(seconds: 1),
+                                );
+                                setState(() {
+                                  isJoined = true;
+                                });
+                              },
+                            ),
                     ],
                   ),
                 ),

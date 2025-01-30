@@ -4,6 +4,7 @@ import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/workout_plans.dart';
 import 'package:zen_active/views/components/workout_videos.dart';
+import 'package:zen_active/views/screen/Workout/plan_details_page.dart';
 
 class WorkoutPage extends StatelessWidget {
   const WorkoutPage({super.key});
@@ -126,9 +127,13 @@ class WorkoutPage extends StatelessWidget {
                 assetPath: "assets/images/workout_plans/2.png",
                 title: "Strength Building",
                 subTitle: "Enhance strength and build muscle.",
-                isHighlighted: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.workoutPlansDetailsPage);
+                  // Get.toNamed(AppRoutes.workoutPlansDetailsPage);
+                  Get.to(()=>
+                    PlanDetailsPage(
+                      isJoined: false,
+                    ),
+                  );
                 },
               ),
               const SizedBox(
@@ -139,7 +144,12 @@ class WorkoutPage extends StatelessWidget {
                 title: "Cardio Conditioning",
                 subTitle: "Improve stamina and cardiovascular health.",
                 onTap: () {
-                  Get.toNamed(AppRoutes.workoutPlansDetailsPage);
+                  // Get.toNamed(AppRoutes.workoutPlansDetailsPage);
+                  Get.to(()=>
+                    PlanDetailsPage(
+                      isJoined: false,
+                    ),
+                  );
                 },
               ),
               const SizedBox(

@@ -4,6 +4,7 @@ import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/workout_plans.dart';
+import 'package:zen_active/views/screen/Workout/plan_details_page.dart';
 
 class WorkoutPlansPage extends StatelessWidget {
   const WorkoutPlansPage({super.key});
@@ -99,7 +100,15 @@ class WorkoutPlansPage extends StatelessWidget {
                         subTitle: data[(index * 2) + 1],
                         isHighlighted: index < 2,
                         onTap: () {
-                          Get.toNamed(AppRoutes.workoutPlansDetailsPage);
+                          if (index == 0) {
+                            Get.toNamed(AppRoutes.workoutPlansDetailsPage);
+                          } else {
+                            Get.to(
+                              PlanDetailsPage(
+                                isJoined: false,
+                              ),
+                            );
+                          }
                         },
                       ),
                     );
