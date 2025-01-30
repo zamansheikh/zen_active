@@ -66,6 +66,7 @@ flutter:
     - assets/images/workout_plans/
     - assets/images/workout_videos/
     - assets/images/offline_videos/
+    - assets/images/challenges/
 
   fonts:
     - family: Khula

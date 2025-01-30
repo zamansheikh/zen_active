@@ -9,6 +9,7 @@ class CustomButton extends StatefulWidget {
   final double height;
   final double width;
   final double? textSize;
+  final double borderRadius;
   final bool isSecondary;
   final VoidCallback? onPressed;
 
@@ -22,6 +23,7 @@ class CustomButton extends StatefulWidget {
     this.onPressed,
     this.buttonColor,
     this.textColor,
+    this.borderRadius = 8,
   });
 
   @override
@@ -40,13 +42,11 @@ class FCustomButtonState extends State<CustomButton> {
           border: Border.all(
             color: Color(0xff1E648C),
           ),
-          borderRadius: BorderRadius.circular(8.h),
+          borderRadius: BorderRadius.circular(widget.borderRadius),
           color: widget.buttonColor ??
-              (
-                widget.isSecondary
-                    ? Color(0xffebf8ff)
-                    : AppColors.splashButtonColor
-              ),
+              (widget.isSecondary
+                  ? Color(0xffebf8ff)
+                  : AppColors.splashButtonColor),
         ),
         child: Center(
           child: Padding(
