@@ -127,7 +127,7 @@ commodo consequat. Duis aute irure dolor in""",
                       CustomButton(
                         buttonName: "Start Workout",
                         onPressed: () {
-                          Get.toNamed(AppRoutes.trackWorkoutPage);
+                          Get.toNamed(AppRoutes.workoutProgressPage);
                         },
                       ),
                     ],
