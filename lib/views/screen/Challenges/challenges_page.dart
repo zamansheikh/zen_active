@@ -80,7 +80,7 @@ class ChallengesPage extends StatelessWidget {
       {bool isCompleted = false}) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(AppRoutes.cardDetailsPage);
+        Get.toNamed(AppRoutes.challengeDetailsPage);
       },
       child: Container(
         padding: EdgeInsets.all(12),
@@ -137,35 +137,13 @@ class ChallengesPage extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                CustomButton(
-                  buttonName: isCompleted ? "" : "Take the Challenge",
-                  textSize: 14,
-                  height: 33,
-                  width: isCompleted ? 130 : 150,
-                  borderRadius: 4,
-                ),
-                if (isCompleted)
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      svgViewer(asset: "assets/svg/tick.svg"),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5.0),
-                        child: Text(
-                          "Completed",
-                          style: TextStyle(
-                            color: Color(0xffFEFEFF),
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-              ],
+            CustomButton(
+              buttonName: isCompleted ? "Completed" : "Take the Challenge",
+              textSize: 14,
+              height: 33,
+              width: isCompleted ? 130 : 150,
+              borderRadius: 4,
+              leadingIcon: isCompleted ? "assets/svg/tick.svg" : null,
             ),
           ],
         ),

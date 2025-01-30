@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:zen_active/utils/uitls.dart';
 import '../../utils/app_colors.dart';
 
 class CustomButton extends StatefulWidget {
@@ -11,6 +12,8 @@ class CustomButton extends StatefulWidget {
   final double? textSize;
   final double borderRadius;
   final bool isSecondary;
+  final String? leadingIcon;
+  final bool isLoading;
   final VoidCallback? onPressed;
 
   const CustomButton({
@@ -23,7 +26,9 @@ class CustomButton extends StatefulWidget {
     this.onPressed,
     this.buttonColor,
     this.textColor,
+    this.leadingIcon,
     this.borderRadius = 8,
+    this.isLoading = false,
   });
 
   @override
@@ -53,18 +58,35 @@ class FCustomButtonState extends State<CustomButton> {
             padding: const EdgeInsets.only(
               top: 3,
             ),
-            child: Text(
-              widget.buttonName,
-              style: TextStyle(
-                color: widget.isSecondary
-                    ? widget.textColor ?? Color(0xff174C6B)
-                    : widget.textColor ?? AppColors.splashBackgrond,
-                fontSize: widget.textSize ?? 20,
-                fontFamily: "khula",
-                height: 1,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+            child: widget.isLoading
+                ? CircularProgressIndicator(
+                    color: Colors.white,
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (widget.leadingIcon != null)
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            bottom: 5.0,
+                            right: 4,
+                          ),
+                          child: svgViewer(asset: widget.leadingIcon!),
+                        ),
+                      Text(
+                        widget.buttonName,
+                        style: TextStyle(
+                          color: widget.isSecondary
+                              ? widget.textColor ?? Color(0xff174C6B)
+                              : widget.textColor ?? AppColors.splashBackgrond,
+                          fontSize: widget.textSize ?? 20,
+                          fontFamily: "khula",
+                          height: 1,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
           ),
         ),
       ),
