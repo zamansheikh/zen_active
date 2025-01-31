@@ -21,6 +21,12 @@ class AppConstants {
   static String uploadIcon = "assets/svg/upload.svg";
   static String downloadIcon = "assets/svg/download.svg";
   static String gymIcon = "assets/svg/gym.svg";
+  static String maditationIcon = "assets/svg/maditation.svg";
+  static String glutenIcon = "assets/svg/gluten.svg";
+  static String ketoIcon = "assets/svg/keto.svg";
+  static String vegitableIcon = "assets/svg/vegitable.svg";
+  static String veganIcon = "assets/svg/vegan.svg";
+  static String noPrefIcon = "assets/svg/no_pref.svg";
 
   // share preference Key
   static String THEME = "theme";
