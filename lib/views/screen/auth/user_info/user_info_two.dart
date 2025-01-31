@@ -7,6 +7,7 @@ import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/views/components/custom_button.dart';
 import 'package:zen_active/views/components/custom_line_bar.dart';
 import 'package:zen_active/views/components/custom_selection_button.dart';
+import 'package:zen_active/views/screen/auth/user_info/user_info_three.dart';
 
 class UserInfoTwo extends StatefulWidget {
   const UserInfoTwo({super.key});
@@ -34,7 +35,7 @@ class _UserInfoTwoState extends State<UserInfoTwo> {
                 ),
                 SizedBox(height: 40.h),
                 Text(
-                  'Tell us about yourself',
+                  'What are your primary fitness goals?',
                   style: TextStyle(
                     color: AppColors.splashTextColor,
                     fontSize: 29.sp,
@@ -43,7 +44,7 @@ class _UserInfoTwoState extends State<UserInfoTwo> {
                 ),
                 SizedBox(height: 24.h),
                 Text(
-                  'We’ll use this information to calculate your fitness and nutritional needs',
+                  'To personalize your experience, choose up to 3 goals that matter most to you',
                   style: TextStyle(
                     color: AppColors.splashTextColor,
                     fontSize: 14.sp,
@@ -76,7 +77,7 @@ class _UserInfoTwoState extends State<UserInfoTwo> {
                   isSecondary: true,
                   hasIcon: true,
                   buttonName: "Increase Flexibility",
-                  svgPath: AppConstants.boostIcon,
+                  svgPath: AppConstants.walkWithStyle,
                 ),
                 SizedBox(height: 24.h),
                 CustomSelectionButton(
@@ -89,20 +90,21 @@ class _UserInfoTwoState extends State<UserInfoTwo> {
                   isSecondary: true,
                   hasIcon: true,
                   buttonName: "Enhance Mental Health",
-                  svgPath: AppConstants.boostIcon,
+                  svgPath: AppConstants.maditationIcon,
                 ),
                 SizedBox(height: 24.h),
                 CustomSelectionButton(
                   isSecondary: true,
                   hasIcon: true,
                   buttonName: "Gain Weight",
-                  svgPath: AppConstants.boostIcon,
+                  svgPath: AppConstants.uploadIcon,
                 ),
                 SizedBox(height: 24.h),
                 CustomButton(
                     buttonName: 'Next',
                     onPressed: () {
-                      Get.to(() => UserInfoTwo());
+                      controller.currentIndex.value = 2;
+                      Get.to(() => UserInfoThree());
                     }),
                 SizedBox(height: 40.h),
               ],
