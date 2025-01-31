@@ -58,24 +58,24 @@ class FCustomButtonState extends State<CustomSelectionButton> {
             ),
             child: Row(
               children: [
-                SizedBox(width: 24.w),
+                if (widget.hasIcon) SizedBox(width: 24.w),
                 if (widget.svgPath != null)
                   svgViewer(
                     asset: widget.svgPath!,
                     color: widget.isSecondary
                         ? widget.textColor ?? Color(0xff2d2d2d)
                         : widget.textColor ?? AppColors.splashBackgrond,
-                    height: 32.h,
+                    height: 24.h,
                     width: 24.w,
                   ),
-                SizedBox(width: 8.w),
+                (widget.hasIcon) ? SizedBox(width: 8.w) : SizedBox(width: 15.w),
                 Text(
                   widget.buttonName,
                   style: TextStyle(
                     color: widget.isSecondary
                         ? widget.textColor ?? Color(0xff2d2d2d)
                         : widget.textColor ?? AppColors.splashBackgrond,
-                    fontSize: widget.textSize ?? 16.sp,
+                    fontSize: widget.textSize?.sp ?? 16.sp,
                     fontFamily: "khula",
                     height: 1,
                     fontWeight: FontWeight.w600,

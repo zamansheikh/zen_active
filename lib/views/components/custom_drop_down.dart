@@ -22,6 +22,7 @@ class CustomDropDown extends StatefulWidget {
 
 class _CustomDropDownState extends State<CustomDropDown> {
   bool isExpanded = false;
+  String? seletedOption;
   ExpansionTileController controller = ExpansionTileController();
 
   @override
@@ -59,7 +60,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
               child: ExpansionTile(
                 controller: controller,
                 title: Text(
-                  widget.hintText!,
+                  seletedOption ?? widget.hintText ?? 'Select an option',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 16,
@@ -76,6 +77,9 @@ class _CustomDropDownState extends State<CustomDropDown> {
                         if (widget.onChanged != null) {
                           widget.onChanged!(widget.options[i]);
                         }
+                        setState(() {
+                          seletedOption = widget.options[i];
+                        });
                         controller.collapse();
                       },
                       child: Container(
