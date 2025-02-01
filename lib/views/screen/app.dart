@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zen_active/views/components/custom_nav_bar.dart';
 import 'package:zen_active/views/screen/Challenges/challenges_page.dart';
+import 'package:zen_active/views/screen/Community/community_app.dart';
 import 'package:zen_active/views/screen/Home/home_screen.dart';
 import 'package:zen_active/views/screen/Profile/profile_page.dart';
 import 'package:zen_active/views/screen/Workout/workout_page.dart';
@@ -34,7 +35,7 @@ class _AppState extends State<App> {
           ChallengesPage(
             key: PageStorageKey('b'),
           ),
-          ProfilePage(
+          CommunityApp(
             key: PageStorageKey('c'),
           ),
           WorkoutPage(
