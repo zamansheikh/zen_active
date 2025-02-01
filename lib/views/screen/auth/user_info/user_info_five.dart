@@ -6,7 +6,6 @@ import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/views/components/custom_button.dart';
 import 'package:zen_active/views/components/custom_drop_down.dart';
 import 'package:zen_active/views/components/custom_line_bar.dart';
-import 'package:zen_active/views/components/custom_selection_button.dart';
 
 class UserInfoFive extends StatefulWidget {
   const UserInfoFive({super.key});
