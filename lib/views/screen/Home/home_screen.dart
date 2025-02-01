@@ -2,12 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:zen_active/utils/app_colors.dart';
-import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/utils/uitls.dart';
+import 'package:zen_active/views/components/food_item_card.dart';
+import 'package:zen_active/views/components/suggestion_card.dart';
+import 'package:zen_active/views/screen/home/home_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  List<String> images = [
+    'https://s3-alpha-sig.figma.com/img/b97f/3445/3cfa17c61a357bcf8fad128ff59de03c?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=bv7rgBpTMMnwpZBFHt4cmRD5xU1GSvRfC7dktCEsa6CzxnqQ1C8ILEQP5On8Xem7G4~DT8nbU30FTB7H-8Po8ggmO9rsijf18GPoAlKWa-8lI3EAL9SSpA4R9iA5URZmrbuG4SME~D-XSiJEb0blMQhOPZeUA7cVZV1JPQgm02dsZWU1Es1ttxUMMWACx2rM4bDfeZ5PxJ9C~RtHNyVOyv3VOytr~dBuzeJNGvitxUCBLNoEbieH9pkQrLSBPnLT8KDkRvzH6PC577J3b-0xve83Es7p0vTyPcm44ie5xb-ucci6ZEgtTQ7VmEAwlN-R1uY6wcxugd8flbWto5sx0A__',
+    'https://s3-alpha-sig.figma.com/img/212f/a1f9/ed913cb886d076193af6cf5481359d7b?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=cQpBPet31O3XPxW4asZCO8HoYnAsjv8msO-jenKvaWY4R7cM4spgp0sRK-EMvT5aAIdHkUII1~udVaG9ztsaMsUynf5bVX90q3pyX8PGdNGppKXSEyV~z~pUy0~pdW7othx1kEbrYQI2azeN~nif3JH6Rkekpf5nnDygdJrDnWHjHnQ3NsqmUBzkDmHClX~wjPXhzQ4rQyJceM4YXARdgWaiJnGb7x8qoAJ~ooLCODk~MnFyOlheyN13GWW3JGYE9CR2naI~ogJq3u1OlJSPo3ZVxfar2Q5Z1p4oqDJsSUyBGg0vh~SSOwKIwWY56WDVCKwWi4Q5MfUaXom0a3sO8Q__',
+    'https://s3-alpha-sig.figma.com/img/bd59/bedf/c81d55cf2715d16603e71c8bf7746754?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=uZDoiQwGin1lBJXfA7Rb3JeG9dD0zbXqPCenTC1jHNMAZryxk9lWEMOEeAXC3axY6rmp4Y3-nct4zIIySj0Id2FiwssNCLPP-SeWOVriE3FZU4u-Pl5aTDLzN~8cCZfoGHdnQhgsD9DjUnGSzyR8BUO2KASconXE2r7CTQwxTAaGMcIiQwO6VXxdOpAA2zLnVW7qcLRrJLsyy~Nc8aGBfIPZ0nBEQgWBvCAvvhYoikdvs0mlEJXKudNzDilsUAKgMaWl7AkSBe4VSQU5Tu65SlGj4iQIV0tJ1Bfsddq8yuhPYCSPxjG9EoSaP-gE6L7I09OtSJm4baGVHCCO-eMGzA__',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -240,132 +252,38 @@ class HomeScreen extends StatelessWidget {
               ),
               SizedBox(height: 24.h),
               //Today Workout --- see all
-              SectionDev(
-                sectionName: 'Today Workout',
-              ),
+              // SectionDev(
+              //   sectionName: 'Today Workout',
+              // ),
               SizedBox(height: 12.h),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: List.generate(5, (index) {
-                    return Container(
-                      width: 120.w,
-                      height: 120.h,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(height: 8.h),
-                          Text(
-                            'Running',
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.primaryTextColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-                ),
+                child: Row(spacing: 12.w, children: [
+                  SuggestionCard(
+                      title:
+                          'Boost your focus with a 5-minute guided meditation',
+                      imageUrl: 'assets/images/banner1.jpg'),
+                  SuggestionCard(
+                      title:
+                          'Feeling energetic? Go for a 30-minute HIIT session!',
+                      imageUrl: 'assets/images/banner2.jpg'),
+                ]),
               ),
-              SectionDev(
-                sectionName: 'Today Meal',
-              )
+              SizedBox(height: 24.h),
+              // SectionDev(
+              //   sectionName: 'Today Meal',
+              // ),
+              FoodItemCard(
+                foodName: 'Salmon Salad',
+                imageUrl: images[0],
+                kcal: 350,
+                carbs: 20,
+                protein: 30,
+                fat: 15,
+                amount: 1,
+              ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class SectionDev extends StatelessWidget {
-  final String sectionName;
-  const SectionDev({
-    required this.sectionName,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          sectionName,
-          style: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w600,
-            color: AppColors.primaryTextColor,
-          ),
-        ),
-        Spacer(),
-        InkWell(
-          onTap: () {},
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'See all',
-                style: TextStyle(
-                  height: 1.5,
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.primaryTextColor,
-                ),
-              ),
-              svgViewer(asset: 'assets/svg/arrow-right.svg'),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class FeatureButton extends StatelessWidget {
-  final String svgAsset;
-  final Function()? onTap;
-  final String title;
-  const FeatureButton({
-    super.key,
-    required this.svgAsset,
-    this.onTap,
-    required this.title,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 8.h),
-        decoration: BoxDecoration(
-          color: Color(0xFFC1E8FF),
-          borderRadius: BorderRadius.circular(8.r),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            svgViewer(
-              asset: svgAsset,
-              width: 24.w,
-              height: 24.h,
-            ),
-            SizedBox(height: 8.h),
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w600,
-                color: AppColors.primaryTextColor,
-              ),
-            ),
-          ],
         ),
       ),
     );
