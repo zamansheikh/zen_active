@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/uitls.dart';
+import 'package:zen_active/views/components/feature_button.dart';
 import 'package:zen_active/views/components/food_item_card.dart';
+import 'package:zen_active/views/components/section_dev.dart';
 import 'package:zen_active/views/components/suggestion_card.dart';
 import 'package:zen_active/views/screen/home/home_screen.dart';
 
@@ -252,9 +254,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(height: 24.h),
               //Today Workout --- see all
-              // SectionDev(
-              //   sectionName: 'Today Workout',
-              // ),
+              SectionDev(
+                sectionName: 'Today Workout',
+              ),
               SizedBox(height: 12.h),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -270,18 +272,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 ]),
               ),
               SizedBox(height: 24.h),
-              // SectionDev(
-              //   sectionName: 'Today Meal',
-              // ),
-              FoodItemCard(
-                foodName: 'Salmon Salad',
-                imageUrl: images[0],
-                kcal: 350,
-                carbs: 20,
-                protein: 30,
-                fat: 15,
-                amount: 1,
+              SectionDev(
+                sectionName: 'Today Meal',
               ),
+
+              SizedBox(height: 12.h),
+              //Button To Sort
+              SizedBox(height: 16.h),
+              ...List.generate(3, (index) {
+                return FoodItemCard(
+                  foodName: 'Grilled Chicken Salad',
+                  imageUrl: images[index],
+                  kcal: 320,
+                  carbs: 12,
+                  protein: 32,
+                  fat: 8,
+                  amount: 1,
+                  taken: index == 0,
+                );
+              })
             ],
           ),
         ),
