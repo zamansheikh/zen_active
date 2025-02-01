@@ -277,20 +277,31 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               SizedBox(height: 12.h),
-              //Button To Sort
+              Placeholder(
+                fallbackHeight: 20.h,
+              ),
               SizedBox(height: 16.h),
-              ...List.generate(3, (index) {
-                return FoodItemCard(
-                  foodName: 'Grilled Chicken Salad',
-                  imageUrl: images[index],
-                  kcal: 320,
-                  carbs: 12,
-                  protein: 32,
-                  fat: 8,
-                  amount: 1,
-                  taken: index == 0,
-                );
-              })
+              Expanded(
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: images.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.only(bottom: 12.h),
+                      child: FoodItemCard(
+                        foodName: 'Grilled Chicken Salad',
+                        imageUrl: images[index],
+                        kcal: 320,
+                        carbs: 12,
+                        protein: 32,
+                        fat: 8,
+                        amount: 1,
+                        taken: index == 0,
+                      ),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),

@@ -29,7 +29,7 @@ class FoodItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: 72.h,
+      height: 75.h,
       padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
         color: AppColors.backgroundColor,
@@ -162,6 +162,7 @@ class FoodItemCard extends StatelessWidget {
           SizedBox(width: 30.w),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (taken)
                 svgViewer(
