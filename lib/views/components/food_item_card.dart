@@ -117,6 +117,11 @@ class FoodItemCard extends StatelessWidget {
                       ),
                     ),
                   ])),
+                  Container(
+                    height: 10.h,
+                    width: 1.w,
+                    color: Colors.grey,
+                  ),
                   RichText(
                       text: TextSpan(children: [
                     TextSpan(
@@ -136,6 +141,11 @@ class FoodItemCard extends StatelessWidget {
                       ),
                     ),
                   ])),
+                  Container(
+                    height: 10.h,
+                    width: 1.w,
+                    color: Colors.grey,
+                  ),
                   RichText(
                       text: TextSpan(children: [
                     TextSpan(
