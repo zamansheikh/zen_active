@@ -48,8 +48,10 @@ class MyApp extends StatelessWidget {
                     AppConstants.languages[0].countryCode),
                 transitionDuration: const Duration(milliseconds: 500),
                 getPages: AppRoutes.pages,
-                initialRoute: AppRoutes.splashScreen,
-                // home: const App(key: PageStorageKey('app'),),
+                // initialRoute: AppRoutes.splashScreen,
+                home: const App(
+                  key: PageStorageKey('app'),
+                ),
               );
             });
       });

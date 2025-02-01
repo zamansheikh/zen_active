@@ -24,32 +24,30 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(
                 height: 24,
               ),
-              Align(
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Image.asset(
-                        "assets/images/user.png",
-                        width: 140,
-                        height: 140,
-                        fit: BoxFit.cover,
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.asset(
+                      "assets/images/user.png",
+                      width: 140,
+                      height: 140,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  if (reward != null)
+                    Positioned(
+                      bottom: -10,
+                      left: reward!.isCentered ? 0 : null,
+                      right: reward!.isCentered ? 0 : -10,
+                      child: svgViewer(
+                        asset: reward!.iconPath,
+                        height: 52,
+                        width: 52,
                       ),
                     ),
-                    if (reward != null)
-                      Positioned(
-                        bottom: -10,
-                        left: reward!.isCentered ? 0 : null,
-                        right: reward!.isCentered ? 0 : -10,
-                        child: svgViewer(
-                          asset: reward!.iconPath,
-                          height: 52,
-                          width: 52,
-                        ),
-                      ),
-                  ],
-                ),
+                ],
               ),
               const SizedBox(
                 height: 29,
@@ -103,7 +101,8 @@ class ProfilePage extends StatelessWidget {
                       profileOptions(
                         iconPath: "assets/svg/profile_info.svg",
                         title: "Profile Information",
-                        onTap: () => Get.toNamed(AppRoutes.profileInformationScreen),
+                        onTap: () =>
+                            Get.toNamed(AppRoutes.profileInformationScreen),
                       ),
                       profileOptions(
                         iconPath: "assets/svg/subscription.svg",
