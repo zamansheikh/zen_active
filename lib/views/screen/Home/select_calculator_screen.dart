@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:zen_active/utils/app_colors.dart';
-import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
-import 'package:zen_active/views/components/custom_button.dart';
-import 'package:zen_active/views/components/fcustom_text_field.dart';
 import 'package:zen_active/views/screen/Home/calorie_calculator.dart';
-import 'package:zen_active/views/screen/auth/otp_verify_screen.dart';
+import 'package:zen_active/views/screen/Home/track_workout_screen.dart';
 
 class SelectCalculatorScreen extends StatefulWidget {
   const SelectCalculatorScreen({super.key});
@@ -83,9 +80,8 @@ class _SelectCalculatorScreenState extends State<SelectCalculatorScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      setState(() {
-                        isChecked = !isChecked;
-                      });
+                      // Get.to(() => TDEECalculatorScreen());
+                      Get.to(() => TrackWorkOutScreen());
                     },
                     child: Container(
                       width: double.infinity,

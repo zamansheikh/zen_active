@@ -3,13 +3,13 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/feature_button.dart';
 import 'package:zen_active/views/components/food_item_card.dart';
+import 'package:zen_active/views/components/random_popup.dart';
 import 'package:zen_active/views/components/section_dev.dart';
 import 'package:zen_active/views/components/slidable_tab_bar.dart';
 import 'package:zen_active/views/components/suggestion_card.dart';
@@ -50,55 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
               //Make color transparent padding: EdgeInsets.zero,
               backgroundColor: Colors.transparent,
               contentPadding: EdgeInsets.zero,
-              content: Container(
-                width: 360.w,
-                height: 230.h,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(4.r),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(height: 20.h),
-                    svgViewer(
-                        asset: 'assets/svg/nap.svg', width: 64.w, height: 64.h),
-                    SizedBox(height: 20.h),
-                    Text(
-                      'Feeling tired? A quick nap could recharge you!',
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.primaryTextColor,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 20.h),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        width: 81.w,
-                        height: 33.h,
-                        decoration: BoxDecoration(
-                          color: AppColors.primaryColor,
-                          borderRadius: BorderRadius.circular(4.r),
-                        ),
-                        child: Center(
-                          child: Text(
-                            'Okay',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16.sp,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 20.h),
-                  ],
-                ),
+              content: RandomPopup(
+                title: 'Feeling tired? A quick nap could recharge you!',
+                svgPath: 'assets/svg/nap.svg',
               ),
             );
           },

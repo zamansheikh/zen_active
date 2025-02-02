@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
-import 'package:zen_active/views/components/custom_button.dart';
-import 'package:zen_active/views/components/custom_drop_down.dart';
-import 'package:zen_active/views/components/custom_gender_button.dart';
-import 'package:zen_active/views/components/custom_text_field.dart';
 
 class TDEECalculationResultScreen extends StatefulWidget {
   const TDEECalculationResultScreen({super.key});
