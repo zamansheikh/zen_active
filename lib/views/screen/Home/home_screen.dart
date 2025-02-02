@@ -11,6 +11,7 @@ import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/feature_button.dart';
 import 'package:zen_active/views/components/food_item_card.dart';
 import 'package:zen_active/views/components/section_dev.dart';
+import 'package:zen_active/views/components/slidable_tab_bar.dart';
 import 'package:zen_active/views/components/suggestion_card.dart';
 import 'package:zen_active/views/screen/Home/notification_screen.dart';
 
@@ -369,9 +370,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               SizedBox(height: 12.h),
-              Placeholder(
-                fallbackHeight: 20.h,
+              SlidableTabBar(
+                options: ['All', 'Completed'],
+                onChanged: (index) {
+                  print('Tab changed to $index');
+                },
+                index: 0,
               ),
+
               SizedBox(height: 16.h),
               Expanded(
                 child: ListView.builder(

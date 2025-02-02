@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zen_active/utils/uitls.dart';
 
 class CustomTextFieldWithButton extends StatefulWidget {
@@ -56,7 +57,7 @@ class _CustomTextFieldWithButtonState extends State<CustomTextFieldWithButton> {
         GestureDetector(
           onTap: widget.onTap,
           child: Container(
-            // height: 52,
+            height: 52,
             constraints: BoxConstraints(
               minHeight: 52,
             ),
@@ -76,58 +77,64 @@ class _CustomTextFieldWithButtonState extends State<CustomTextFieldWithButton> {
                 padding: const EdgeInsets.only(top: 3.0),
                 child: Row(
                   children: [
-                    TextField(
-                      controller: widget.controller,
-                      maxLines: widget.multiline ? 2 : 1,
-                      enabled: !widget.isDisabled,
-                      style: kTextStyle.copyWith(
-                        color: widget.isDisabled
-                            ? Color(0xff757575)
-                            : Color(0xff4B4B4B),
-                      ),
-                      decoration: InputDecoration(
-                        hintText: widget.hintText ??
-                            'Enter your ${widget.title.toLowerCase()}',
-                        border: InputBorder.none,
+                    Expanded(
+                      child: TextField(
+                        keyboardType: TextInputType.number,
+                        controller: widget.controller,
+                        maxLines: widget.multiline ? 2 : 1,
+                        enabled: !widget.isDisabled,
+                        style: kTextStyle.copyWith(
+                          color: widget.isDisabled
+                              ? Color(0xff757575)
+                              : Color(0xff4B4B4B),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            _amount = int.tryParse(value) ?? 0;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          hintText: widget.hintText ??
+                              'Enter your ${widget.title.toLowerCase()}',
+                          border: InputBorder.none,
+                        ),
                       ),
                     ),
                     Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         SizedBox(
-                          width: 36, // Set a fixed width
-                          height: 36, // Set a fixed height
-                          child: IconButton(
-                            onPressed: () {
-                              if (_amount > 0) {
-                                setState(() {
-                                  _amount--;
-                                  widget.controller!.text = _amount.toString();
-                                });
-                              }
+                          width: 15,
+                          height: 7,
+                          child: InkWell(
+                            onTap: () {
+                              _amount++;
+                              widget.controller?.text = _amount.toString();
+                              print(_amount);
+                              setState(() {});
                             },
-                            icon: Icon(
-                              Icons.remove,
-                              color: Color(0xff79CDFF),
-                            ),
+                            child: svgViewer(asset: 'assets/svg/arrow_up.svg'),
                           ),
                         ),
                         SizedBox(
-                          width: 36, // Set a fixed width
-                          height: 36, // Set a fixed height
-                          child: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                _amount++;
-                                widget.controller!.text = _amount.toString();
-                              });
+                          width: 15,
+                          height: 7,
+                          child: InkWell(
+                            onTap: () {
+                              if (_amount > 0) {
+                                _amount--;
+                                widget.controller?.text = _amount.toString();
+                              }
+                              setState(() {});
                             },
-                            icon: Icon(
-                              Icons.add,
-                              color: Color(0xff79CDFF),
-                            ),
+                            child:
+                                svgViewer(asset: 'assets/svg/arrow_down.svg'),
                           ),
                         ),
                       ],
+                    ),
+                    SizedBox(
+                      width: 5.w,
                     ),
                   ],
                 ),
