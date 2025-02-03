@@ -3,11 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_button.dart';
-import 'package:zen_active/views/screen/auth/user_info_page_stack.dart';
+import 'package:zen_active/views/screen/Splash/controller/splash_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,15 +18,36 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final SplashController _splashController = Get.find<SplashController>();
   int _index = 0;
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
-      setState(() {
-        _index = 1;
-      });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      handleRoute();
     });
+  }
+
+  void handleRoute() {
+    if (_splashController.isSplashPassed.value &&
+        _splashController.isUserLoggedIn.value &&
+        _splashController.isUserInfoCompleted.value) {
+      Get.offAllNamed(AppRoutes.app);
+    } else if (_splashController.isSplashPassed.value &&
+        !_splashController.isUserLoggedIn.value) {
+      Get.offAllNamed(AppRoutes.signInScreen);
+    } else if (_splashController.isSplashPassed.value &&
+        _splashController.isUserLoggedIn.value &&
+        !_splashController.isUserInfoCompleted.value) {
+      Get.offAllNamed(AppRoutes.userInfoStack);
+    } else if (!_splashController.isSplashPassed.value &&
+        !_splashController.isUserLoggedIn.value) {
+      Future.delayed(const Duration(seconds: 2), () {
+        setState(() {
+          _index = 1;
+        });
+      });
+    }
   }
 
   @override
@@ -37,8 +59,12 @@ class _SplashScreenState extends State<SplashScreen> {
         child: IndexedStack(
           index: _index,
           children: [
-            SplashOne(),
-            SplashTwo(),
+            SplashOne(
+              controller: _splashController,
+            ),
+            SplashTwo(
+              controller: _splashController,
+            ),
           ],
         ),
       ),
@@ -47,7 +73,9 @@ class _SplashScreenState extends State<SplashScreen> {
 }
 
 class SplashOne extends StatelessWidget {
+  final SplashController controller;
   const SplashOne({
+    required this.controller,
     super.key,
   });
 
@@ -105,7 +133,9 @@ class SplashOne extends StatelessWidget {
 }
 
 class SplashTwo extends StatelessWidget {
+  final SplashController controller;
   const SplashTwo({
+    required this.controller,
     super.key,
   });
 
@@ -173,11 +203,9 @@ class SplashTwo extends StatelessWidget {
                 CustomButton(
                   buttonName: "Let's Go!",
                   onPressed: () {
-                    Get.offAll(
-                      () => const UserInfoPageStack(),
-                    );
+                    controller.skipSplash(); // Use the controller method
                   },
-                )
+                ),
               ],
             ),
           ),

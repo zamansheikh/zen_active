@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zen_active/views/screen/Splash/controller/splash_controller.dart';
 import 'package:zen_active/controllers/community_group_controller.dart';
 import '../controllers/home_controller.dart';
 import '../controllers/localization_controller.dart';
@@ -10,12 +11,14 @@ import '../models/language_model.dart';
 import '../utils/app_constants.dart';
 
 Future<Map<String, Map<String, String>>> init() async {
+  //SplashController
+  Get.lazyPut(() => SplashController());
+
   // Core
   final sharedPreferences = await SharedPreferences.getInstance();
   Get.lazyPut(() => sharedPreferences);
 
   // Repository
-
   Get.lazyPut(() => ThemeController(sharedPreferences: Get.find()));
   Get.lazyPut(() => LocalizationController(sharedPreferences: Get.find()));
   Get.lazyPut(() => HomeController());

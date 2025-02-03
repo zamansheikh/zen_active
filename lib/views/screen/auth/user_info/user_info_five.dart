@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/controllers/auth_controller.dart';
 import 'package:zen_active/controllers/user_info_controller.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/views/components/custom_button.dart';
@@ -16,6 +17,7 @@ class UserInfoFive extends StatefulWidget {
 
 class _UserInfoFiveState extends State<UserInfoFive> {
   final controller = Get.find<UserInfoController>();
+  final AuthController _authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,9 +99,10 @@ class _UserInfoFiveState extends State<UserInfoFive> {
                     ]),
                 SizedBox(height: 24.h),
                 CustomButton(
+                    isLoading: _authController.isLoading.value,
                     buttonName: 'Submit',
                     onPressed: () {
-                      print('Submit');
+                      _authController.updateUserDetails();
                     }),
                 SizedBox(height: 40.h),
               ],
