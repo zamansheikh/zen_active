@@ -7,6 +7,7 @@ class CustomAppBar extends StatelessWidget {
   final String? title;
   final String? tailingIconPath;
   final Function()? tailingCallback;
+  final Function()? overridedBackFunction;
   final Color? backgroundColor;
   const CustomAppBar({
     super.key,
@@ -14,6 +15,7 @@ class CustomAppBar extends StatelessWidget {
     this.backgroundColor,
     this.tailingIconPath,
     this.tailingCallback,
+    this.overridedBackFunction,
   });
 
   @override
@@ -28,7 +30,11 @@ class CustomAppBar extends StatelessWidget {
           const SizedBox(width: 24),
           GestureDetector(
             onTap: () {
-              Get.back();
+              if (overridedBackFunction != null) {
+                overridedBackFunction!();
+              } else {
+                Get.back();
+              }
             },
             child: svgViewer(asset: "assets/svg/arrow_back.svg"),
           ),

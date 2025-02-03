@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:zen_active/controllers/community_group_controller.dart';
 import 'package:zen_active/views/components/custom_search_bar.dart';
+import 'package:zen_active/views/screen/Community/Groups/community_groups_create_group.dart';
 
 class CommunityGroupsYourGroups extends StatelessWidget {
   const CommunityGroupsYourGroups({super.key});
@@ -17,34 +20,39 @@ class CommunityGroupsYourGroups extends StatelessWidget {
             CustomSearchBar(
               hintText: "Search Group",
             ),
-            Row(
-              children: [
-                Container(
-                  height: 36,
-                  width: 36,
-                  decoration: BoxDecoration(
-                    color: Color(0xffC1E8FF),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.add_rounded,
-                      color: Color(0xff174C6B),
+            InkWell(
+              onTap: () {
+                Get.find<CommunityGroupController>().push(CommunityGroupsCreateGroup());
+              },
+              child: Row(
+                children: [
+                  Container(
+                    height: 36,
+                    width: 36,
+                    decoration: BoxDecoration(
+                      color: Color(0xffC1E8FF),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.add_rounded,
+                        color: Color(0xff174C6B),
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  width: 12,
-                ),
-                Text(
-                  "Create Group",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xff4B4B4B),
+                  const SizedBox(
+                    width: 12,
                   ),
-                ),
-              ],
+                  Text(
+                    "Create Group",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xff4B4B4B),
+                    ),
+                  ),
+                ],
+              ),
             ),
             for (int i = 1; i <= 100; i++) groupNames("$i"),
           ],

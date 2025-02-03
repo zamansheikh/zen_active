@@ -18,179 +18,181 @@ class WorkoutPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(
             horizontal: 24,
           ),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  Image.asset(
-                    "assets/logo/zen_logo.png",
-                    width: 46,
-                    height: 33,
-                  ),
-                  const Spacer(),
-                  svgViewer(
-                    asset: "assets/svg/notification.svg",
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Get.toNamed(AppRoutes.workoutPlansPage);
-                },
-                behavior: HitTestBehavior.translucent,
-                child: Row(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
                   children: [
-                    Text(
-                      "Workout Plans",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xff525252),
-                      ),
+                    Image.asset(
+                      "assets/logo/zen_logo.png",
+                      width: 46,
+                      height: 33,
                     ),
                     const Spacer(),
-                    Text(
-                      "See All",
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xff525252),
-                      ),
+                    svgViewer(
+                      asset: "assets/svg/notification.svg",
                     ),
-                    svgViewer(asset: "assets/svg/see_all.svg"),
                   ],
                 ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              SizedBox(
-                height: 25,
-                child: ListView.builder(
-                  clipBehavior: Clip.none,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: plans.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 8,
+                const SizedBox(
+                  height: 16,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(AppRoutes.workoutPlansPage);
+                  },
+                  behavior: HitTestBehavior.translucent,
+                  child: Row(
+                    children: [
+                      Text(
+                        "Workout Plans",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xff525252),
                         ),
-                        decoration: BoxDecoration(
-                          color: Color(0xffC1E8FF),
-                          border: Border.all(
-                            width: index == 0 ? 1.5 : 0,
-                            color: Color(0xff37B5FF),
+                      ),
+                      const Spacer(),
+                      Text(
+                        "See All",
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xff525252),
+                        ),
+                      ),
+                      svgViewer(asset: "assets/svg/see_all.svg"),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                SizedBox(
+                  height: 25,
+                  child: ListView.builder(
+                    clipBehavior: Clip.none,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: plans.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 8,
                           ),
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Center(
-                          heightFactor: 5,
-                          child: Text(
-                            plans[index],
-                            style: kTextStyle.copyWith(
-                              fontSize: 14,
-                              color: Color(
-                                index == 0 ? 0xff174C6B : 0xff32A5E8,
+                          decoration: BoxDecoration(
+                            color: Color(0xffC1E8FF),
+                            border: Border.all(
+                              width: index == 0 ? 1.5 : 0,
+                              color: Color(0xff37B5FF),
+                            ),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Center(
+                            heightFactor: 5,
+                            child: Text(
+                              plans[index],
+                              style: kTextStyle.copyWith(
+                                fontSize: 14,
+                                color: Color(
+                                  index == 0 ? 0xff174C6B : 0xff32A5E8,
+                                ),
                               ),
                             ),
                           ),
                         ),
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                WorkoutPlans(
+                  assetPath: "assets/images/workout_plans/1.png",
+                  title: "Full-Body Plan",
+                  subTitle: "Building foundational strength and endurance.",
+                  isHighlighted: true,
+                  onTap: () {
+                    Get.toNamed(AppRoutes.workoutPlansDetailsPage);
+                  },
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                WorkoutPlans(
+                  assetPath: "assets/images/workout_plans/2.png",
+                  title: "Strength Building",
+                  subTitle: "Enhance strength and build muscle.",
+                  onTap: () {
+                    // Get.toNamed(AppRoutes.workoutPlansDetailsPage);
+                    Get.to(()=>
+                      PlanDetailsPage(
+                        isJoined: false,
                       ),
                     );
                   },
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              WorkoutPlans(
-                assetPath: "assets/images/workout_plans/1.png",
-                title: "Full-Body Plan",
-                subTitle: "Building foundational strength and endurance.",
-                isHighlighted: true,
-                onTap: () {
-                  Get.toNamed(AppRoutes.workoutPlansDetailsPage);
-                },
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              WorkoutPlans(
-                assetPath: "assets/images/workout_plans/2.png",
-                title: "Strength Building",
-                subTitle: "Enhance strength and build muscle.",
-                onTap: () {
-                  // Get.toNamed(AppRoutes.workoutPlansDetailsPage);
-                  Get.to(()=>
-                    PlanDetailsPage(
-                      isJoined: false,
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              WorkoutPlans(
-                assetPath: "assets/images/workout_plans/3.png",
-                title: "Cardio Conditioning",
-                subTitle: "Improve stamina and cardiovascular health.",
-                onTap: () {
-                  // Get.toNamed(AppRoutes.workoutPlansDetailsPage);
-                  Get.to(()=>
-                    PlanDetailsPage(
-                      isJoined: false,
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Get.toNamed(AppRoutes.workoutVideosPage);
-                },
-                behavior: HitTestBehavior.translucent,
-                child: Row(
-                  children: [
-                    Text(
-                      "Workout Videos",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xff525252),
-                      ),
-                    ),
-                    const Spacer(),
-                    Text(
-                      "See All",
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xff525252),
-                      ),
-                    ),
-                    svgViewer(asset: "assets/svg/see_all.svg"),
-                  ],
+                const SizedBox(
+                  height: 16,
                 ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              WorkoutVideos(
-                assetPath: "assets/images/workout_videos/1.png",
-                onTap: () => Get.toNamed(AppRoutes.workoutVideoPlayingPage),
-              ),
-            ],
+                WorkoutPlans(
+                  assetPath: "assets/images/workout_plans/3.png",
+                  title: "Cardio Conditioning",
+                  subTitle: "Improve stamina and cardiovascular health.",
+                  onTap: () {
+                    // Get.toNamed(AppRoutes.workoutPlansDetailsPage);
+                    Get.to(()=>
+                      PlanDetailsPage(
+                        isJoined: false,
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(AppRoutes.workoutVideosPage);
+                  },
+                  behavior: HitTestBehavior.translucent,
+                  child: Row(
+                    children: [
+                      Text(
+                        "Workout Videos",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xff525252),
+                        ),
+                      ),
+                      const Spacer(),
+                      Text(
+                        "See All",
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xff525252),
+                        ),
+                      ),
+                      svgViewer(asset: "assets/svg/see_all.svg"),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                WorkoutVideos(
+                  assetPath: "assets/images/workout_videos/1.png",
+                  onTap: () => Get.toNamed(AppRoutes.workoutVideoPlayingPage),
+                ),
+              ],
+            ),
           ),
         ),
       ),

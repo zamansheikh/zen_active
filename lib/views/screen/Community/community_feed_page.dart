@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zen_active/utils/app_colors.dart';
-import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_loading.dart';
 import 'package:zen_active/views/components/posts.dart';
-import 'package:zen_active/views/screen/Community/community_comment_page.dart';
 import 'package:zen_active/views/screen/Community/community_post_page.dart';
 
 class CommunityFeedPage extends StatelessWidget {

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:zen_active/controllers/community_group_controller.dart';
 import 'package:zen_active/views/components/slidable_tab_bar.dart';
 import 'package:zen_active/views/screen/Community/Groups/community_groups_discover.dart';
 import 'package:zen_active/views/screen/Community/Groups/community_groups_posts.dart';
@@ -13,6 +15,7 @@ class CommunityGroupsPage extends StatefulWidget {
 
 class _CommunityGroupsPageState extends State<CommunityGroupsPage> {
   int index = 0;
+  late CommunityGroupController controller;
   List<Widget> initialPages = [
     CommunityGroupsYourGroups(),
     CommunityGroupsDiscover(),
@@ -20,30 +23,41 @@ class _CommunityGroupsPageState extends State<CommunityGroupsPage> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    controller = Get.find<CommunityGroupController>();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.only(
-            left: 24,
-            top: 24,
-            right: 24,
-            bottom: 20,
+    return Obx(() {
+      if (controller.customPages.isNotEmpty) {
+        return controller.customPages.last;
+      }
+      return Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(
+              left: 24,
+              top: 24,
+              right: 24,
+              bottom: 20,
+            ),
+            child: SlidableTabBar(
+              options: ["Your Groups", "Discover", "Posts"],
+              index: index,
+              onChanged: (p0) {
+                setState(() {
+                  index = p0;
+                });
+              },
+            ),
           ),
-          child: SlidableTabBar(
-            options: ["Your Groups", "Discover", "Posts"],
-            index: index,
-            onChanged: (p0) {
-              setState(() {
-                index = p0;
-              });
-            },
+          Expanded(
+            child: initialPages[index % initialPages.length],
           ),
-        ),
-        Expanded(
-          child: initialPages[index % initialPages.length],
-        ),
-      ],
-    );
+        ],
+      );
+    });
   }
 }
