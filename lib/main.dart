@@ -7,9 +7,7 @@ import 'package:zen_active/utils/message.dart';
 import 'controllers/localization_controller.dart';
 import 'controllers/theme_controller.dart';
 import 'helpers/di.dart' as di;
-// ignore: unused_import
 import 'helpers/route.dart';
-import 'views/screen/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,10 +46,10 @@ class MyApp extends StatelessWidget {
                     AppConstants.languages[0].countryCode),
                 transitionDuration: const Duration(milliseconds: 500),
                 getPages: AppRoutes.pages,
-                // initialRoute: AppRoutes.splashScreen,
-                home: const App(
-                  key: PageStorageKey('app'),
-                ),
+                initialRoute: AppRoutes.splashScreen,
+                // home: const App(
+                //   key: PageStorageKey('app'),
+                // ),
               );
             });
       });

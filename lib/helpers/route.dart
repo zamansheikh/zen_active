@@ -6,6 +6,7 @@ import 'package:zen_active/views/screen/Workout/workout_progress_page.dart';
 import 'package:zen_active/views/screen/auth/forget_password.dart';
 import 'package:zen_active/views/screen/auth/sign_in_screen.dart';
 import 'package:zen_active/views/screen/auth/signup_screen.dart';
+import 'package:zen_active/views/screen/auth/user_info_page_stack.dart';
 import 'package:zen_active/views/screen/home/home_screen.dart';
 import 'package:zen_active/views/screen/splash/splash_screen.dart';
 
@@ -39,6 +40,7 @@ class AppRoutes {
   static String signUpScreen = "/sign_up_screen";
   static String signInScreen = "/sign_in_screen";
   static String forgetPassword = "/forget_password";
+  static String userInfoStack = "/user_info_stack";
 
   // Challenges
   static String challengesPage = "/challenges_page";
@@ -79,17 +81,19 @@ class AppRoutes {
   static List<GetPage> pages = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
     GetPage(
-        name: homeScreen,
-        page: () => const HomeScreen(),
-        transition: Transition.noTransition),
+      name: homeScreen,
+      page: () => const HomeScreen(),
+      transition: Transition.noTransition,
+    ),
     GetPage(name: signUpScreen, page: () => SignupScreen()),
     GetPage(name: signInScreen, page: () => SigninScreen()),
     GetPage(name: forgetPassword, page: () => ForgetPassword()),
+    GetPage(name: userInfoStack, page: () => UserInfoPageStack()),
 
     // Challenges
-    GetPage(name: challengesPage, page: ()=> ChallengesPage()),
-    GetPage(name: challengeDetailsPage, page: ()=> ChallengeDetailsPage()),
-    GetPage(name: challengeProgressPage, page: ()=> ChallengeProgressPage()),
+    GetPage(name: challengesPage, page: () => ChallengesPage()),
+    GetPage(name: challengeDetailsPage, page: () => ChallengeDetailsPage()),
+    GetPage(name: challengeProgressPage, page: () => ChallengeProgressPage()),
 
     // Workout Pages
     GetPage(name: workoutPage, page: () => WorkoutPage()),
