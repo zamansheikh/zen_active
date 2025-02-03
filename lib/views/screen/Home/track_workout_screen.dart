@@ -7,7 +7,6 @@ import 'package:zen_active/views/components/custom_button.dart';
 import 'package:zen_active/views/components/custom_drop_down.dart';
 import 'package:zen_active/views/components/custom_text_field_with_button.dart';
 import 'package:zen_active/views/screen/Home/mode_tracker_screen.dart';
-import 'package:zen_active/views/screen/Home/tdee_calculator_screen.dart';
 
 class TrackWorkOutScreen extends StatefulWidget {
   const TrackWorkOutScreen({super.key});

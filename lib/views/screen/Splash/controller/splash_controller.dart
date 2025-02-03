@@ -33,7 +33,7 @@ class SplashController extends GetxController implements GetxService {
     } else if (!isUserInfoCompleted.value) {
       Get.offAllNamed(AppRoutes.userInfoStack);
     } else {
-      Get.offAllNamed('/home');
+      Get.offAllNamed(AppRoutes.app);
     }
   }
 
