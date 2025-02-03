@@ -68,10 +68,23 @@ class ChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<ChatBubble> messages = [
-      ChatBubble(message: "Hello! Nazrul How are you?", isMe: false),
-      ChatBubble(message: "You did your job well!", isMe: true),
-      ChatBubble(message: "Have a great working week!!", isMe: false),
-      ChatBubble(message: "Hope you like it", isMe: false),
+      ChatBubble(
+        message: "Hello! Nazrul How are you?",
+        showTime: true,
+      ),
+      ChatBubble(
+        message: "You did your job well!",
+        isMe: true,
+        showTime: true,
+      ),
+      ChatBubble(
+        message: "Have a great working week!!",
+      ),
+      ChatBubble(
+        message: "Hope you like it",
+        showImage: false,
+        showTime: true,
+      ),
     ];
 
     return Column(
@@ -226,53 +239,81 @@ class ChatScreen extends StatelessWidget {
 class ChatBubble extends StatelessWidget {
   final String message;
   final bool isMe;
+  final bool showImage;
+  final bool showTime;
 
-  const ChatBubble({super.key, required this.message, required this.isMe});
+  const ChatBubble({
+    super.key,
+    required this.message,
+    this.isMe = false,
+    this.showImage = true,
+    this.showTime = false,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
-      child: Row(
-        mainAxisAlignment:
-            isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
-        children: [
-          if (!isMe)
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 24,
-                right: 22,
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment:
+              isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+          children: [
+            if (!isMe)
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 24,
+                ),
+                child: showImage
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(999),
+                        child: Image.asset(
+                          "assets/images/faces/1.png",
+                          height: 40,
+                        ),
+                      )
+                    : SizedBox(
+                        height: 40,
+                        width: 40,
+                      ),
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(999),
-                child: Image.asset(
-                  "assets/images/faces/1.png",
-                  height: 40,
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 24),
+              padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+              decoration: BoxDecoration(
+                color: isMe ? Colors.blue : Colors.grey[300],
+                borderRadius: BorderRadius.only(
+                  bottomLeft: const Radius.circular(12),
+                  bottomRight: const Radius.circular(12),
+                  topLeft: isMe ? const Radius.circular(12) : Radius.zero,
+                  topRight: isMe ? Radius.zero : const Radius.circular(12),
+                ),
+              ),
+              child: Text(
+                message,
+                style: TextStyle(
+                  color: isMe ? Colors.white : Color(0xff2D2D2D),
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
-            decoration: BoxDecoration(
-              color: isMe ? Colors.blue : Colors.grey[300],
-              borderRadius: BorderRadius.only(
-                topLeft: const Radius.circular(12),
-                topRight: const Radius.circular(12),
-                bottomLeft: isMe ? const Radius.circular(12) : Radius.zero,
-                bottomRight: isMe ? Radius.zero : const Radius.circular(12),
-              ),
-            ),
-            child: Text(
-              message,
-              style: TextStyle(
-                color: isMe ? Colors.white : Colors.black,
-                fontSize: 16,
+          ],
+        ),
+        if (showTime)
+          Align(
+            alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: isMe ? 32 : 96),
+              child: Text(
+                "9:25 AM",
+                style: TextStyle(
+                  color: Color(0xff797C7B),
+                  fontSize: 10,
+                ),
               ),
             ),
           ),
-        ],
-      ),
+      ],
     );
   }
 }
