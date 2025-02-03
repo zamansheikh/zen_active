@@ -1,13 +1,19 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/feature_button.dart';
 import 'package:zen_active/views/components/food_item_card.dart';
+import 'package:zen_active/views/components/random_popup.dart';
 import 'package:zen_active/views/components/section_dev.dart';
+import 'package:zen_active/views/components/slidable_tab_bar.dart';
 import 'package:zen_active/views/components/suggestion_card.dart';
-import 'package:zen_active/views/screen/home/home_screen.dart';
+import 'package:zen_active/views/screen/Home/notification_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,6 +28,45 @@ class _HomeScreenState extends State<HomeScreen> {
     'https://s3-alpha-sig.figma.com/img/212f/a1f9/ed913cb886d076193af6cf5481359d7b?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=cQpBPet31O3XPxW4asZCO8HoYnAsjv8msO-jenKvaWY4R7cM4spgp0sRK-EMvT5aAIdHkUII1~udVaG9ztsaMsUynf5bVX90q3pyX8PGdNGppKXSEyV~z~pUy0~pdW7othx1kEbrYQI2azeN~nif3JH6Rkekpf5nnDygdJrDnWHjHnQ3NsqmUBzkDmHClX~wjPXhzQ4rQyJceM4YXARdgWaiJnGb7x8qoAJ~ooLCODk~MnFyOlheyN13GWW3JGYE9CR2naI~ogJq3u1OlJSPo3ZVxfar2Q5Z1p4oqDJsSUyBGg0vh~SSOwKIwWY56WDVCKwWi4Q5MfUaXom0a3sO8Q__',
     'https://s3-alpha-sig.figma.com/img/bd59/bedf/c81d55cf2715d16603e71c8bf7746754?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=uZDoiQwGin1lBJXfA7Rb3JeG9dD0zbXqPCenTC1jHNMAZryxk9lWEMOEeAXC3axY6rmp4Y3-nct4zIIySj0Id2FiwssNCLPP-SeWOVriE3FZU4u-Pl5aTDLzN~8cCZfoGHdnQhgsD9DjUnGSzyR8BUO2KASconXE2r7CTQwxTAaGMcIiQwO6VXxdOpAA2zLnVW7qcLRrJLsyy~Nc8aGBfIPZ0nBEQgWBvCAvvhYoikdvs0mlEJXKudNzDilsUAKgMaWl7AkSBe4VSQU5Tu65SlGj4iQIV0tJ1Bfsddq8yuhPYCSPxjG9EoSaP-gE6L7I09OtSJm4baGVHCCO-eMGzA__',
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    // _showRandomPopup();
+  }
+
+  void _showRandomPopup() {
+    final random = Random();
+    final delay = Duration(
+        seconds:
+            random.nextInt(10) + 5); // Random delay between 5 to 15 seconds
+
+    Timer(delay, () {
+      if (mounted) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              //Make color transparent padding: EdgeInsets.zero,
+              backgroundColor: Colors.transparent,
+              contentPadding: EdgeInsets.zero,
+              content: RandomPopup(
+                title: 'Feeling tired? A quick nap could recharge you!',
+                svgPath: 'assets/svg/nap.svg',
+              ),
+            );
+          },
+        );
+        Future.delayed(Duration(seconds: 2), () {
+          if (mounted) {
+            Navigator.pop(context);
+          }
+        });
+        _showRandomPopup(); // Schedule the next popup
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +121,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   SizedBox(width: 12.w),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Get.to(() => NotificationScreen());
+                    },
                     child: svgViewer(asset: 'assets/svg/bell.svg'),
                   ),
                 ],
@@ -277,9 +324,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               SizedBox(height: 12.h),
-              Placeholder(
-                fallbackHeight: 20.h,
+              SlidableTabBar(
+                options: ['All', 'Completed'],
+                onChanged: (index) {
+                  print('Tab changed to $index');
+                },
+                index: 0,
               ),
+
               SizedBox(height: 16.h),
               Expanded(
                 child: ListView.builder(
