@@ -32,7 +32,7 @@ class _CommunityGroupsPageState extends State<CommunityGroupsPage> {
   Widget build(BuildContext context) {
     return Obx(() {
       if (controller.customPages.isNotEmpty) {
-        return controller.customPages.last;
+        return controller.customPages[controller.customPages.length - 1];
       }
       return Column(
         children: [
