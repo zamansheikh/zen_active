@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:zen_active/views/components/community_app_bar.dart';
+import 'package:zen_active/views/screen/Community/Groups/community_groups_page.dart';
 import 'package:zen_active/views/screen/Community/community_feed_page.dart';
 import 'package:zen_active/views/screen/Community/Friends/community_friends_page.dart';
 import 'package:zen_active/views/screen/Community/community_messages_page.dart';
@@ -50,7 +51,7 @@ class _CommunityAppState extends State<CommunityApp> {
                   CommunityFeedPage(),
                   CommunityFriendsPage(),
                   CommunityMessagesPage(),
-                  Text("Groups"),
+                  CommunityGroupsPage(),
                   Text("Notifications"),
                 ],
               ),
