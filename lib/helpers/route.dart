@@ -9,7 +9,6 @@ import 'package:zen_active/views/screen/auth/forget_password.dart';
 import 'package:zen_active/views/screen/auth/sign_in_screen.dart';
 import 'package:zen_active/views/screen/auth/signup_screen.dart';
 import 'package:zen_active/views/screen/auth/user_info_page_stack.dart';
-import 'package:zen_active/views/screen/home/home_screen.dart';
 import 'package:zen_active/views/screen/splash/splash_screen.dart';
 
 import 'package:zen_active/views/screen/workout/optimize_traning_completion_page.dart';

@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/utils/uitls.dart';
@@ -22,11 +23,25 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    if (_splashController.isSplashPassed.value) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _splashController.checkNavigationFlow(); // Navigate immediately
-      });
-    } else {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      handleRoute();
+    });
+  }
+
+  void handleRoute() {
+    if (_splashController.isSplashPassed.value &&
+        _splashController.isUserLoggedIn.value &&
+        _splashController.isUserInfoCompleted.value) {
+      Get.offAllNamed(AppRoutes.app);
+    } else if (_splashController.isSplashPassed.value &&
+        !_splashController.isUserLoggedIn.value) {
+      Get.offAllNamed(AppRoutes.signInScreen);
+    } else if (_splashController.isSplashPassed.value &&
+        _splashController.isUserLoggedIn.value &&
+        !_splashController.isUserInfoCompleted.value) {
+      Get.offAllNamed(AppRoutes.userInfoStack);
+    } else if (!_splashController.isSplashPassed.value &&
+        !_splashController.isUserLoggedIn.value) {
       Future.delayed(const Duration(seconds: 2), () {
         setState(() {
           _index = 1;

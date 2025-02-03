@@ -10,48 +10,48 @@ class SplashController extends GetxController implements GetxService {
   @override
   void onInit() {
     super.onInit();
-    checkNavigationFlow();
+    laodState();
+  }
+
+  void laodState() async {
+    isSplashPassed.value = await PrefsHelper.getBool("isSplashPassed");
+    isUserLoggedIn.value = await PrefsHelper.getBool("isUserLoggedIn");
+    isUserInfoCompleted.value =
+        await PrefsHelper.getBool("isUserInfoCompleted");
   }
 
   void checkNavigationFlow() async {
-    if (Get.currentRoute == AppRoutes.splashScreen && !isSplashPassed.value) {
-      return;
-    }
-
-    if (Get.currentRoute == AppRoutes.signInScreen && !isUserLoggedIn.value) {
-      return;
-    }
-    if (Get.currentRoute == AppRoutes.userInfoStack &&
-        !isUserInfoCompleted.value) {
-      return;
-    }
-
-    if (!isSplashPassed.value) {
-      Get.offAllNamed(AppRoutes.splashScreen);
-    } else if (!isUserLoggedIn.value) {
-      Get.offAllNamed(AppRoutes.signInScreen);
-    } else if (!isUserInfoCompleted.value) {
-      Get.offAllNamed(AppRoutes.userInfoStack);
-    } else {
+    if (isSplashPassed.value &&
+        isUserLoggedIn.value &&
+        isUserInfoCompleted.value) {
       Get.offAllNamed(AppRoutes.app);
+    } else if (isSplashPassed.value && !isUserLoggedIn.value) {
+      Get.offAllNamed(AppRoutes.signInScreen);
+    } else if (isSplashPassed.value &&
+        isUserLoggedIn.value &&
+        !isUserInfoCompleted.value) {
+      Get.offAllNamed(AppRoutes.userInfoStack);
     }
   }
 
   /// Call this when the user skips the splash screen
   void skipSplash() async {
     await PrefsHelper.setBool("isSplashPassed", true);
+    isSplashPassed.value = true;
     checkNavigationFlow();
   }
 
   /// Call this when the user logs in
   void onLoginSuccess() async {
     await PrefsHelper.setBool("isUserLoggedIn", true);
+    isUserLoggedIn.value = true;
     checkNavigationFlow();
   }
 
   /// Call this when the user completes the required info
   void onUserInfoCompleted() async {
     await PrefsHelper.setBool("isUserInfoCompleted", true);
+    isUserInfoCompleted.value = true;
     checkNavigationFlow();
   }
 }

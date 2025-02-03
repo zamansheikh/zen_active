@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/controllers/auth_controller.dart';
 import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/app_constants.dart';
@@ -16,6 +17,7 @@ class SigninScreen extends StatefulWidget {
 }
 
 class _SigninScreenState extends State<SigninScreen> {
+  final AuthController _authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +59,15 @@ class _SigninScreenState extends State<SigninScreen> {
                   ),
                 ),
               ),
-              CustomButton(buttonName: 'Sign In', onPressed: () {}),
+              Obx(() {
+                return CustomButton(
+                    buttonName: 'Sign In',
+                    isLoading: _authController.isLoading.value,
+                    onPressed: () {
+                      _authController.logIn(
+                          email: 'test@gmail  .com', password: '123456');
+                    });
+              }),
               SizedBox(height: 10.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

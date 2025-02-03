@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/message_highlight_widget.dart';
 
