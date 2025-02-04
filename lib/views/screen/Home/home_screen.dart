@@ -17,6 +17,7 @@ import 'package:zen_active/views/screen/Home/mood_tracker_form_screen.dart';
 import 'package:zen_active/views/screen/Home/mood_tracker_screen.dart';
 import 'package:zen_active/views/screen/Home/notification_screen.dart';
 import 'package:zen_active/views/screen/Home/select_calculator_screen.dart';
+import 'package:zen_active/views/screen/Home/track_workout_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final Function(int)? changePage;
@@ -61,11 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
         );
-        // Future.delayed(Duration(seconds: 4), () {
-        //   if (mounted) {
-        //     Navigator.pop(context);
-        //   }
-        // });
+
         setState(() {
           checkPoint = false;
         });
@@ -297,7 +294,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       svgAsset: 'assets/svg/workouts.svg',
                       title: 'Track Workout',
                       onTap: () {
-                        Get.to(() => MoodTrackerFormScreen());
+                        Get.to(() => TrackWorkOutScreen());
                       },
                     ),
                   ),
@@ -306,7 +303,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       svgAsset: 'assets/svg/senti.svg',
                       title: 'Track Mood',
                       onTap: () {
-                        Get.to(() => MoodTrackerScreen());
+                        Get.to(() => MoodTrackerFormScreen());
                       },
                     ),
                   ),
