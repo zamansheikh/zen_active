@@ -24,7 +24,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      handleRoute();
+      Future.delayed(const Duration(seconds: 2), () {
+        handleRoute();
+      });
     });
   }
 
