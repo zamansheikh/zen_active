@@ -5,11 +5,6 @@ class AuthController extends GetxController implements GetxService {
   RxBool isLoading = false.obs;
   final SplashController _splashController = Get.find<SplashController>();
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
   void logIn({
     required String email,
     required String password,
