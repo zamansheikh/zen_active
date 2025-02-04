@@ -20,7 +20,8 @@ import 'package:zen_active/views/screen/Home/select_calculator_screen.dart';
 import 'package:zen_active/views/screen/Home/track_workout_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final Function(int)? changePage;
+  const HomeScreen({super.key, this.changePage});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

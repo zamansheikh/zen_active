@@ -18,6 +18,13 @@ class _AppState extends State<App> {
   final int _defaultAnimationDuration = 200;
   PageController controller = PageController(initialPage: 0);
 
+  void changePage(int index) {
+    setState(() {
+      controller.animateToPage(index,
+          duration: Duration(milliseconds: _defaultAnimationDuration), curve: Curves.decelerate);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,6 +38,7 @@ class _AppState extends State<App> {
         children: [
           HomeScreen(
             key: PageStorageKey('a'),
+            
           ),
           ChallengesPage(
             key: PageStorageKey('b'),
