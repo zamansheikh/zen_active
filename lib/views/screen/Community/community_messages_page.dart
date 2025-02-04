@@ -98,7 +98,10 @@ class ChatScreen extends StatelessWidget {
                         _removeOverlay();
                       },
                     ),
-                    Divider(height: 0.5, color: Color(0xff79CDFF),),
+                    Divider(
+                      height: 0.5,
+                      color: Color(0xff79CDFF),
+                    ),
                     ListTile(
                       leading: svgViewer(asset: "assets/svg/unfriend.svg"),
                       title: Text("Remove Devon"),

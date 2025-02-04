@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
 import 'package:zen_active/views/components/custom_drop_down.dart';
 import 'package:zen_active/views/components/custom_text_field_with_button.dart';
-import 'package:zen_active/views/screen/Home/tdee_calculator_screen.dart';
 
 class CalorieCalculator extends StatefulWidget {
   const CalorieCalculator({super.key});
