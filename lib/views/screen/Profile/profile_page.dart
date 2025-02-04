@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/models/reward_model.dart';
 import 'package:zen_active/utils/app_colors.dart';
+import 'package:zen_active/utils/prefs_helper.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_button.dart';
 
@@ -179,6 +180,9 @@ class ProfilePage extends StatelessWidget {
                                               buttonName: "Logout",
                                               isSecondary: true,
                                               width: 170,
+                                              onPressed: () {
+                                                PrefsHelper.clearAll();
+                                              },
                                             ),
                                             const Spacer(),
                                             CustomButton(

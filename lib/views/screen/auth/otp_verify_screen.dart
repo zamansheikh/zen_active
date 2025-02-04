@@ -6,6 +6,7 @@ import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_otp_field.dart';
+import 'package:zen_active/views/screen/auth/reset_password.dart';
 
 class OtpVerifyScreen extends StatefulWidget {
   const OtpVerifyScreen({super.key});
@@ -40,7 +41,9 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                       ),
                       SizedBox(height: 48.h),
                       CustomOTPField(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(() => ResetPasswordScreen());
+                        },
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -55,7 +58,13 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                           ),
                           TextButton(
                             onPressed: () {
-                              Get.back();
+                              Get.snackbar(
+                                'Resend OTP',
+                                'OTP has been resent to your mobile number',
+                                snackPosition: SnackPosition.BOTTOM,
+                                backgroundColor: AppColors.splashColor,
+                                colorText: Colors.white,
+                              );
                             },
                             child: Text(
                               'Resend',
