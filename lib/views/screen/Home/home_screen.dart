@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _showRandomPopup() {
     final random = Random();
-    final delay = Duration(seconds: random.nextInt(checkPoint ? 10 : 200) + 5);
+    final delay = Duration(seconds: random.nextInt(checkPoint ? 10 : 1000) + 5);
 
     Timer(delay, () {
       if (mounted) {
