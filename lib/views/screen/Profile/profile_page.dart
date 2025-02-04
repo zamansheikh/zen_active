@@ -70,6 +70,9 @@ class ProfilePage extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   controller: ScrollController(initialScrollOffset: 100),
                   children: [
+                    const SizedBox(
+                      width: 24,
+                    ),
                     achievement(),
                     const SizedBox(
                       width: 12,
