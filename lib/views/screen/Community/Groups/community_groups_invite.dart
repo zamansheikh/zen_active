@@ -22,6 +22,7 @@ class CommunityGroupsInvite extends StatelessWidget {
                 Get.find<CommunityGroupController>().pop();
               },
             ),
+            if(hasNext)
             Positioned(
               right: 12,
               top: 12,

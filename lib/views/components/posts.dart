@@ -85,11 +85,14 @@ class Posts extends StatelessWidget {
               horizontal: 12,
               vertical: 20,
             ),
-            child: Text(
-              text,
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                text,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),

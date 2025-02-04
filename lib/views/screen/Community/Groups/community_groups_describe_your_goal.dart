@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:zen_active/controllers/community_group_controller.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_button.dart';
+import 'package:zen_active/views/screen/Community/Groups/community_group_details.dart';
 
 class CommunityGroupsDescribeYourGoal extends StatelessWidget {
   const CommunityGroupsDescribeYourGoal({super.key});
@@ -40,7 +41,9 @@ class CommunityGroupsDescribeYourGoal extends StatelessWidget {
           ),
           Container(
             height: 170,
-            padding: EdgeInsets.symmetric(horizontal: 16,),
+            padding: EdgeInsets.symmetric(
+              horizontal: 16,
+            ),
             decoration: BoxDecoration(
               color: Color(0xffFEFEFF),
               borderRadius: BorderRadius.circular(8),
@@ -52,14 +55,13 @@ class CommunityGroupsDescribeYourGoal extends StatelessWidget {
               children: [
                 TextField(
                   decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Tell us more about your goal.......",
-                    hintStyle: TextStyle(
-                      color: Color(0xff8B8B8B),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    )
-                  ),
+                      border: InputBorder.none,
+                      hintText: "Tell us more about your goal.......",
+                      hintStyle: TextStyle(
+                        color: Color(0xff8B8B8B),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      )),
                 ),
               ],
             ),
@@ -69,7 +71,10 @@ class CommunityGroupsDescribeYourGoal extends StatelessWidget {
           ),
           CustomButton(
             buttonName: "Next",
-            onPressed: () {},
+            onPressed: () {
+              Get.find<CommunityGroupController>()
+                  .push(CommunityGroupDetails());
+            },
           ),
         ],
       ),
