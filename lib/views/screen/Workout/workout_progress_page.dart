@@ -4,7 +4,6 @@ import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
-import 'package:zen_active/views/components/timer_widget.dart';
 
 class WorkoutProgressPage extends StatefulWidget {
   const WorkoutProgressPage({super.key});
@@ -14,9 +13,6 @@ class WorkoutProgressPage extends StatefulWidget {
 }
 
 class _WorkoutProgressPageState extends State<WorkoutProgressPage> {
-  bool isRunning = true;
-  bool isCompleted = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +21,48 @@ class _WorkoutProgressPageState extends State<WorkoutProgressPage> {
           children: [
             CustomAppBar(
               title: "Track Workout",
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24,
+              ),
+              child: Container(
+                height: 270,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Color(0xffFEFEFF),
+                  border: Border.all(
+                    color: Color(0xff79CDFF),
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      svgViewer(
+                        asset: "assets/svg/check.svg",
+                        height: 180,
+                        width: 180,
+                      ),
+                      Text(
+                        "Done",
+                        style: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xff222222),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -35,110 +73,71 @@ class _WorkoutProgressPageState extends State<WorkoutProgressPage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  TimerWidget(
-                    timer: const Duration(seconds: 10),
-                    isRunning: isRunning,
-                    onComplete: () {
-                      setState(() {
-                        isCompleted = !isCompleted;
-                        isRunning = false;
-                      });
-                    },
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  isCompleted
-                      ? Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                          ),
-                          child: Column(
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                    ),
+                    child: Column(
+                      children: [
+                        RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            text:
+                                "You successfully complete today’s workout plan and earn ",
+                            style: TextStyle(
+                              fontFamily: "khula",
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xff525252),
+                              height: 1,
+                            ),
                             children: [
-                              RichText(
-                                textAlign: TextAlign.center,
-                                text: TextSpan(
-                                  text:
-                                      "You successfully complete today’s workout plan and earn ",
-                                  style: TextStyle(
-                                    fontFamily: "khula",
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color(0xff525252),
-                                    height: 1,
-                                  ),
-                                  children: [
-                                    TextSpan(
-                                      text: "52",
-                                      style: TextStyle(
-                                        fontFamily: "khula",
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
-                                        color: Color(0xff1E648C),
-                                        height: 1,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: " points",
-                                      style: TextStyle(
-                                        fontFamily: "khula",
-                                        fontSize: 18,
-                                        height: 1,
-                                        fontWeight: FontWeight.w600,
-                                        color: Color(0xff525252),
-                                      ),
-                                    ),
-                                  ],
+                              TextSpan(
+                                text: "52",
+                                style: TextStyle(
+                                  fontFamily: "khula",
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xff1E648C),
+                                  height: 1,
                                 ),
                               ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              Text(
-                                "Click ‘Next’ to optimize your training",
+                              TextSpan(
+                                text: " points",
                                 style: TextStyle(
                                   fontFamily: "khula",
                                   fontSize: 18,
+                                  height: 1,
                                   fontWeight: FontWeight.w600,
                                   color: Color(0xff525252),
                                 ),
                               ),
-                              const SizedBox(height: 20),
-                              CustomButton(
-                                buttonName: "Next",
-                                width: 124,
-                                onPressed: () {
-                                  Get.toNamed(AppRoutes.optimizeTrainingPage);
-                                },
-                              ),
                             ],
                           ),
-                        )
-                      : InkWell(
-                          onTap: () {
-                            setState(() {
-                              isRunning = !isRunning;
-                            });
-                          },
-                          borderRadius: BorderRadius.circular(9999),
-                          child: Container(
-                            height: 56,
-                            width: 56,
-                            decoration: BoxDecoration(
-                              color: Color(0xffC1E8FF),
-                              shape: BoxShape.circle,
-                            ),
-                            child: Center(
-                              child: svgViewer(
-                                asset: !isRunning
-                                    ? "assets/svg/play.svg"
-                                    : "assets/svg/pause.svg",
-                                height: 32,
-                                width: 32,
-                              ),
-                            ),
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Text(
+                          "Click ‘Next’ to optimize your training",
+                          style: TextStyle(
+                            fontFamily: "khula",
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xff525252),
                           ),
                         ),
+                        const SizedBox(height: 20),
+                        CustomButton(
+                          buttonName: "Next",
+                          width: 124,
+                          onPressed: () {
+                            Get.toNamed(AppRoutes.optimizeTrainingPage);
+                          },
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
