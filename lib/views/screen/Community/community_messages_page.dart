@@ -62,7 +62,67 @@ class _CommunityMessagesPageState extends State<CommunityMessagesPage> {
 
 class ChatScreen extends StatelessWidget {
   final Function()? goBack;
-  const ChatScreen({super.key, this.goBack});
+  ChatScreen({super.key, this.goBack});
+  OverlayEntry? _overlayEntry;
+
+  void _showFloatingMenu(BuildContext context) {
+    _overlayEntry = OverlayEntry(
+      builder: (context) => Stack(
+        children: [
+          GestureDetector(
+            onTap: _removeOverlay,
+            child: Container(
+              color: Colors.black.withOpacity(0.5),
+            ),
+          ),
+          Positioned(
+            right: 24,
+            top: 120,
+            child: Material(
+              elevation: 8,
+              borderRadius: BorderRadius.circular(8),
+              child: Container(
+                width: 250,
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ListTile(
+                      leading: svgViewer(asset: "assets/svg/block.svg"),
+                      title: Text("Block Devon"),
+                      onTap: () {
+                        _removeOverlay();
+                      },
+                    ),
+                    Divider(height: 0.5, color: Color(0xff79CDFF),),
+                    ListTile(
+                      leading: svgViewer(asset: "assets/svg/unfriend.svg"),
+                      title: Text("Remove Devon"),
+                      onTap: () {
+                        // handle Option 2 action
+                        _removeOverlay();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+
+    Overlay.of(context).insert(_overlayEntry!);
+  }
+
+  void _removeOverlay() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -156,8 +216,13 @@ class ChatScreen extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              Icon(
-                Icons.more_vert_outlined,
+              InkWell(
+                onTap: () {
+                  _showFloatingMenu(context);
+                },
+                child: Icon(
+                  Icons.more_vert_outlined,
+                ),
               ),
               const SizedBox(
                 width: 24,

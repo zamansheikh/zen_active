@@ -58,7 +58,7 @@ class CommunityFriendsDefault extends StatelessWidget {
             color: Color(0xffDBE1E4),
           ),
         ),
-        friendsOnlineSection(),
+        friendsOnlineSection(context),
         const SizedBox(
           height: 32,
         ),
@@ -114,7 +114,7 @@ class CommunityFriendsDefault extends StatelessWidget {
     );
   }
 
-  Widget friendsOnlineSection({int count = 52}) {
+  Widget friendsOnlineSection(BuildContext context, {int count = 52}) {
     return Column(
       // spacing: 16,
       children: [
@@ -218,9 +218,146 @@ class CommunityFriendsDefault extends StatelessWidget {
                 const SizedBox(
                   width: 8,
                 ),
-                Icon(
-                  Icons.more_horiz_rounded,
-                  size: 16,
+                InkWell(
+                  borderRadius: BorderRadius.circular(9999),
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        backgroundColor: Color(0xfffefeff),
+                        useSafeArea: true,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        builder: (context) {
+                          return Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 24,
+                                  vertical: 16,
+                                ),
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      color: Color(0xffDBE1E4),
+                                    ),
+                                  ),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Stack(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(999),
+                                          child: Image.asset(
+                                            "assets/images/faces/${(i % 9) + 1}.png",
+                                            height: 52,
+                                          ),
+                                        ),
+                                        Positioned(
+                                          bottom: 0,
+                                          right: 0,
+                                          child: Container(
+                                            height: 12,
+                                            width: 12,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xff04AB04),
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                color: Color(0xfff6fafc),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      width: 16,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Random Name",
+                                          style: TextStyle(
+                                            color: Color(0xff222222),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        Text(
+                                          "Friends since May 2024",
+                                          style: TextStyle(
+                                            color: Color(0xff8B8B8B),
+                                            fontSize: 13,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 24),
+                                child: ListTile(
+                                  leading: svgViewer(
+                                    asset: "assets/svg/messages.svg",
+                                    color: Color(0xff2D2D2D),
+                                  ),
+                                  title: Text(
+                                    "Message Random",
+                                    style: TextStyle(
+                                      color: Color(0xff2D2D2D),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 24),
+                                child: ListTile(
+                                  leading:
+                                      svgViewer(asset: "assets/svg/block.svg"),
+                                  title: Text(
+                                    "Block Random",
+                                    style: TextStyle(
+                                      color: Color(0xff2D2D2D),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 24, bottom: 24),
+                                child: ListTile(
+                                  leading: svgViewer(
+                                      asset: "assets/svg/unfriend.svg"),
+                                  title: Text(
+                                    "Unfriend Random",
+                                    style: TextStyle(
+                                      color: Color(0xffE71F1F),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        });
+                  },
+                  child: Icon(
+                    Icons.more_horiz_rounded,
+                    size: 16,
+                  ),
                 ),
               ],
             ),
