@@ -19,7 +19,7 @@ class LeaderboardPage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Expanded(
+          Positioned.fill(
             child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
