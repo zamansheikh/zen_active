@@ -13,7 +13,11 @@ import 'package:zen_active/views/components/random_popup.dart';
 import 'package:zen_active/views/components/section_dev.dart';
 import 'package:zen_active/views/components/slidable_tab_bar.dart';
 import 'package:zen_active/views/components/suggestion_card.dart';
+import 'package:zen_active/views/screen/Home/mood_tracker_form_screen.dart';
+import 'package:zen_active/views/screen/Home/mood_tracker_screen.dart';
 import 'package:zen_active/views/screen/Home/notification_screen.dart';
+import 'package:zen_active/views/screen/Home/select_calculator_screen.dart';
+import 'package:zen_active/views/screen/Home/track_workout_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,17 +33,17 @@ class _HomeScreenState extends State<HomeScreen> {
     'https://s3-alpha-sig.figma.com/img/bd59/bedf/c81d55cf2715d16603e71c8bf7746754?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=uZDoiQwGin1lBJXfA7Rb3JeG9dD0zbXqPCenTC1jHNMAZryxk9lWEMOEeAXC3axY6rmp4Y3-nct4zIIySj0Id2FiwssNCLPP-SeWOVriE3FZU4u-Pl5aTDLzN~8cCZfoGHdnQhgsD9DjUnGSzyR8BUO2KASconXE2r7CTQwxTAaGMcIiQwO6VXxdOpAA2zLnVW7qcLRrJLsyy~Nc8aGBfIPZ0nBEQgWBvCAvvhYoikdvs0mlEJXKudNzDilsUAKgMaWl7AkSBe4VSQU5Tu65SlGj4iQIV0tJ1Bfsddq8yuhPYCSPxjG9EoSaP-gE6L7I09OtSJm4baGVHCCO-eMGzA__',
   ];
 
+  bool checkPoint = true;
+
   @override
   void initState() {
     super.initState();
-    // _showRandomPopup();
+    _showRandomPopup();
   }
 
   void _showRandomPopup() {
     final random = Random();
-    final delay = Duration(
-        seconds:
-            random.nextInt(10) + 5); // Random delay between 5 to 15 seconds
+    final delay = Duration(seconds: random.nextInt(checkPoint ? 10 : 200) + 5);
 
     Timer(delay, () {
       if (mounted) {
@@ -57,10 +61,13 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
         );
-        Future.delayed(Duration(seconds: 2), () {
+        Future.delayed(Duration(seconds: 4), () {
           if (mounted) {
             Navigator.pop(context);
           }
+        });
+        setState(() {
+          checkPoint = false;
         });
         _showRandomPopup(); // Schedule the next popup
       }
@@ -280,21 +287,27 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: FeatureButton(
                       svgAsset: 'assets/svg/boost.svg',
                       title: 'Count Calorie',
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(() => SelectCalculatorScreen());
+                      },
                     ),
                   ),
                   Expanded(
                     child: FeatureButton(
                       svgAsset: 'assets/svg/workouts.svg',
                       title: 'Track Workout',
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(() => MoodTrackerFormScreen());
+                      },
                     ),
                   ),
                   Expanded(
                     child: FeatureButton(
                       svgAsset: 'assets/svg/senti.svg',
                       title: 'Track Mood',
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(() => MoodTrackerScreen());
+                      },
                     ),
                   ),
                 ],

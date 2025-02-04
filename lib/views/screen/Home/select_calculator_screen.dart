@@ -5,6 +5,7 @@ import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/screen/Home/calorie_calculator.dart';
+import 'package:zen_active/views/screen/Home/tdee_calculator_screen.dart';
 import 'package:zen_active/views/screen/Home/track_workout_screen.dart';
 
 class SelectCalculatorScreen extends StatefulWidget {
@@ -35,7 +36,7 @@ class _SelectCalculatorScreenState extends State<SelectCalculatorScreen> {
                   //DateSection
                   InkWell(
                     onTap: () {
-                      Get.to(CalorieCalculator());
+                      Get.to(() => CalorieCalculator());
                     },
                     child: Container(
                       width: double.infinity,
@@ -80,8 +81,7 @@ class _SelectCalculatorScreenState extends State<SelectCalculatorScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      // Get.to(() => TDEECalculatorScreen());
-                      Get.to(() => TrackWorkOutScreen());
+                      Get.to(() => TDEECalculatorScreen());
                     },
                     child: Container(
                       width: double.infinity,

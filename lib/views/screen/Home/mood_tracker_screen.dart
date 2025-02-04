@@ -12,14 +12,14 @@ import 'dart:io';
 import 'package:flutter/rendering.dart';
 import 'package:zen_active/views/components/random_popup.dart';
 
-class ModeTrackerScreen extends StatefulWidget {
-  const ModeTrackerScreen({super.key});
+class MoodTrackerScreen extends StatefulWidget {
+  const MoodTrackerScreen({super.key});
 
   @override
-  State<ModeTrackerScreen> createState() => _ModeTrackerScreenState();
+  State<MoodTrackerScreen> createState() => _MoodTrackerScreenState();
 }
 
-class _ModeTrackerScreenState extends State<ModeTrackerScreen> {
+class _MoodTrackerScreenState extends State<MoodTrackerScreen> {
   final GlobalKey _modeCardKey = GlobalKey();
 
   Future<void> _shareScreenshot() async {
