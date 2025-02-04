@@ -16,6 +16,7 @@ class CalorieCalculator extends StatefulWidget {
 }
 
 class _CalorieCalculatorState extends State<CalorieCalculator> {
+  bool result = false;
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
@@ -56,7 +57,9 @@ class _CalorieCalculatorState extends State<CalorieCalculator> {
                     child: CustomButton(
                       buttonName: "Calculate",
                       onPressed: () {
-                        Get.to(() => TDEECalculatorScreen());
+                        setState(() {
+                          result = true;
+                        });
                       },
                     ),
                   ),
@@ -64,125 +67,125 @@ class _CalorieCalculatorState extends State<CalorieCalculator> {
                   SizedBox(
                     height: 20.h,
                   ),
-
-                  //Result Section
-                  Container(
-                    height: 114.h,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                        color: AppColors.splashColor,
+                  if (result)
+                    //Result Section
+                    Container(
+                      height: 114.h,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                          color: AppColors.splashColor,
+                        ),
+                        borderRadius: BorderRadius.circular(8.r),
                       ),
-                      borderRadius: BorderRadius.circular(8.r),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "CALORIES",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16.sp,
-                                  color: AppColors.primaryTextColor,
-                                ),
-                              ),
-                              Text(
-                                "160",
-                                style: TextStyle(
-                                    fontSize: 29.sp,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "CALORIES",
+                                  style: TextStyle(
                                     fontWeight: FontWeight.w600,
-                                    color: AppColors.primaryTextColor),
-                              ),
-                            ],
+                                    fontSize: 16.sp,
+                                    color: AppColors.primaryTextColor,
+                                  ),
+                                ),
+                                Text(
+                                  "160",
+                                  style: TextStyle(
+                                      fontSize: 29.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.primaryTextColor),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        VerticalDivider(
-                          color: AppColors.splashColor,
-                          thickness: 1.5,
-                          indent: 20,
-                          endIndent: 20,
-                          width: 20,
-                        ),
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "FAT",
-                                style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppColors.primaryTextColor,
-                                ),
-                              ),
-                              RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: "10",
-                                      style: TextStyle(
-                                          fontSize: 29.sp,
-                                          color: AppColors.primaryTextColor),
-                                    ),
-                                    TextSpan(
-                                      text: "G",
-                                      style: TextStyle(
-                                          fontSize: 11.sp,
-                                          color: AppColors.primaryTextColor),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                          VerticalDivider(
+                            color: AppColors.splashColor,
+                            thickness: 1.5,
+                            indent: 20,
+                            endIndent: 20,
+                            width: 20,
                           ),
-                        ),
-                        VerticalDivider(
-                          color: AppColors.splashColor,
-                          thickness: 1.5,
-                          indent: 20,
-                          endIndent: 20,
-                          width: 20,
-                        ),
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "CARBS",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16.sp,
-                                  color: AppColors.primaryTextColor,
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "FAT",
+                                  style: TextStyle(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColors.primaryTextColor,
+                                  ),
                                 ),
-                              ),
-                              RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: "2S",
-                                      style: TextStyle(
-                                          fontSize: 29.sp,
-                                          color: AppColors.primaryTextColor),
-                                    ),
-                                    TextSpan(
-                                      text: "G",
-                                      style: TextStyle(
-                                          fontSize: 11.sp,
-                                          color: AppColors.primaryTextColor),
-                                    ),
-                                  ],
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: "10",
+                                        style: TextStyle(
+                                            fontSize: 29.sp,
+                                            color: AppColors.primaryTextColor),
+                                      ),
+                                      TextSpan(
+                                        text: "G",
+                                        style: TextStyle(
+                                            fontSize: 11.sp,
+                                            color: AppColors.primaryTextColor),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                          VerticalDivider(
+                            color: AppColors.splashColor,
+                            thickness: 1.5,
+                            indent: 20,
+                            endIndent: 20,
+                            width: 20,
+                          ),
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "CARBS",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16.sp,
+                                    color: AppColors.primaryTextColor,
+                                  ),
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                    children: [
+                                      TextSpan(
+                                        text: "2",
+                                        style: TextStyle(
+                                            fontSize: 29.sp,
+                                            color: AppColors.primaryTextColor),
+                                      ),
+                                      TextSpan(
+                                        text: "G",
+                                        style: TextStyle(
+                                            fontSize: 11.sp,
+                                            color: AppColors.primaryTextColor),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
                 ],
               ),
             ),
