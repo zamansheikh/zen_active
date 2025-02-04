@@ -6,6 +6,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final bool isDisabled;
   final bool multiline;
+  final int? lines;
   final Function()? onTap;
   final String? hintText;
   const CustomTextField({
@@ -16,6 +17,7 @@ class CustomTextField extends StatelessWidget {
     this.multiline = false,
     this.onTap,
     this.hintText,
+    this.lines,
   });
 
   @override
@@ -57,7 +59,7 @@ class CustomTextField extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 3.0),
                 child: TextField(
                   controller: controller,
-                  maxLines: multiline ? 2 : 1,
+                  maxLines: multiline ? lines?? 2 : 1,
                   enabled: !isDisabled,
                   style: kTextStyle.copyWith(
                     color: isDisabled ? Color(0xff757575) : Color(0xff4B4B4B),

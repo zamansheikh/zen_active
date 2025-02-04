@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/utils/text_bolder.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/screen/Community/community_comment_page.dart';
 
@@ -85,11 +86,14 @@ class Posts extends StatelessWidget {
               horizontal: 12,
               vertical: 20,
             ),
-            child: Text(
-              text,
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: textBolder(
+                text,
+                TextStyle(
+                  fontSize: 14,
+                  color: Color(0xff222222),
+                ),
               ),
             ),
           ),
@@ -142,7 +146,7 @@ class Posts extends StatelessWidget {
                 Expanded(
                   child: InkWell(
                     onTap: () {
-                      Get.to(()=> CommunityCommentPage());
+                      Get.to(() => CommunityCommentPage());
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

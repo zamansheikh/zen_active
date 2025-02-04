@@ -70,7 +70,10 @@ class FCustomButtonState extends State<CustomButton> {
                             bottom: 5.0,
                             right: 4,
                           ),
-                          child: svgViewer(asset: widget.leadingIcon!),
+                          child: svgViewer(
+                            asset: widget.leadingIcon!,
+                            height: widget.textSize ?? 24,
+                          ),
                         ),
                       Text(
                         widget.buttonName,

@@ -4,6 +4,7 @@ import 'package:zen_active/views/screen/Community/Groups/community_groups_page.d
 import 'package:zen_active/views/screen/Community/community_feed_page.dart';
 import 'package:zen_active/views/screen/Community/Friends/community_friends_page.dart';
 import 'package:zen_active/views/screen/Community/community_messages_page.dart';
+import 'package:zen_active/views/screen/Community/community_notifications_page.dart';
 
 class CommunityApp extends StatefulWidget {
   const CommunityApp({super.key});
@@ -52,7 +53,7 @@ class _CommunityAppState extends State<CommunityApp> {
                   CommunityFriendsPage(),
                   CommunityMessagesPage(),
                   CommunityGroupsPage(),
-                  Text("Notifications"),
+                  CommunityNotificationsPage(),
                 ],
               ),
             ),

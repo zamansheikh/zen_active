@@ -110,7 +110,6 @@ class _CustomTextFieldWithButtonState extends State<CustomTextFieldWithButton> {
                             onTap: () {
                               _amount++;
                               widget.controller?.text = _amount.toString();
-                              print(_amount);
                               setState(() {});
                             },
                             child: svgViewer(asset: 'assets/svg/arrow_up.svg'),
