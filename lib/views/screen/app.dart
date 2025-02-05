@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:zen_active/views/components/custom_nav_bar.dart';
 import 'package:zen_active/views/screen/challenges/challenges_page.dart';
-import 'package:zen_active/views/screen/Communitys/community_app.dart';
+import 'package:zen_active/views/screen/community/community_app.dart';
 import 'package:zen_active/views/screen/home/home_screen.dart';
 import 'package:zen_active/views/screen/profile/profile_page.dart';
 import 'package:zen_active/views/screen/Workout/workout_page.dart';
