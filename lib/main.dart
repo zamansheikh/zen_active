@@ -15,8 +15,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FirebaseNotificationService.initialize();
-  await FirebaseNotificationService.printFCMToken();
-  await FirebaseNotificationService.initializeSocket();
+  // await FirebaseNotificationService.printFCMToken();
+  // await FirebaseNotificationService.initializeSocket();
   Map<String, Map<String, String>> languages = await di.init();
   runApp(MyApp(
     languages: languages,
