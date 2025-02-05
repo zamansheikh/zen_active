@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:zen_active/views/components/community_app_bar.dart';
-import 'package:zen_active/views/screen/Communitys/Groups/community_groups_page.dart';
-import 'package:zen_active/views/screen/Communitys/community_feed_page.dart';
-import 'package:zen_active/views/screen/Communitys/Friends/community_friends_page.dart';
+import 'package:zen_active/views/screen/community/Groups/community_groups_page.dart';
+import 'package:zen_active/views/screen/community/community_feed_page.dart';
+import 'package:zen_active/views/screen/community/Friends/community_friends_page.dart';
 import 'package:zen_active/views/screen/community/community_messages_page.dart';
 import 'package:zen_active/views/screen/community/community_notifications_page.dart';
 

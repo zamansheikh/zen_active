@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zen_active/controllers/community_group_controller.dart';
 import 'package:zen_active/views/components/custom_search_bar.dart';
-import 'package:zen_active/views/screen/Communitys/Groups/community_groups_create_group.dart';
+import 'package:zen_active/views/screen/community/Groups/community_groups_create_group.dart';
 
 class CommunityGroupsYourGroups extends StatelessWidget {
   const CommunityGroupsYourGroups({super.key});

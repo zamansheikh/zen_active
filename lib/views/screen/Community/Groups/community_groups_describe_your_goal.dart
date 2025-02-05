@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zen_active/controllers/community_group_controller.dart';
 import 'package:zen_active/views/components/custom_button.dart';
-import 'package:zen_active/views/screen/Communitys/Groups/community_group_details.dart';
+import 'package:zen_active/views/screen/community/Groups/community_group_details.dart';
 
 class CommunityGroupsDescribeYourGoal extends StatelessWidget {
   const CommunityGroupsDescribeYourGoal({super.key});
