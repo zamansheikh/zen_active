@@ -10,6 +10,7 @@ class CustomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.only(bottom: 5),
       decoration: BoxDecoration(
         color: AppColors.scaffoldBackgroundColor,
         border: Border(

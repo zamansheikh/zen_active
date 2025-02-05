@@ -26,6 +26,7 @@ class _CommunityAppState extends State<CommunityApp> {
       body: SafeArea(
         child: Column(
           children: [
+            const SizedBox(height: 24),
             CommunityAppBar(
               index: index,
               onTap: (newIndex) {

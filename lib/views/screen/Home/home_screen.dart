@@ -80,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             children: [
+              const SizedBox(height: 24),
               Row(
                 children: [
                   CircleAvatar(

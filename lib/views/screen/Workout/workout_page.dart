@@ -22,7 +22,7 @@ class WorkoutPage extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(
-                  height: 10,
+                  height: 34,
                 ),
                 Row(
                   children: [
@@ -130,8 +130,8 @@ class WorkoutPage extends StatelessWidget {
                   subTitle: "Enhance strength and build muscle.",
                   onTap: () {
                     // Get.toNamed(AppRoutes.workoutPlansDetailsPage);
-                    Get.to(()=>
-                      PlanDetailsPage(
+                    Get.to(
+                      () => PlanDetailsPage(
                         isJoined: false,
                       ),
                     );
@@ -146,8 +146,8 @@ class WorkoutPage extends StatelessWidget {
                   subTitle: "Improve stamina and cardiovascular health.",
                   onTap: () {
                     // Get.toNamed(AppRoutes.workoutPlansDetailsPage);
-                    Get.to(()=>
-                      PlanDetailsPage(
+                    Get.to(
+                      () => PlanDetailsPage(
                         isJoined: false,
                       ),
                     );

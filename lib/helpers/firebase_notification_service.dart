@@ -1,3 +1,4 @@
+// ignore_for_file: library_prefixes
 import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -75,10 +76,15 @@ class FirebaseNotificationService {
     return await _firebaseMessaging.getToken();
   }
 
-  static Future<String?> printFCMToken() async {
-    String? token = await FirebaseNotificationService.getFCMToken();
-    debugPrint("FCM Token: $token");
-    return token;
+  static Future<void> printFCMToken() async {
+    String token = await PrefsHelper.getString('fcmToken');
+    if (token.length > 5) {
+      debugPrint("FCM Token: $token");
+    } else {
+      token = await FirebaseNotificationService.getFCMToken() ?? '';
+      PrefsHelper.setString('fcmToken', token);
+      debugPrint("FCM Token: $token");
+    }
   }
 
   static Future<void> initializeSocket() async {
@@ -92,22 +98,18 @@ class FirebaseNotificationService {
     socket.on('connect', (_) async {
       debugPrint('Connected to socket server');
       final String token = await PrefsHelper.getString('fcmToken');
+      await Future.delayed(const Duration(seconds: 5));
 
-      String title = "Sample Title"; // Replace with your title
-      String body = "Sample Body"; // Replace with your body
-      if (token.isNotEmpty) {
-        socket.emit('subscribeToFCM',
-            jsonEncode({'title': title, 'body': body, 'token': token}));
+      String title = "Sample Title";
+      String body = "Sample Body";
+      if (token.length > 5) {
+        socket.emit(
+            'subscribeToFCM', {'title': title, 'body': body, 'token': token});
       } else {
-        String? token = await FirebaseNotificationService.getFCMToken();
-        if (token != null) {
-          PrefsHelper.setString('fcmToken', token);
-          socket.emit('subscribeToFCM',
-              jsonEncode({'title': title, 'body': body, 'token': token}));
-        }
+        socket.emit(
+            'subscribeToFCM', {'title': title, 'body': body, 'token': token});
       }
     });
-
     socket.on('notificationSent', (data) {
       debugPrint('Notification sent: $data');
     });

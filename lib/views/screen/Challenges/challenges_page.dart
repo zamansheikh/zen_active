@@ -18,7 +18,7 @@ class ChallengesPage extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(
-                height: 10,
+                height: 34,
               ),
               Row(
                 children: [

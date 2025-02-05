@@ -23,7 +23,7 @@ class ProfilePage extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(
-                height: 24,
+                height: 44,
               ),
               Stack(
                 clipBehavior: Clip.none,
