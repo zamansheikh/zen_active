@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:zen_active/helpers/firebase_notification_service.dart';
@@ -15,6 +16,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FirebaseNotificationService.initialize();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: AppColors.scaffoldBackgroundColor, // Change this to your preferred color
+    statusBarIconBrightness: Brightness.dark, // Use Brightness.dark for dark icons
+  ));
   // await FirebaseNotificationService.printFCMToken();
   // await FirebaseNotificationService.initializeSocket();
   Map<String, Map<String, String>> languages = await di.init();
