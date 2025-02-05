@@ -7,7 +7,7 @@ import 'package:zen_active/views/components/custom_button.dart';
 import 'package:zen_active/views/components/custom_drop_down.dart';
 import 'package:zen_active/views/components/custom_gender_button.dart';
 import 'package:zen_active/views/components/custom_text_field.dart';
-import 'package:zen_active/views/screen/Home/tdee_calulator_result_screen.dart';
+import 'package:zen_active/views/screen/home/tdee_calulator_result_screen.dart';
 
 class TDEECalculatorScreen extends StatefulWidget {
   const TDEECalculatorScreen({super.key});

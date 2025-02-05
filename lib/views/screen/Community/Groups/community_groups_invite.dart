@@ -4,7 +4,7 @@ import 'package:zen_active/controllers/community_group_controller.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
 import 'package:zen_active/views/components/custom_search_bar.dart';
-import 'package:zen_active/views/screen/Community/Groups/community_groups_cover_photo.dart';
+import 'package:zen_active/views/screen/Communitys/Groups/community_groups_cover_photo.dart';
 
 class CommunityGroupsInvite extends StatelessWidget {
   final bool hasNext;
@@ -22,23 +22,24 @@ class CommunityGroupsInvite extends StatelessWidget {
                 Get.find<CommunityGroupController>().pop();
               },
             ),
-            if(hasNext)
-            Positioned(
-              right: 12,
-              top: 12,
-              child: TextButton(
-                onPressed: () {
-                  Get.find<CommunityGroupController>().push(CommunityGroupsCoverPhoto());
-                },
-                child: Text(
-                  "Next",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
+            if (hasNext)
+              Positioned(
+                right: 12,
+                top: 12,
+                child: TextButton(
+                  onPressed: () {
+                    Get.find<CommunityGroupController>()
+                        .push(CommunityGroupsCoverPhoto());
+                  },
+                  child: Text(
+                    "Next",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
-            ),
           ],
         ),
         Expanded(

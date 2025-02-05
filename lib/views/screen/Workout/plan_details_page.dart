@@ -4,7 +4,7 @@ import 'package:zen_active/models/workout_plan.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
-import 'package:zen_active/views/screen/Workout/workout_excercise_page.dart';
+import 'package:zen_active/views/screen/workout/workout_excercise_page.dart';
 
 class PlanDetailsPage extends StatefulWidget {
   final bool isJoined;
@@ -287,7 +287,8 @@ class _PlanDetailsPageState extends State<PlanDetailsPage> {
                               buttonName: "Start Workout",
                               onPressed: () {
                                 // Get.toNamed(AppRoutes.workoutProgressPage);
-                                Get.to(()=> WorkoutExcercisePage(plans: plans));
+                                Get.to(
+                                    () => WorkoutExcercisePage(plans: plans));
                               },
                             )
                           : CustomButton(

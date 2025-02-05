@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:zen_active/views/screen/community/Friends/community_friends_all_friends.dart';
-import 'package:zen_active/views/screen/community/Friends/community_friends_default.dart';
-import 'package:zen_active/views/screen/community/Friends/community_friends_online.dart';
-import 'package:zen_active/views/screen/community/Friends/community_friends_requests.dart';
-import 'package:zen_active/views/screen/community/Friends/community_friends_suggestion.dart';
+import 'package:zen_active/views/screen/community/friends/community_friends_all_friends.dart';
+import 'package:zen_active/views/screen/community/friends/community_friends_default.dart';
+import 'package:zen_active/views/screen/community/friends/community_friends_online.dart';
+import 'package:zen_active/views/screen/community/friends/community_friends_requests.dart';
+import 'package:zen_active/views/screen/community/friends/community_friends_suggestion.dart';
 
 /*
 

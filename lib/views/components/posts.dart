@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zen_active/utils/text_bolder.dart';
 import 'package:zen_active/utils/uitls.dart';
-import 'package:zen_active/views/screen/Community/community_comment_page.dart';
+import 'package:zen_active/views/screen/community/community_comment_page.dart';
 
 class Posts extends StatelessWidget {
   const Posts({

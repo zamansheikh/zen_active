@@ -13,11 +13,11 @@ import 'package:zen_active/views/components/random_popup.dart';
 import 'package:zen_active/views/components/section_dev.dart';
 import 'package:zen_active/views/components/slidable_tab_bar.dart';
 import 'package:zen_active/views/components/suggestion_card.dart';
-import 'package:zen_active/views/screen/Home/ai_screen.dart';
-import 'package:zen_active/views/screen/Home/mood_tracker_form_screen.dart';
-import 'package:zen_active/views/screen/Home/notification_screen.dart';
-import 'package:zen_active/views/screen/Home/select_calculator_screen.dart';
-import 'package:zen_active/views/screen/Home/track_workout_screen.dart';
+import 'package:zen_active/views/screen/home/ai_screen.dart';
+import 'package:zen_active/views/screen/home/mood_tracker_form_screen.dart';
+import 'package:zen_active/views/screen/home/notification_screen.dart';
+import 'package:zen_active/views/screen/home/select_calculator_screen.dart';
+import 'package:zen_active/views/screen/home/track_workout_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final Function(int)? changePage;

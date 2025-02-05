@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
-import 'package:zen_active/views/screen/Profile/about_us_page.dart';
-import 'package:zen_active/views/screen/Profile/privary_policy_page.dart';
-import 'package:zen_active/views/screen/Profile/terms_of_services_page.dart';
+import 'package:zen_active/views/screen/profile/about_us_page.dart';
+import 'package:zen_active/views/screen/profile/privary_policy_page.dart';
+import 'package:zen_active/views/screen/profile/terms_of_services_page.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -13,7 +13,11 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     List<List<dynamic>> data = [
       ["assets/svg/privacy_policy.svg", "Privacy Policy", PrivaryPolicyPage()],
-      ["assets/svg/terms_of_services.svg", "Terms of Services", TermsOfServicesPage()],
+      [
+        "assets/svg/terms_of_services.svg",
+        "Terms of Services",
+        TermsOfServicesPage()
+      ],
       ["assets/svg/about_us.svg", "About Us", AboutUsPage()],
     ];
     return Scaffold(
