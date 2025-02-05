@@ -21,7 +21,8 @@ class _AppState extends State<App> {
   void changePage(int index) {
     setState(() {
       controller.animateToPage(index,
-          duration: Duration(milliseconds: _defaultAnimationDuration), curve: Curves.decelerate);
+          duration: Duration(milliseconds: _defaultAnimationDuration),
+          curve: Curves.decelerate);
     });
   }
 
@@ -38,7 +39,7 @@ class _AppState extends State<App> {
         children: [
           HomeScreen(
             key: PageStorageKey('a'),
-            
+            changePage: changePage,
           ),
           ChallengesPage(
             key: PageStorageKey('b'),

@@ -32,7 +32,7 @@ class CurrentSubscriptionPage extends StatelessWidget {
                       ),
                       SubscriptionWidget(
                         title: "Monthly Subscription",
-                        subTitle: "\$20/month",
+                        subTitle: "\$14.99/month",
                         benifits: [
                           "Personalized meal plans",
                           "Adaptive fitness recommendations",

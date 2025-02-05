@@ -46,7 +46,7 @@ class SubscriptionPage extends StatelessWidget {
                       ),
                       SubscriptionWidget(
                         title: "Monthly Subscription",
-                        subTitle: "\$20/month",
+                        subTitle: "\$14.99/month",
                         benifits: [
                           "Personalized meal plans",
                           "Adaptive fitness recommendations",
@@ -65,7 +65,7 @@ class SubscriptionPage extends StatelessWidget {
                       ),
                       SubscriptionWidget(
                         title: "Annual Subscription",
-                        subTitle: "\$79.99/year",
+                        subTitle: "\$69.99/year",
                         benifits: [
                           "Everything in Monthly Plan",
                           "Save 50% with annual Plan",

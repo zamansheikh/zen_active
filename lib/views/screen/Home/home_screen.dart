@@ -315,6 +315,11 @@ class _HomeScreenState extends State<HomeScreen> {
               //Today Workout --- see all
               SectionDev(
                 sectionName: 'Today Workout',
+                onTap: () {
+                  setState(() {
+                    widget.changePage!(1);
+                  });
+                },
               ),
               SizedBox(height: 12.h),
               SingleChildScrollView(
@@ -333,6 +338,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: 24.h),
               SectionDev(
                 sectionName: 'Today Meal',
+                onTap: () {},
               ),
 
               SizedBox(height: 12.h),
