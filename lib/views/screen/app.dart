@@ -65,9 +65,6 @@ class _AppState extends State<App> {
             ),
             curve: Curves.linear,
           );
-          setState(() {
-            _index = index;
-          });
         },
       ),
     );

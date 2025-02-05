@@ -28,7 +28,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int slidableIndex = 0;
   List<String> images = [
+    'https://s3-alpha-sig.figma.com/img/b97f/3445/3cfa17c61a357bcf8fad128ff59de03c?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=bv7rgBpTMMnwpZBFHt4cmRD5xU1GSvRfC7dktCEsa6CzxnqQ1C8ILEQP5On8Xem7G4~DT8nbU30FTB7H-8Po8ggmO9rsijf18GPoAlKWa-8lI3EAL9SSpA4R9iA5URZmrbuG4SME~D-XSiJEb0blMQhOPZeUA7cVZV1JPQgm02dsZWU1Es1ttxUMMWACx2rM4bDfeZ5PxJ9C~RtHNyVOyv3VOytr~dBuzeJNGvitxUCBLNoEbieH9pkQrLSBPnLT8KDkRvzH6PC577J3b-0xve83Es7p0vTyPcm44ie5xb-ucci6ZEgtTQ7VmEAwlN-R1uY6wcxugd8flbWto5sx0A__',
+    'https://s3-alpha-sig.figma.com/img/212f/a1f9/ed913cb886d076193af6cf5481359d7b?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=cQpBPet31O3XPxW4asZCO8HoYnAsjv8msO-jenKvaWY4R7cM4spgp0sRK-EMvT5aAIdHkUII1~udVaG9ztsaMsUynf5bVX90q3pyX8PGdNGppKXSEyV~z~pUy0~pdW7othx1kEbrYQI2azeN~nif3JH6Rkekpf5nnDygdJrDnWHjHnQ3NsqmUBzkDmHClX~wjPXhzQ4rQyJceM4YXARdgWaiJnGb7x8qoAJ~ooLCODk~MnFyOlheyN13GWW3JGYE9CR2naI~ogJq3u1OlJSPo3ZVxfar2Q5Z1p4oqDJsSUyBGg0vh~SSOwKIwWY56WDVCKwWi4Q5MfUaXom0a3sO8Q__',
+    'https://s3-alpha-sig.figma.com/img/bd59/bedf/c81d55cf2715d16603e71c8bf7746754?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=uZDoiQwGin1lBJXfA7Rb3JeG9dD0zbXqPCenTC1jHNMAZryxk9lWEMOEeAXC3axY6rmp4Y3-nct4zIIySj0Id2FiwssNCLPP-SeWOVriE3FZU4u-Pl5aTDLzN~8cCZfoGHdnQhgsD9DjUnGSzyR8BUO2KASconXE2r7CTQwxTAaGMcIiQwO6VXxdOpAA2zLnVW7qcLRrJLsyy~Nc8aGBfIPZ0nBEQgWBvCAvvhYoikdvs0mlEJXKudNzDilsUAKgMaWl7AkSBe4VSQU5Tu65SlGj4iQIV0tJ1Bfsddq8yuhPYCSPxjG9EoSaP-gE6L7I09OtSJm4baGVHCCO-eMGzA__',
+    'https://s3-alpha-sig.figma.com/img/b97f/3445/3cfa17c61a357bcf8fad128ff59de03c?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=bv7rgBpTMMnwpZBFHt4cmRD5xU1GSvRfC7dktCEsa6CzxnqQ1C8ILEQP5On8Xem7G4~DT8nbU30FTB7H-8Po8ggmO9rsijf18GPoAlKWa-8lI3EAL9SSpA4R9iA5URZmrbuG4SME~D-XSiJEb0blMQhOPZeUA7cVZV1JPQgm02dsZWU1Es1ttxUMMWACx2rM4bDfeZ5PxJ9C~RtHNyVOyv3VOytr~dBuzeJNGvitxUCBLNoEbieH9pkQrLSBPnLT8KDkRvzH6PC577J3b-0xve83Es7p0vTyPcm44ie5xb-ucci6ZEgtTQ7VmEAwlN-R1uY6wcxugd8flbWto5sx0A__',
+    'https://s3-alpha-sig.figma.com/img/212f/a1f9/ed913cb886d076193af6cf5481359d7b?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=cQpBPet31O3XPxW4asZCO8HoYnAsjv8msO-jenKvaWY4R7cM4spgp0sRK-EMvT5aAIdHkUII1~udVaG9ztsaMsUynf5bVX90q3pyX8PGdNGppKXSEyV~z~pUy0~pdW7othx1kEbrYQI2azeN~nif3JH6Rkekpf5nnDygdJrDnWHjHnQ3NsqmUBzkDmHClX~wjPXhzQ4rQyJceM4YXARdgWaiJnGb7x8qoAJ~ooLCODk~MnFyOlheyN13GWW3JGYE9CR2naI~ogJq3u1OlJSPo3ZVxfar2Q5Z1p4oqDJsSUyBGg0vh~SSOwKIwWY56WDVCKwWi4Q5MfUaXom0a3sO8Q__',
+    'https://s3-alpha-sig.figma.com/img/bd59/bedf/c81d55cf2715d16603e71c8bf7746754?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=uZDoiQwGin1lBJXfA7Rb3JeG9dD0zbXqPCenTC1jHNMAZryxk9lWEMOEeAXC3axY6rmp4Y3-nct4zIIySj0Id2FiwssNCLPP-SeWOVriE3FZU4u-Pl5aTDLzN~8cCZfoGHdnQhgsD9DjUnGSzyR8BUO2KASconXE2r7CTQwxTAaGMcIiQwO6VXxdOpAA2zLnVW7qcLRrJLsyy~Nc8aGBfIPZ0nBEQgWBvCAvvhYoikdvs0mlEJXKudNzDilsUAKgMaWl7AkSBe4VSQU5Tu65SlGj4iQIV0tJ1Bfsddq8yuhPYCSPxjG9EoSaP-gE6L7I09OtSJm4baGVHCCO-eMGzA__',
     'https://s3-alpha-sig.figma.com/img/b97f/3445/3cfa17c61a357bcf8fad128ff59de03c?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=bv7rgBpTMMnwpZBFHt4cmRD5xU1GSvRfC7dktCEsa6CzxnqQ1C8ILEQP5On8Xem7G4~DT8nbU30FTB7H-8Po8ggmO9rsijf18GPoAlKWa-8lI3EAL9SSpA4R9iA5URZmrbuG4SME~D-XSiJEb0blMQhOPZeUA7cVZV1JPQgm02dsZWU1Es1ttxUMMWACx2rM4bDfeZ5PxJ9C~RtHNyVOyv3VOytr~dBuzeJNGvitxUCBLNoEbieH9pkQrLSBPnLT8KDkRvzH6PC577J3b-0xve83Es7p0vTyPcm44ie5xb-ucci6ZEgtTQ7VmEAwlN-R1uY6wcxugd8flbWto5sx0A__',
     'https://s3-alpha-sig.figma.com/img/212f/a1f9/ed913cb886d076193af6cf5481359d7b?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=cQpBPet31O3XPxW4asZCO8HoYnAsjv8msO-jenKvaWY4R7cM4spgp0sRK-EMvT5aAIdHkUII1~udVaG9ztsaMsUynf5bVX90q3pyX8PGdNGppKXSEyV~z~pUy0~pdW7othx1kEbrYQI2azeN~nif3JH6Rkekpf5nnDygdJrDnWHjHnQ3NsqmUBzkDmHClX~wjPXhzQ4rQyJceM4YXARdgWaiJnGb7x8qoAJ~ooLCODk~MnFyOlheyN13GWW3JGYE9CR2naI~ogJq3u1OlJSPo3ZVxfar2Q5Z1p4oqDJsSUyBGg0vh~SSOwKIwWY56WDVCKwWi4Q5MfUaXom0a3sO8Q__',
     'https://s3-alpha-sig.figma.com/img/bd59/bedf/c81d55cf2715d16603e71c8bf7746754?Expires=1739145600&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=uZDoiQwGin1lBJXfA7Rb3JeG9dD0zbXqPCenTC1jHNMAZryxk9lWEMOEeAXC3axY6rmp4Y3-nct4zIIySj0Id2FiwssNCLPP-SeWOVriE3FZU4u-Pl5aTDLzN~8cCZfoGHdnQhgsD9DjUnGSzyR8BUO2KASconXE2r7CTQwxTAaGMcIiQwO6VXxdOpAA2zLnVW7qcLRrJLsyy~Nc8aGBfIPZ0nBEQgWBvCAvvhYoikdvs0mlEJXKudNzDilsUAKgMaWl7AkSBe4VSQU5Tu65SlGj4iQIV0tJ1Bfsddq8yuhPYCSPxjG9EoSaP-gE6L7I09OtSJm4baGVHCCO-eMGzA__',
@@ -324,6 +331,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(height: 12.h),
               SingleChildScrollView(
+                clipBehavior: Clip.none,
                 scrollDirection: Axis.horizontal,
                 child: Row(spacing: 12.w, children: [
                   SuggestionCard(
@@ -347,8 +355,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 options: ['All', 'Completed'],
                 onChanged: (index) {
                   print('Tab changed to $index');
+                  setState(() {
+                    slidableIndex = index;
+                  });
                 },
-                index: 0,
+                index: slidableIndex,
               ),
 
               SizedBox(height: 16.h),
@@ -357,19 +368,33 @@ class _HomeScreenState extends State<HomeScreen> {
                   scrollDirection: Axis.vertical,
                   itemCount: images.length,
                   itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: 12.h),
-                      child: FoodItemCard(
-                        foodName: 'Grilled Chicken Salad',
-                        imageUrl: images[index],
-                        kcal: 320,
-                        carbs: 12,
-                        protein: 32,
-                        fat: 8,
-                        amount: 1,
-                        taken: index == 0,
-                      ),
-                    );
+                    var foodCard = (slidableIndex != 0)
+                        ? Padding(
+                            padding: EdgeInsets.only(bottom: 12.h),
+                            child: FoodItemCard(
+                              foodName: 'Grilled Chicken Salad',
+                              imageUrl: images[index],
+                              kcal: 320,
+                              carbs: 12,
+                              protein: 32,
+                              fat: 8,
+                              amount: 1,
+                              taken: true,
+                            ))
+                        : Padding(
+                            padding: EdgeInsets.only(bottom: 12.h),
+                            child: FoodItemCard(
+                              foodName: 'Grilled Chicken Salad',
+                              imageUrl: images[index],
+                              kcal: 320,
+                              carbs: 12,
+                              protein: 32,
+                              fat: 8,
+                              amount: 1,
+                              taken: false,
+                            ),
+                          );
+                    return foodCard;
                   },
                 ),
               ),
