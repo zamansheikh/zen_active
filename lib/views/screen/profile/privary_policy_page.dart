@@ -17,7 +17,7 @@ class PrivaryPolicyPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                 horizontal: 24,
               ),
-              child: Expanded(
+              child: SingleChildScrollView(
                 child: Column(
                   children: [
                     const SizedBox(height: 16),
