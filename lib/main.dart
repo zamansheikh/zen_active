@@ -17,8 +17,10 @@ void main() async {
   await Firebase.initializeApp();
   await FirebaseNotificationService.initialize();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: AppColors.scaffoldBackgroundColor, // Change this to your preferred color
-    statusBarIconBrightness: Brightness.dark, // Use Brightness.dark for dark icons
+    statusBarColor: AppColors
+        .scaffoldBackgroundColor, // Change this to your preferred color
+    statusBarIconBrightness:
+        Brightness.dark, // Use Brightness.dark for dark icons
   ));
   // await FirebaseNotificationService.printFCMToken();
   // await FirebaseNotificationService.initializeSocket();

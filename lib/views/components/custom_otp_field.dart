@@ -5,7 +5,7 @@ import 'package:zen_active/views/components/custom_button.dart';
 
 class CustomOTPField extends StatefulWidget {
   const CustomOTPField({super.key, this.onPressed});
-  final Function()? onPressed;
+  final Function(String)? onPressed;
 
   @override
   CustomOTPFieldState createState() => CustomOTPFieldState();
@@ -48,13 +48,12 @@ class CustomOTPFieldState extends State<CustomOTPField> {
           Directionality(
             textDirection: TextDirection.ltr,
             child: Pinput(
-              length: 6, // Set the length to 6
+              length: 6,
               controller: pinController,
               focusNode: focusNode,
-
               defaultPinTheme: defaultPinTheme,
               validator: (value) {
-                return value == '222222'
+                return (value?.length == 6)
                     ? null
                     : 'Pin is incorrect'; // Update the validation logic if needed
               },
@@ -65,7 +64,6 @@ class CustomOTPFieldState extends State<CustomOTPField> {
               onChanged: (value) {
                 debugPrint('onChanged: $value');
               },
-
               cursor: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -96,7 +94,12 @@ class CustomOTPFieldState extends State<CustomOTPField> {
             ),
           ),
           SizedBox(height: 24),
-          CustomButton(buttonName: "Verify", onPressed: widget.onPressed),
+          CustomButton(
+            buttonName: "Verify",
+            onPressed: widget.onPressed != null
+                ? () => widget.onPressed!(pinController.text)
+                : null,
+          ),
         ],
       ),
     );

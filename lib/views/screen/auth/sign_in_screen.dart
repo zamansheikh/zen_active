@@ -34,12 +34,14 @@ class _SigninScreenState extends State<SigninScreen> {
               FCustomTextField(
                 hintText: 'Enter your email',
                 svgIcon: AppConstants.mailIcon,
+                controller: _authController.emailController,
               ),
               SizedBox(height: 12.h),
               FCustomTextField(
                 isPassword: true,
                 hintText: 'Enter your password',
                 svgIcon: AppConstants.lockIcon,
+                controller: _authController.passwordController,
               ),
 
               //Forget Password
@@ -63,9 +65,10 @@ class _SigninScreenState extends State<SigninScreen> {
                 return CustomButton(
                     buttonName: 'Sign In',
                     isLoading: _authController.isLoading.value,
-                    onPressed: () {
+                    onPressed: () async {
                       _authController.logIn(
-                          email: 'test@gmail  .com', password: '123456');
+                          email: _authController.emailController.text.trim(),
+                          password: _authController.emailController.text);
                     });
               }),
               SizedBox(height: 10.h),

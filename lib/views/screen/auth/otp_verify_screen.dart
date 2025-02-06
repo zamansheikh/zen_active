@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/controllers/auth_controller.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/utils/uitls.dart';
@@ -16,8 +17,10 @@ class OtpVerifyScreen extends StatefulWidget {
 }
 
 class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
+  final AuthController _authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
+    final String email = Get.arguments;
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
@@ -41,8 +44,11 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                       ),
                       SizedBox(height: 48.h),
                       CustomOTPField(
-                        onPressed: () {
-                          Get.to(() => ResetPasswordScreen());
+                        onPressed: (otp) {
+                          _authController.verifyOTP(
+                            email: email,
+                            otp: otp,
+                          );
                         },
                       ),
                       Row(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/controllers/auth_controller.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/utils/uitls.dart';
@@ -15,6 +16,7 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  final AuthController _authController = Get.put(AuthController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,21 +33,33 @@ class _SignupScreenState extends State<SignupScreen> {
               FCustomTextField(
                 hintText: 'Enter your email',
                 svgIcon: AppConstants.mailIcon,
+                controller: _authController.emailController,
               ),
               SizedBox(height: 12.h),
               FCustomTextField(
                 isPassword: true,
                 hintText: 'Enter your password',
                 svgIcon: AppConstants.lockIcon,
+                controller: _authController.passwordController,
               ),
               SizedBox(height: 12.h),
               FCustomTextField(
                 isPassword: true,
                 hintText: 'Re-enter your password',
                 svgIcon: AppConstants.lockIcon,
+                controller: _authController.confirmPasswordController,
               ),
               SizedBox(height: 20.h),
-              CustomButton(buttonName: 'Sign Up', onPressed: () {}),
+              CustomButton(
+                  buttonName: 'Sign Up',
+                  onPressed: () {
+                    _authController.signUp(
+                      email: _authController.emailController.text,
+                      password: _authController.passwordController.text,
+                      confirmPassword:
+                          _authController.confirmPasswordController.text,
+                    );
+                  }),
               SizedBox(height: 10.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

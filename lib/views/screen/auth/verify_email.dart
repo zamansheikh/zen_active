@@ -39,7 +39,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                       ),
                       SizedBox(height: 48.h),
                       CustomOTPField(
-                        onPressed: () {},
+                        onPressed: (otp) {},
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

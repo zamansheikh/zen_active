@@ -8,12 +8,14 @@ class FCustomTextField extends StatefulWidget {
   final String hintText;
   final String svgIcon;
   final bool isPassword;
+  final TextEditingController? controller;
 
   const FCustomTextField({
     super.key,
     required this.hintText,
     required this.svgIcon,
     this.isPassword = false,
+    this.controller,
   });
 
   @override
@@ -27,6 +29,7 @@ class FCustomTextFieldState extends State<FCustomTextField> {
   Widget build(BuildContext context) {
     return TextField(
       scrollPadding: EdgeInsets.all(0),
+      controller: widget.controller,
       obscureText: widget.isPassword ? _obscureText : false,
       decoration: InputDecoration(
         prefixIcon: svgViewer(

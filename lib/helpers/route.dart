@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/views/screen/auth/otp_verify_screen.dart';
 import 'package:zen_active/views/screen/challenges/challenge_details_page.dart';
 import 'package:zen_active/views/screen/challenges/challenge_progress_page.dart';
 import 'package:zen_active/views/screen/challenges/challenges_page.dart';
@@ -42,6 +43,7 @@ class AppRoutes {
   static String signInScreen = "/sign_in_screen";
   static String forgetPassword = "/forget_password";
   static String userInfoStack = "/user_info_stack";
+  static String otpVerify = "/otp_verify";
 
   // Challenges
   static String challengesPage = "/challenges_page";
@@ -89,6 +91,7 @@ class AppRoutes {
     GetPage(name: signInScreen, page: () => SigninScreen()),
     GetPage(name: forgetPassword, page: () => ForgetPassword()),
     GetPage(name: userInfoStack, page: () => UserInfoPageStack()),
+    GetPage(name: otpVerify, page: () => OtpVerifyScreen()),
 
     // Challenges
     GetPage(name: challengesPage, page: () => ChallengesPage()),

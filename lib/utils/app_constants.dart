@@ -51,4 +51,5 @@ class AppConstants {
   static String SPLASH_HEADER = "Achieve Your Fitness Goals!";
   static String SPLASH_SUB_HEADER =
       "Track your progress, take on challenges, and connect with a community of achievers";
+  static String bearerToken = "bearerToken";
 }
