@@ -2,7 +2,7 @@ import 'package:logger/logger.dart';
 
 /// A utility class for logging messages in a structured and customizable way.
 ///
-/// This logger uses the `Logger` package and a `PrettyPrinter` to format logs 
+/// This logger uses the `Logger` package and a `PrettyPrinter` to format logs
 /// with features like method count, colorful output, emojis, and more.
 ///
 /// ### Developer
@@ -61,7 +61,7 @@ class AppLogger {
 
 /// Extension for easier logging on objects.
 ///
-/// This extension adds logging methods (`logD`, `logI`, `logW`, `logE`, `logF`) 
+/// This extension adds logging methods (`logD`, `logI`, `logW`, `logE`, `logF`)
 /// to any object, making it convenient to log directly from any instance.
 ///
 /// ### Example
@@ -74,7 +74,7 @@ extension Loggable on Object {
   /// Ensures the current object is safely converted to a string for logging.
   String _safeToString() {
     try {
-      return this.toString();
+      return toString();
     } catch (e) {
       return 'Error converting object to string: $e';
     }

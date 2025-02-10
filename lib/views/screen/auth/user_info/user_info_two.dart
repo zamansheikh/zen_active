@@ -18,6 +18,26 @@ class UserInfoTwo extends StatefulWidget {
 
 class _UserInfoTwoState extends State<UserInfoTwo> {
   final controller = Get.find<UserInfoController>();
+  void updateGoal(String goal) {
+    controller.primaryGoalController.text = goal;
+    goals.forEach((key, value) {
+      if (key != goal) {
+        goals[key] = false;
+      } else {
+        goals[key] = true;
+      }
+    });
+  }
+
+  Map<String, bool> goals = {
+    'Build Muscle': false,
+    'Lose Weight': false,
+    'Improve Endurance': false,
+    'Increase Flexibility': false,
+    'Boost Energy': false,
+    'Enhance Mental Health': false,
+    'Gain Weight': false,
+  };
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,51 +73,87 @@ class _UserInfoTwoState extends State<UserInfoTwo> {
                 ),
                 SizedBox(height: 28.h),
                 CustomSelectionButton(
-                  // isSecondary: true,
+                  isSecondary: !goals['Build Muscle']!,
                   hasIcon: true,
+                  onPressed: () {
+                    setState(() {
+                      updateGoal('Build Muscle');
+                    });
+                  },
                   buttonName: "Build Muscle",
                   svgPath: AppConstants.gymIcon,
                 ),
                 SizedBox(height: 24.h),
                 CustomSelectionButton(
-                  isSecondary: true,
+                  isSecondary: !goals['Lose Weight']!,
                   hasIcon: true,
-                  buttonName: "Loose Weight",
+                  buttonName: 'Lose Weight',
                   svgPath: AppConstants.downloadIcon,
+                  onPressed: () {
+                    setState(() {
+                      updateGoal('Lose Weight');
+                    });
+                  },
                 ),
                 SizedBox(height: 24.h),
                 CustomSelectionButton(
-                  isSecondary: true,
+                  isSecondary: !goals['Improve Endurance']!,
                   hasIcon: true,
                   buttonName: "Improve Endurance",
                   svgPath: AppConstants.walkIcon,
+                  onPressed: () {
+                    setState(() {
+                      updateGoal('Improve Endurance');
+                    });
+                  },
                 ),
                 SizedBox(height: 24.h),
                 CustomSelectionButton(
-                  isSecondary: true,
+                  isSecondary: !goals['Increase Flexibility']!,
                   hasIcon: true,
                   buttonName: "Increase Flexibility",
                   svgPath: AppConstants.walkWithStyle,
+                  onPressed: () {
+                    setState(() {
+                      updateGoal('Increase Flexibility');
+                    });
+                  },
                 ),
                 SizedBox(height: 24.h),
                 CustomSelectionButton(
                   hasIcon: true,
                   buttonName: "Boost Energy",
+                  isSecondary: !goals['Boost Energy']!,
                   svgPath: AppConstants.boostIcon,
+                  onPressed: () {
+                    setState(() {
+                      updateGoal('Boost Energy');
+                    });
+                  },
                 ),
                 SizedBox(height: 24.h),
                 CustomSelectionButton(
-                  isSecondary: true,
+                  isSecondary: !goals['Enhance Mental Health']!,
                   hasIcon: true,
                   buttonName: "Enhance Mental Health",
                   svgPath: AppConstants.maditationIcon,
+                  onPressed: () {
+                    setState(() {
+                      updateGoal('Enhance Mental Health');
+                    });
+                  },
                 ),
                 SizedBox(height: 24.h),
                 CustomSelectionButton(
-                  isSecondary: true,
+                  isSecondary: !goals['Gain Weight']!,
                   hasIcon: true,
                   buttonName: "Gain Weight",
                   svgPath: AppConstants.uploadIcon,
+                  onPressed: () {
+                    setState(() {
+                      updateGoal('Gain Weight');
+                    });
+                  },
                 ),
                 SizedBox(height: 24.h),
                 CustomButton(

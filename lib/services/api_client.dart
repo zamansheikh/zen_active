@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:http/http.dart' as http;
 import 'package:zen_active/utils/prefs_helper.dart';
+import 'package:zen_active/utils/uitls.dart';
 import '../Utils/app_constants.dart';
 import 'api_constant.dart';
 
@@ -110,19 +111,66 @@ class ApiClient extends GetxService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $bearerToken'
     };
+
     try {
       debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
       debugPrint('====> API Body: $body');
 
+      try {
+        http.Response response = await client.patch(
+          Uri.parse(ApiConstant.baseUrl + uri),
+          body: jsonEncode(body), // Ensure JSON encoding
+          headers: headers ?? mainHeaders,
+        );
+      } catch (e) {
+        llg(e.toString());
+      }
+
       http.Response response = await client
           .patch(
             Uri.parse(ApiConstant.baseUrl + uri),
-            body: body,
+            body: body, // Ensure JSON encoding
             headers: headers ?? mainHeaders,
           )
           .timeout(const Duration(seconds: timeoutInSeconds));
+
+      debugPrint("==========> Response Patch Method : ${response.statusCode}");
       return handleResponse(response, uri);
     } catch (e) {
+      return const Response(statusCode: 1, statusText: noInternetMessage);
+    }
+  }
+
+  static Future<Response> patchMultipartData(String uri, dynamic body,
+      {required List<MultipartBody> multipartBody,
+      Map<String, String>? headers}) async {
+    try {
+      bearerToken = await PrefsHelper.getString(AppConstants.bearerToken);
+
+      var mainHeaders = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Bearer $bearerToken'
+      };
+      debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
+      debugPrint('====> API Body: $body with ${multipartBody.length} files');
+
+      var request =
+          http.MultipartRequest('PATCH', Uri.parse(ApiConstant.baseUrl + uri));
+      request.headers.addAll(headers ?? mainHeaders);
+      request.fields.addAll(body);
+
+      for (MultipartBody element in multipartBody) {
+        request.files.add(await http.MultipartFile.fromPath(
+          element.key,
+          element.file.path,
+        ));
+      }
+
+      http.StreamedResponse streamedResponse = await request.send();
+      http.Response response = await http.Response.fromStream(streamedResponse);
+      return handleResponse(response, uri);
+    } catch (e) {
+      debugPrint('------------${e.toString()}');
       return const Response(statusCode: 1, statusText: noInternetMessage);
     }
   }

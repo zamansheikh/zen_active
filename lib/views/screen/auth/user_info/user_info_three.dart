@@ -18,6 +18,24 @@ class UserInfoThree extends StatefulWidget {
 
 class _UserInfoThreeState extends State<UserInfoThree> {
   final controller = Get.find<UserInfoController>();
+  void updateDiet(String diet) {
+    controller.dietController.text = diet;
+    diets.forEach((key, value) {
+      if (key != diet) {
+        diets[key] = false;
+      } else {
+        diets[key] = true;
+      }
+    });
+  }
+
+  Map<String, bool> diets = {
+    'No Preference': false,
+    'Vegan': false,
+    'Vegetarian': false,
+    'Keto/Low Carb': false,
+    'Gluten-Free': false,
+  };
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,37 +71,63 @@ class _UserInfoThreeState extends State<UserInfoThree> {
                 ),
                 SizedBox(height: 28.h),
                 CustomSelectionButton(
-                  // isSecondary: true,
+                  isSecondary: !diets['No Preference']!,
                   hasIcon: true,
                   buttonName: "No Preference",
                   svgPath: AppConstants.noPrefIcon,
+                  onPressed: () {
+                    setState(() {
+                      updateDiet('No Preference');
+                    });
+                  },
                 ),
                 SizedBox(height: 24.h),
                 CustomSelectionButton(
-                  isSecondary: true,
+                  isSecondary: !diets['Vegan']!,
                   hasIcon: true,
                   buttonName: "Vegan",
                   svgPath: AppConstants.veganIcon,
+                  onPressed: () {
+                    setState(() {
+                      updateDiet('Vegan');
+                    });
+                  },
                 ),
                 SizedBox(height: 24.h),
                 CustomSelectionButton(
-                  isSecondary: true,
+                  isSecondary: !diets['Vegetarian']!,
                   hasIcon: true,
                   buttonName: "Vegetarian",
                   svgPath: AppConstants.vegitableIcon,
+                  onPressed: () {
+                    setState(() {
+                      updateDiet('Vegetarian');
+                    });
+                  },
                 ),
                 SizedBox(height: 24.h),
                 CustomSelectionButton(
+                  isSecondary: !diets['Keto/Low Carb']!,
                   hasIcon: true,
                   buttonName: "Keto/Low Carb",
                   svgPath: AppConstants.ketoIcon,
+                  onPressed: () {
+                    setState(() {
+                      updateDiet('Keto/Low Carb');
+                    });
+                  },
                 ),
                 SizedBox(height: 24.h),
                 CustomSelectionButton(
-                  isSecondary: true,
+                  isSecondary: !diets['Gluten-Free']!,
                   hasIcon: true,
                   buttonName: "Gluten-Free",
                   svgPath: AppConstants.glutenIcon,
+                  onPressed: () {
+                    setState(() {
+                      updateDiet('Gluten-Free');
+                    });
+                  },
                 ),
                 SizedBox(height: 24.h),
                 CustomButton(

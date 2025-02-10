@@ -53,50 +53,66 @@ class _UserInfoFiveState extends State<UserInfoFive> {
                 ),
                 SizedBox(height: 28.h),
                 CustomDropDown(
-                    title: "Do you have a history of injuries?",
-                    hintText: "Select an injury type",
-                    options: [
-                      'No Injuries',
-                      'Back Pain',
-                      'Knee Issues',
-                      'Shoulder Injuries',
-                      'Ankle Sprains',
-                    ]),
+                  title: "Do you have a history of injuries?",
+                  hintText: "Select an injury type",
+                  options: [
+                    'No Injuries',
+                    'Back Pain',
+                    'Knee Issues',
+                    'Shoulder Injuries',
+                    'Ankle Sprains',
+                  ],
+                  onChanged: (p0) {
+                    controller.injuryController.text = p0;
+                  },
+                ),
                 SizedBox(height: 24.h),
                 CustomDropDown(
-                    title: "Do you have difficulty with certain movements?",
-                    hintText: "Select an movements type",
-                    options: [
-                      'No Difficulty',
-                      'Overhead Movements',
-                      'Deep Squats',
-                      'Rotational Movements',
-                      'Forward Bends'
-                    ]),
+                  title: "Do you have difficulty with certain movements?",
+                  hintText: "Select an movements type",
+                  options: [
+                    'No Difficulty',
+                    'Overhead Movements',
+                    'Deep Squats',
+                    'Rotational Movements',
+                    'Forward Bends'
+                  ],
+                  onChanged: (p0) {
+                    controller.movementDifficultyController.text = p0;
+                  },
+                ),
                 SizedBox(height: 24.h),
                 CustomDropDown(
-                    title:
-                        "Do you have any medical conditions we should consider?",
-                    hintText: "Select a condition",
-                    options: [
-                      'No Medical Conditions',
-                      'Asthma',
-                      'Heart Conditions',
-                      'Diabetes',
-                      'Arthritis',
-                    ]),
+                  title:
+                      "Do you have any medical conditions we should consider?",
+                  hintText: "Select a condition",
+                  options: [
+                    'No Medical Conditions',
+                    'Asthma',
+                    'Heart Conditions',
+                    'Diabetes',
+                    'Arthritis',
+                  ],
+                  onChanged: (p0) {
+                    controller.medicalConditionController.text = p0;
+                  },
+                ),
                 SizedBox(height: 24.h),
                 CustomDropDown(
-                    title: "What is your occupation",
-                    hintText: "Select your occupation ",
-                    options: [
-                      'Software Engineer 👨‍💻',
-                      'Teacher 👩‍🏫',
-                      'Doctor 👨‍⚕️',
-                      'Chef 👨‍🍳',
-                      'Photographer 📷',
-                      'Entrepreneur 💼'
-                    ]),
+                  title: "What is your occupation",
+                  hintText: "Select your occupation ",
+                  options: [
+                    'Software Engineer 👨‍💻',
+                    'Teacher 👩‍🏫',
+                    'Doctor 👨‍⚕️',
+                    'Chef 👨‍🍳',
+                    'Photographer 📷',
+                    'Entrepreneur 💼'
+                  ],
+                  onChanged: (p0) {
+                    controller.occupationController.text = p0;
+                  },
+                ),
                 SizedBox(height: 24.h),
                 CustomButton(
                     isLoading: _authController.isLoading.value,

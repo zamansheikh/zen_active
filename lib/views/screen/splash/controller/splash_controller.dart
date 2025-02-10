@@ -21,6 +21,10 @@ class SplashController extends GetxController implements GetxService {
   }
 
   void checkNavigationFlow() async {
+    laodState();
+    print(isSplashPassed.value);
+    print(isUserLoggedIn.value);
+    print(isUserInfoCompleted.value);
     if (isSplashPassed.value &&
         isUserLoggedIn.value &&
         isUserInfoCompleted.value) {

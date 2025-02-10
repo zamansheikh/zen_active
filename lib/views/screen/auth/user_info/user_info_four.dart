@@ -17,6 +17,24 @@ class UserInfoFour extends StatefulWidget {
 
 class _UserInfoFourState extends State<UserInfoFour> {
   final controller = Get.find<UserInfoController>();
+  void updateActivityLevel(String activityLevel) {
+    controller.activityLevelController.text = activityLevel;
+    activityLevels.forEach((key, value) {
+      if (key != activityLevel) {
+        activityLevels[key] = false;
+      } else {
+        activityLevels[key] = true;
+      }
+    });
+  }
+
+  Map<String, bool> activityLevels = {
+    'Sedentary (little to no exercise)': false,
+    'Lightly Active (light exercise 1-3 days/week)': false,
+    'Moderately Active (exercise 3-5 days/week)': false,
+    'Very Active (hard exercise 6-7 days/week)': false,
+    'Super Active (intense exercise every day)': false,
+  };
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,33 +70,67 @@ class _UserInfoFourState extends State<UserInfoFour> {
                 ),
                 SizedBox(height: 28.h),
                 CustomSelectionButton(
-                  isSecondary: true,
+                  isSecondary:
+                      !activityLevels['Sedentary (little to no exercise)']!,
                   hasIcon: false,
                   buttonName: "Sedentary (little to no exercise)",
+                  onPressed: () {
+                    setState(() {
+                      updateActivityLevel('Sedentary (little to no exercise)');
+                    });
+                  },
                 ),
                 SizedBox(height: 24.h),
                 CustomSelectionButton(
-                  isSecondary: false,
+                  isSecondary: !activityLevels[
+                      'Lightly Active (light exercise 1-3 days/week)']!,
                   hasIcon: false,
                   buttonName: "Lightly Active (light exercise 1-3 days/week)",
+                  onPressed: () {
+                    setState(() {
+                      updateActivityLevel(
+                          'Lightly Active (light exercise 1-3 days/week)');
+                    });
+                  },
                 ),
                 SizedBox(height: 24.h),
                 CustomSelectionButton(
-                  isSecondary: true,
+                  isSecondary: !activityLevels[
+                      'Moderately Active (exercise 3-5 days/week)']!,
                   hasIcon: false,
                   buttonName: "Moderately Active (exercise 3-5 days/week)",
+                  onPressed: () {
+                    setState(() {
+                      updateActivityLevel(
+                          'Moderately Active (exercise 3-5 days/week)');
+                    });
+                  },
                 ),
                 SizedBox(height: 24.h),
                 CustomSelectionButton(
-                  isSecondary: true,
+                  isSecondary: !activityLevels[
+                      'Very Active (hard exercise 6-7 days/week)']!,
                   hasIcon: false,
                   buttonName: "Very Active (hard exercise 6-7 days/week)",
+                  onPressed: () {
+                    setState(() {
+                      updateActivityLevel(
+                          'Very Active (hard exercise 6-7 days/week)');
+                    });
+                  },
                 ),
                 SizedBox(height: 24.h),
                 CustomSelectionButton(
-                  isSecondary: true,
+                  isSecondary: !activityLevels[
+                      'Super Active (intense exercise every day)']!,
                   hasIcon: false,
                   buttonName: "Super Active (intense exercise every day)",
+                  onPressed: () {
+                    setState(() {
+                      updateActivityLevel(
+                          'Super Active (intense exercise every day)');
+                    });
+                  },
                 ),
                 SizedBox(height: 24.h),
                 CustomButton(

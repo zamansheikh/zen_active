@@ -68,7 +68,7 @@ class _SigninScreenState extends State<SigninScreen> {
                     onPressed: () async {
                       _authController.logIn(
                           email: _authController.emailController.text.trim(),
-                          password: _authController.emailController.text);
+                          password: _authController.passwordController.text);
                     });
               }),
               SizedBox(height: 10.h),
