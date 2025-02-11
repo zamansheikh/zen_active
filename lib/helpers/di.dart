@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zen_active/controllers/auth_controller.dart';
 import 'package:zen_active/views/screen/Splash/controller/splash_controller.dart';
 import 'package:zen_active/controllers/community_group_controller.dart';
 import '../controllers/home_controller.dart';
@@ -13,6 +14,9 @@ import '../utils/app_constants.dart';
 Future<Map<String, Map<String, String>>> init() async {
   //SplashController
   Get.lazyPut(() => SplashController());
+
+  //Auth Controller
+  Get.lazyPut(() => AuthController());
 
   // Core
   final sharedPreferences = await SharedPreferences.getInstance();

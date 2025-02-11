@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/controllers/auth_controller.dart';
 import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/models/reward_model.dart';
 import 'package:zen_active/utils/app_colors.dart';
@@ -7,13 +8,19 @@ import 'package:zen_active/utils/prefs_helper.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_button.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   final RewardModel? reward;
   const ProfilePage({
     super.key,
     this.reward,
   });
 
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  final AuthController authController = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,20 +37,20 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(100),
-                    child: Image.asset(
-                      "assets/images/user.png",
+                    child: Image.network(
+                      authController.user.value.image!,
                       width: 140,
                       height: 140,
                       fit: BoxFit.cover,
                     ),
                   ),
-                  if (reward != null)
+                  if (widget.reward != null)
                     Positioned(
                       bottom: -10,
-                      left: reward!.isCentered ? 0 : null,
-                      right: reward!.isCentered ? 0 : -10,
+                      left: widget.reward!.isCentered ? 0 : null,
+                      right: widget.reward!.isCentered ? 0 : -10,
                       child: svgViewer(
-                        asset: reward!.iconPath,
+                        asset: widget.reward!.iconPath,
                         height: 52,
                         width: 52,
                       ),
@@ -54,7 +61,7 @@ class ProfilePage extends StatelessWidget {
                 height: 29,
               ),
               Text(
-                "Arlene Flores",
+                "${authController.user.value.name!.firstName!} ${authController.user.value.name!.lastName!}",
                 style: kTextStyle.copyWith(
                   fontSize: 26,
                   color: Color(0xff3a3a3a),

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController implements GetxService {
+class EventController extends GetxController implements GetxService {
   String title = "Home Screen";
 
   @override

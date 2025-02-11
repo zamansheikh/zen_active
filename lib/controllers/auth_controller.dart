@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:zen_active/Utils/app_constants.dart';
 import 'package:zen_active/controllers/user_info_controller.dart';
 import 'package:zen_active/helpers/route.dart';
+import 'package:zen_active/models/user_meal_plan.dart';
 import 'package:zen_active/models/user_model.dart';
 import 'package:zen_active/services/api_checker.dart';
 import 'package:zen_active/services/api_client.dart';
@@ -33,8 +35,8 @@ class AuthController extends GetxController implements GetxService {
     required String email,
     required String password,
   }) async {
+    isLoading.value = true;
     try {
-      isLoading.value = true;
       final headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
       };
@@ -214,6 +216,33 @@ class AuthController extends GetxController implements GetxService {
       isLoading.value = false;
     }
 
+    isLoading.value = false;
+  }
+
+  //GET USER DETAILS
+  void getUserDetails() async {
+    isLoading.value = true;
+    final bearerToken = await PrefsHelper.getString(AppConstants.bearerToken);
+    final headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer $bearerToken',
+    };
+    try {
+      final response = await ApiClient.getData(
+        ApiConstant.getMe,
+        headers: headers,
+      );
+      if (response.body["status"] == 200) {
+        try {
+          user.value = UserModel.fromJson(response.body["data"]);
+        } catch (e) {
+          debugPrint('Model Convertion Error: ${e.toString()}');
+          isLoading.value = false;
+        }
+      }
+    } catch (e) {
+      debugPrint('------------${e.toString()}');
+    }
     isLoading.value = false;
   }
 }

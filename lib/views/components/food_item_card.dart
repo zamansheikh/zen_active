@@ -12,6 +12,7 @@ class FoodItemCard extends StatelessWidget {
   final int fat;
   final int amount;
   final bool taken;
+  final bool isAdmins;
   final Function()? onTap;
   const FoodItemCard({
     this.onTap,
@@ -23,6 +24,7 @@ class FoodItemCard extends StatelessWidget {
     required this.protein,
     required this.fat,
     required this.amount,
+    required this.isAdmins,
     this.taken = false,
   });
 
@@ -49,6 +51,17 @@ class FoodItemCard extends StatelessWidget {
               fit: BoxFit.cover,
               width: 56.w, // Set the width
               height: 56.w,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  width: 56.w,
+                  height: 56.w,
+                  color: Colors.grey, // You can use a random color if needed
+                  child: Icon(
+                    Icons.image_not_supported,
+                    color: Colors.white,
+                  ),
+                );
+              },
             ),
           ),
           SizedBox(width: 16.w),
@@ -170,20 +183,24 @@ class FoodItemCard extends StatelessWidget {
             ],
           )),
           SizedBox(width: 30.w),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (taken)
-                svgViewer(
-                  asset: 'assets/svg/checked.svg',
-                )
-              else
-                svgViewer(
-                  asset: 'assets/svg/unchecked.svg',
-                ),
-            ],
-          ),
+          if (!isAdmins)
+            InkWell(
+              onTap: onTap,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (taken)
+                    svgViewer(
+                      asset: 'assets/svg/checked.svg',
+                    )
+                  else
+                    svgViewer(
+                      asset: 'assets/svg/unchecked.svg',
+                    ),
+                ],
+              ),
+            ),
         ],
       ),
     );

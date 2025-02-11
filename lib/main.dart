@@ -2,8 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:zen_active/helpers/firebase_notification_service.dart';
+import 'package:zen_active/services/overlay.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/utils/message.dart';
@@ -43,23 +46,34 @@ class MyApp extends StatelessWidget {
             minTextAdapt: true,
             splitScreenMode: true,
             builder: (_, child) {
-              return GetMaterialApp(
-                title: AppConstants.APPNAME,
-                debugShowCheckedModeBanner: false,
-                navigatorKey: Get.key,
-                // theme: themeController.darkTheme ? dark() : light(),
-                theme: ThemeData(
-                  fontFamily: "Khula",
-                  scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
+              return GlobalLoaderOverlay(
+                overlayWidgetBuilder: (_) {
+                  //ignored progress for the moment
+                  return Center(
+                    child: SpinKitFadingCircle(
+                      color: AppColors.primaryColor,
+                      size: 60.0,
+                    ),
+                  );
+                },
+                child: GetMaterialApp(
+                  title: AppConstants.APPNAME,
+                  debugShowCheckedModeBanner: false,
+                  navigatorKey: Get.key,
+                  // theme: themeController.darkTheme ? dark() : light(),
+                  theme: ThemeData(
+                    fontFamily: "Khula",
+                    scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
+                  ),
+                  defaultTransition: Transition.topLevel,
+                  locale: localizeController.locale,
+                  translations: Messages(languages: languages),
+                  fallbackLocale: Locale(AppConstants.languages[0].languageCode,
+                      AppConstants.languages[0].countryCode),
+                  transitionDuration: const Duration(milliseconds: 500),
+                  getPages: AppRoutes.pages,
+                  initialRoute: AppRoutes.splashScreen,
                 ),
-                defaultTransition: Transition.topLevel,
-                locale: localizeController.locale,
-                translations: Messages(languages: languages),
-                fallbackLocale: Locale(AppConstants.languages[0].languageCode,
-                    AppConstants.languages[0].countryCode),
-                transitionDuration: const Duration(milliseconds: 500),
-                getPages: AppRoutes.pages,
-                initialRoute: AppRoutes.splashScreen,
               );
             });
       });

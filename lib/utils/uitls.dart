@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/services/api_constant.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:flutter/foundation.dart';
 
@@ -43,5 +44,14 @@ void llg(dynamic message) {
   var toString = message.toString();
   if (kDebugMode) {
     print("Logged from Here: $toString");
+  }
+}
+
+String imageUrl(String? url) {
+  if (url == null || url.isEmpty) {
+    return "https://via.placeholder.com/150";
+  } else {
+    print("Image URL: ${ApiConstant.imageBaseUrl + url}");
+    return ApiConstant.imageBaseUrl + url;
   }
 }
