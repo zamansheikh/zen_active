@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:http/http.dart' as http;
 import 'package:zen_active/utils/prefs_helper.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:zen_active/utils/uitls.dart';
 import '../Utils/app_constants.dart';
 import 'api_constant.dart';
@@ -79,26 +80,37 @@ class ApiClient extends GetxService {
       bearerToken = await PrefsHelper.getString(AppConstants.bearerToken);
 
       var mainHeaders = {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Bearer $bearerToken'
+        'Authorization': 'Bearer $bearerToken',
       };
 
+      if (headers != null) {
+        mainHeaders.addAll(headers);
+      }
+
       debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
-      debugPrint('====> API Body: $body with ${multipartBody.length} picture');
+      debugPrint('====> API Body: $body with ${multipartBody.length} files');
+
       var request =
           http.MultipartRequest('POST', Uri.parse(ApiConstant.baseUrl + uri));
-      request.headers.addAll(headers ?? mainHeaders);
+      request.headers.addAll(mainHeaders);
+      request.fields.addAll(body);
+
       for (MultipartBody element in multipartBody) {
+        String mimeType = _getMimeType(element.file.path);
+
         request.files.add(await http.MultipartFile.fromPath(
           element.key,
           element.file.path,
+          contentType:
+              MediaType.parse(mimeType), // Set content type dynamically
         ));
       }
-      request.fields.addAll(body);
+
       http.Response response =
           await http.Response.fromStream(await request.send());
       return handleResponse(response, uri);
     } catch (e) {
+      debugPrint('------------${e.toString()}');
       return const Response(statusCode: 1, statusText: noInternetMessage);
     }
   }
@@ -141,37 +153,63 @@ class ApiClient extends GetxService {
     }
   }
 
-  static Future<Response> patchMultipartData(String uri, dynamic body,
+  static Future<Response> patchMultipartData(
+      String uri, Map<String, String> body,
       {required List<MultipartBody> multipartBody,
       Map<String, String>? headers}) async {
     try {
       bearerToken = await PrefsHelper.getString(AppConstants.bearerToken);
 
       var mainHeaders = {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Bearer $bearerToken'
+        'Authorization': 'Bearer $bearerToken',
       };
+
+      if (headers != null) {
+        mainHeaders.addAll(headers);
+      }
+
       debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
       debugPrint('====> API Body: $body with ${multipartBody.length} files');
 
       var request =
           http.MultipartRequest('PATCH', Uri.parse(ApiConstant.baseUrl + uri));
-      request.headers.addAll(headers ?? mainHeaders);
+      request.headers.addAll(mainHeaders);
       request.fields.addAll(body);
 
       for (MultipartBody element in multipartBody) {
+        String mimeType = _getMimeType(element.file.path);
+
         request.files.add(await http.MultipartFile.fromPath(
           element.key,
           element.file.path,
+          contentType: MediaType.parse(mimeType), // Set content type
         ));
       }
 
-      http.StreamedResponse streamedResponse = await request.send();
-      http.Response response = await http.Response.fromStream(streamedResponse);
+      http.Response response =
+          await http.Response.fromStream(await request.send());
       return handleResponse(response, uri);
     } catch (e) {
       debugPrint('------------${e.toString()}');
       return const Response(statusCode: 1, statusText: noInternetMessage);
+    }
+  }
+
+  /// Helper function to determine MIME type based on file extension
+  static String _getMimeType(String filePath) {
+    String extension = filePath.split('.').last.toLowerCase();
+    switch (extension) {
+      case 'jpg':
+      case 'jpeg':
+        return 'image/jpeg';
+      case 'png':
+        return 'image/png';
+      case 'gif':
+        return 'image/gif';
+      case 'webp':
+        return 'image/webp';
+      default:
+        return 'application/octet-stream'; // Default if unknown
     }
   }
 
@@ -207,29 +245,37 @@ class ApiClient extends GetxService {
       bearerToken = await PrefsHelper.getString(AppConstants.bearerToken);
 
       var mainHeaders = {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization': 'Bearer $bearerToken'
+        'Authorization': 'Bearer $bearerToken',
       };
-      debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
-      debugPrint('====> API Body: $body with ${multipartBody.length} picture');
-      var request =
-          http.MultipartRequest('PUT', Uri.parse(ApiConstant.baseUrl + uri));
-      request.headers.addAll(headers ?? mainHeaders);
-      for (MultipartBody element in multipartBody) {
-        for (MultipartBody element in multipartBody) {
-          request.files.add(await http.MultipartFile.fromPath(
-            element.key,
-            element.file.path,
-          ));
-        }
+
+      if (headers != null) {
+        mainHeaders.addAll(headers);
       }
 
+      debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
+      debugPrint('====> API Body: $body with ${multipartBody.length} files');
+
+      var request =
+          http.MultipartRequest('PUT', Uri.parse(ApiConstant.baseUrl + uri));
+      request.headers.addAll(mainHeaders);
       request.fields.addAll(body);
+
+      for (MultipartBody element in multipartBody) {
+        String mimeType = _getMimeType(element.file.path);
+
+        request.files.add(await http.MultipartFile.fromPath(
+          element.key,
+          element.file.path,
+          contentType:
+              MediaType.parse(mimeType), // Set content type dynamically
+        ));
+      }
 
       http.Response response =
           await http.Response.fromStream(await request.send());
       return handleResponse(response, uri);
     } catch (e) {
+      debugPrint('------------${e.toString()}');
       return const Response(statusCode: 1, statusText: noInternetMessage);
     }
   }
