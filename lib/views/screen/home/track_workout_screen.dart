@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
 import 'package:zen_active/views/components/custom_drop_down.dart';
 import 'package:zen_active/views/components/custom_text_field_with_button.dart';
-import 'package:zen_active/views/screen/home/mood_tracker_screen.dart';
 
 class TrackWorkOutScreen extends StatefulWidget {
   const TrackWorkOutScreen({super.key});
@@ -63,9 +61,7 @@ class _TrackWorkOutScreenState extends State<TrackWorkOutScreen> {
                     width: 163.w,
                     child: CustomButton(
                       buttonName: "Start Workout",
-                      onPressed: () {
-                        Get.to(() => MoodTrackerScreen());
-                      },
+                      onPressed: () {},
                     ),
                   ),
 

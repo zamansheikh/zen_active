@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:zen_active/helpers/route.dart';
+import 'package:zen_active/controllers/challenges_controller.dart';
+import 'package:zen_active/models/exercise_model.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
+import 'package:zen_active/views/screen/challenges/challenge_progress_page.dart';
 
-class ChallengeDetailsPage extends StatelessWidget {
-  const ChallengeDetailsPage({super.key});
+class ChallengeDetailsPage extends StatefulWidget {
+  final ExerciseModel exercise;
+  const ChallengeDetailsPage({super.key, required this.exercise});
+
+  @override
+  State<ChallengeDetailsPage> createState() => _ChallengeDetailsPageState();
+}
+
+class _ChallengeDetailsPageState extends State<ChallengeDetailsPage> {
+  final controller = Get.find<ChallengesController>();
+  @override
+  void initState() {
+    controller.getSingleChallege(
+      widget.exercise.id!,
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +49,8 @@ class ChallengeDetailsPage extends StatelessWidget {
                           const SizedBox(height: 12),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8),
-                            child: Image.asset(
-                              "assets/images/challenges/2.png",
+                            child: Image.network(
+                              imageUrl(widget.exercise.image!),
                               height: 215,
                               width: double.infinity,
                               fit: BoxFit.cover,
@@ -41,7 +58,7 @@ class ChallengeDetailsPage extends StatelessWidget {
                           ),
                           const SizedBox(height: 24),
                           Text(
-                            "Power Push-Up Challenge",
+                            widget.exercise.name!,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 23,
@@ -50,7 +67,7 @@ class ChallengeDetailsPage extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            "Test your strength and resilience! Complete 50 push-ups in a week and level up your fitness",
+                            widget.exercise.description!,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 16,
@@ -80,7 +97,8 @@ class ChallengeDetailsPage extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    "50 Push-Ups today",
+                                    controller
+                                        .singleExercise.value.exercise!.goal!,
                                     style: TextStyle(
                                       fontSize: 13,
                                       color: Color(0xff3A3A3A),
@@ -115,7 +133,11 @@ class ChallengeDetailsPage extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    "30 min",
+                                    secondToFormattedTime(controller
+                                        .singleExercise
+                                        .value
+                                        .exercise!
+                                        .duration!),
                                     style: TextStyle(
                                       fontSize: 13,
                                       color: Color(0xff3A3A3A),
@@ -150,7 +172,7 @@ class ChallengeDetailsPage extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    "20 completed",
+                                    "${controller.singleExercise.value.participant!.toString()} Completed",
                                     style: TextStyle(
                                       fontSize: 13,
                                       color: Color(0xff3A3A3A),
@@ -173,7 +195,7 @@ class ChallengeDetailsPage extends StatelessWidget {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. commodo consequat. Duis aute irure dolor in""",
+                            controller.singleExercise.value.exercise!.about!,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 16,
@@ -209,8 +231,11 @@ class ChallengeDetailsPage extends StatelessWidget {
                         ),
                         CustomButton(
                           buttonName: "Take the Challenge",
-                          onPressed: () {
-                            Get.toNamed(AppRoutes.challengeProgressPage);
+                          onPressed: () async {
+                            final state =
+                                await Get.to(() => ChallengeProgressPage(
+                                      exercise: controller.singleExercise.value,
+                                    ));
                           },
                         ),
                       ],

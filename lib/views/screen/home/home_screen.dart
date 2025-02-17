@@ -17,7 +17,7 @@ import 'package:zen_active/views/components/section_dev.dart';
 import 'package:zen_active/views/components/slidable_tab_bar.dart';
 import 'package:zen_active/views/components/suggestion_card.dart';
 import 'package:zen_active/views/screen/home/ai_screen.dart';
-import 'package:zen_active/views/screen/home/mood_tracker_form_screen.dart';
+import 'package:zen_active/views/screen/home/mode_tracker_form_screen.dart';
 import 'package:zen_active/views/screen/home/notification_screen.dart';
 import 'package:zen_active/views/screen/home/select_calculator_screen.dart';
 import 'package:zen_active/views/screen/home/track_workout_screen.dart';
@@ -48,6 +48,23 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     // _showRandomPopup();
     apiCall();
+  }
+
+  _showDistructPopup() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            //Make color transparent padding: EdgeInsets.zero,
+            backgroundColor: Colors.transparent,
+            contentPadding: EdgeInsets.zero,
+            content: RandomPopup(
+              hasCrossButton: true,
+              title: 'Feeling tired? A quick nap could recharge you!',
+              svgPath: 'assets/svg/nap.svg',
+            ),
+          );
+        });
   }
 
   void _showRandomPopup() {
@@ -99,9 +116,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       CircleAvatar(
                         radius: 20,
-                        backgroundImage: Image.network(
+                        backgroundImage: Image.network(imageUrl(
                           authController.user.value.image!,
-                        ).image,
+                        )).image,
                       ),
                       SizedBox(width: 8.w),
                       Column(
@@ -272,7 +289,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
                                     RichText(
                                         text: TextSpan(
-                                      text: '1h 30m',
+                                      text: secondToFormattedTime(6100),
                                       style: TextStyle(
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.w600,
@@ -280,7 +297,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                       children: [
                                         TextSpan(
-                                          text: ' / 2h',
+                                          text:
+                                              "/ ${secondToFormattedTime(authController.user.value.userAppData!.workoutTime!)}",
                                           style: TextStyle(
                                             fontSize: 16.sp,
                                             fontWeight: FontWeight.w600,
@@ -335,7 +353,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           svgAsset: 'assets/svg/senti.svg',
                           title: 'Track Mood',
                           onTap: () {
-                            Get.to(() => MoodTrackerFormScreen());
+                            Get.to(() => ModeTrackerFormScreen());
                           },
                         ),
                       ),

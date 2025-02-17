@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zen_active/views/screen/auth/otp_verify_screen.dart';
-import 'package:zen_active/views/screen/challenges/challenge_details_page.dart';
 import 'package:zen_active/views/screen/challenges/challenge_progress_page.dart';
 import 'package:zen_active/views/screen/challenges/challenges_page.dart';
 import 'package:zen_active/views/screen/app.dart';
@@ -95,8 +94,7 @@ class AppRoutes {
 
     // Challenges
     GetPage(name: challengesPage, page: () => ChallengesPage()),
-    GetPage(name: challengeDetailsPage, page: () => ChallengeDetailsPage()),
-    GetPage(name: challengeProgressPage, page: () => ChallengeProgressPage()),
+    // GetPage(name: challengeProgressPage, page: () => ChallengeProgressPage()),
 
     // Workout Pages
     GetPage(name: workoutPage, page: () => WorkoutPage()),

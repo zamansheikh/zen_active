@@ -13,4 +13,5 @@ class ApiConstant {
   static String getUserMealPlan = "/meal-plan";
   static String getMealPlan = "/meal";
   static String updateAsTaken = "/meal-plan/";
+  static String getExercise = "/exercise/";
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:zen_active/controllers/home_controller.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
@@ -14,8 +16,24 @@ class CalorieCalculator extends StatefulWidget {
 }
 
 class _CalorieCalculatorState extends State<CalorieCalculator> {
+  final HomeController homeController = Get.find<HomeController>();
   bool result = false;
   bool isChecked = false;
+  int calories = 0;
+  int fat = 0;
+  int carbs = 0;
+
+  List<String> foodItems = [];
+  String? selectedFoodItem;
+  TextEditingController quantityController = TextEditingController();
+  @override
+  void initState() {
+    for (var element in homeController.adminsMealPlans) {
+      foodItems.add(element.mealName!);
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,15 +54,20 @@ class _CalorieCalculatorState extends State<CalorieCalculator> {
                   CustomDropDown(
                     title: "Select Food",
                     hintText: "Select food item",
-                    options: ["Food 1", "Food 2", "Food 3"],
+                    options: foodItems,
+                    onChanged: (p0) {
+                      setState(() {
+                        selectedFoodItem = p0;
+                      });
+                    },
                   ),
                   SizedBox(
                     height: 20.h,
                   ),
                   CustomTextFieldWithButton(
-                    title: "Calories",
-                    hintText: "Enter calories",
-                    controller: TextEditingController(),
+                    title: "Quantity",
+                    hintText: "Enter quantity",
+                    controller: quantityController,
                   ),
                   SizedBox(
                     height: 20.h,
@@ -56,7 +79,27 @@ class _CalorieCalculatorState extends State<CalorieCalculator> {
                       buttonName: "Calculate",
                       onPressed: () {
                         setState(() {
-                          result = true;
+                          if (selectedFoodItem != null &&
+                              quantityController.text.isNotEmpty) {
+                            try {
+                              int quantity = int.parse(quantityController.text);
+                              for (var element
+                                  in homeController.adminsMealPlans) {
+                                if (element.mealName == selectedFoodItem) {
+                                  calories =
+                                      element.nutritionalInfo!.calories! *
+                                          quantity;
+                                  fat =
+                                      element.nutritionalInfo!.fats! * quantity;
+                                  carbs = element.nutritionalInfo!.carbs! *
+                                      quantity;
+                                  result = true;
+                                }
+                              }
+                            } catch (e) {
+                              print(e);
+                            }
+                          }
                         });
                       },
                     ),
@@ -92,7 +135,7 @@ class _CalorieCalculatorState extends State<CalorieCalculator> {
                                   ),
                                 ),
                                 Text(
-                                  "160",
+                                  calories.toString(),
                                   style: TextStyle(
                                       fontSize: 29.sp,
                                       fontWeight: FontWeight.w600,
@@ -124,7 +167,7 @@ class _CalorieCalculatorState extends State<CalorieCalculator> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: "10",
+                                        text: fat.toString(),
                                         style: TextStyle(
                                             fontSize: 29.sp,
                                             color: AppColors.primaryTextColor),
@@ -164,7 +207,7 @@ class _CalorieCalculatorState extends State<CalorieCalculator> {
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
-                                        text: "2",
+                                        text: carbs.toString(),
                                         style: TextStyle(
                                             fontSize: 29.sp,
                                             color: AppColors.primaryTextColor),

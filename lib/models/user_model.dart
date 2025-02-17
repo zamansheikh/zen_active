@@ -173,6 +173,8 @@ class UserAppData {
   int? gainedCalories;
   int? points;
   double? tdee;
+  int? workoutTime;
+
   DateTime? updatedAt;
 
   UserAppData({
@@ -183,6 +185,7 @@ class UserAppData {
     this.gainedCalories,
     this.points,
     this.tdee,
+    this.workoutTime,
     this.updatedAt,
   });
 
@@ -196,6 +199,7 @@ class UserAppData {
       gainedCalories: json['gainedCalories'] as int?,
       points: json['points'] as int?,
       tdee: (json['tdee'] as num?)?.toDouble(),
+      workoutTime: json['workoutTime'] as int?,
       updatedAt:
           json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
     );
@@ -209,6 +213,7 @@ class UserAppData {
     int? gainedCalories,
     int? points,
     double? tdee,
+    int? workoutTime,
     DateTime? updatedAt,
   }) =>
       UserAppData(
@@ -220,6 +225,7 @@ class UserAppData {
         points: points ?? this.points,
         tdee: tdee ?? this.tdee,
         updatedAt: updatedAt ?? this.updatedAt,
+        workoutTime: workoutTime ?? this.workoutTime,
       );
 }
 

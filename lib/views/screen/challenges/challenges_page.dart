@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:zen_active/helpers/route.dart';
+import 'package:zen_active/controllers/challenges_controller.dart';
+import 'package:zen_active/models/exercise_model.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_button.dart';
+import 'package:zen_active/views/screen/challenges/challenge_details_page.dart';
 
-class ChallengesPage extends StatelessWidget {
+class ChallengesPage extends StatefulWidget {
   const ChallengesPage({super.key});
+
+  @override
+  State<ChallengesPage> createState() => _ChallengesPageState();
+}
+
+class _ChallengesPageState extends State<ChallengesPage> {
+  final controller = Get.put(ChallengesController());
+  @override
+  void initState() {
+    controller.getChallenges();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,36 +51,24 @@ class ChallengesPage extends StatelessWidget {
                 height: 24,
               ),
               Expanded(
-                child: Column(
-                  spacing: 16,
-                  children: [
-                    challengeWidget(
-                      "Step Up Challenge",
-                      "Complete 5,000 steps today. Let's get moving!",
-                      1,
-                    ),
-                    challengeWidget(
-                      "Power Push-Up Challenge",
-                      "Master your strength by completing 50 push-ups",
-                      2,
-                    ),
-                    challengeWidget(
-                      "Yoga Quest",
-                      "Complete a 5 minute yoga sessions to improbe flexibility",
-                      3,
-                      isCompleted: true,
-                    ),
-                    challengeWidget(
-                      "Sprint to the Finish",
-                      "Cover 1 km in 30 min",
-                      4,
-                    ),
-                    challengeWidget(
-                      "Dance Party Challenge",
-                      "Dance for 30 minutes",
-                      5,
-                    ),
-                  ],
+                child: ListView.builder(
+                  itemCount: controller.exercises.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        challengeWidget(
+                          controller.exercises[index].name!,
+                          controller.exercises[index].description!,
+                          imageUrl(controller.exercises[index].image),
+                          controller.exercises[index],
+                          isCompleted: controller.exercises[index].isCompleted!,
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ],
@@ -76,11 +78,15 @@ class ChallengesPage extends StatelessWidget {
     );
   }
 
-  Widget challengeWidget(String title, String subTitle, int fileNo,
+  Widget challengeWidget(
+      String title, String subTitle, String imageUrl, ExerciseModel exercise,
       {bool isCompleted = false}) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(AppRoutes.challengeDetailsPage);
+        if (isCompleted) return;
+        Get.to(() => ChallengeDetailsPage(
+              exercise: exercise,
+            ));
       },
       child: Container(
         padding: EdgeInsets.all(12),
@@ -97,11 +103,18 @@ class ChallengesPage extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(4),
-                  child: Image.asset(
-                    "assets/images/challenges/$fileNo.png",
+                  child: Image.network(
+                    imageUrl,
                     height: 50,
                     width: 50,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        "assets/logo/zen_logo.png",
+                        width: 46,
+                        height: 33,
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(

@@ -1,22 +1,49 @@
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
-import 'package:zen_active/views/components/custom_drop_down.dart';
-import 'package:zen_active/views/components/custom_text_field.dart';
-import 'package:zen_active/views/screen/home/mood_tracker_screen.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+import 'package:flutter/rendering.dart';
+import 'package:zen_active/views/components/random_popup.dart';
 
-class MoodTrackerFormScreen extends StatefulWidget {
-  const MoodTrackerFormScreen({super.key});
+class ModeTrackerScreen extends StatefulWidget {
+  final String mode;
+  final List<String> activities;
+  const ModeTrackerScreen(
+      {super.key, required this.mode, required this.activities});
 
   @override
-  State<MoodTrackerFormScreen> createState() => _MoodTrackerFormScreenState();
+  State<ModeTrackerScreen> createState() => _ModeTrackerScreenState();
 }
 
-class _MoodTrackerFormScreenState extends State<MoodTrackerFormScreen> {
+class _ModeTrackerScreenState extends State<ModeTrackerScreen> {
+  final GlobalKey _modeCardKey = GlobalKey();
+
+  Future<void> _shareScreenshot() async {
+    try {
+      RenderRepaintBoundary boundary = _modeCardKey.currentContext!
+          .findRenderObject() as RenderRepaintBoundary;
+      ui.Image image = await boundary.toImage();
+      ByteData? byteData =
+          await image.toByteData(format: ui.ImageByteFormat.png);
+      Uint8List pngBytes = byteData!.buffer.asUint8List();
+
+      final tempDir = await getTemporaryDirectory();
+      final file = await File('${tempDir.path}/screenshot.png').create();
+      await file.writeAsBytes(pngBytes);
+
+      Share.shareXFiles([XFile(file.path)], text: 'Check out my mode!');
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,52 +60,38 @@ class _MoodTrackerFormScreenState extends State<MoodTrackerFormScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CustomDropDown(
-                    title: "Select your mode",
-                    options: [
-                      "Happy 😊",
-                      "Neutral 😐",
-                      "Stressed 😓",
-                      "Anxious 😟",
-                      "Excited 😄"
-                    ],
+                  RepaintBoundary(
+                    key: _modeCardKey,
+                    child: ModeCard(
+                      mode: "You’re feeling ${widget.mode} today!",
+                      onShare: _shareScreenshot,
+                    ),
+                  ),
+                  SizedBox(height: 32.h),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Activity suggestion:",
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                   SizedBox(height: 20.h),
-                  CustomDropDown(
-                    title: "How do you feel physically?",
-                    options: [
-                      "Energetic ⚡",
-                      "Tired 😴",
-                      "Calm 🌊",
-                      "Restless 🌀",
-                      "Balanced ⚖️",
-                    ],
-                  ),
-                  SizedBox(height: 20.h),
-                  CustomDropDown(
-                    title: "What’s your overall energy level?",
-                    options: [
-                      "High 🔋",
-                      "Medium ⚡",
-                      "Low 🌙",
-                    ],
-                  ),
-                  SizedBox(height: 20.h),
-                  CustomTextField(
-                    title: "What’s bothering you right now?",
-                    hintText: "Tell us more.....",
-                  ),
-                  SizedBox(height: 20.h),
-                  CustomTextField(
-                    title: "What’s one thing you’re grateful for today?",
-                    hintText: "Tell us more.....",
-                  ),
-                  SizedBox(height: 20.h),
-                  CustomButton(
-                      buttonName: "Submit",
-                      onPressed: () {
-                        Get.to(() => MoodTrackerScreen());
-                      }),
+                  ...widget.activities.map((activity) {
+                    return Column(
+                      children: [
+                        SizedBox(height: 20.h),
+                        CustomButton(
+                          buttonColor: Colors.transparent,
+                          buttonName: activity,
+                          textColor: AppColors.primaryTextColor,
+                          onPressed: () {},
+                        ),
+                      ],
+                    );
+                  }),
                 ],
               ),
             ),

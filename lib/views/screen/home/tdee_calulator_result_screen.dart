@@ -3,17 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 
-class TDEECalculationResultScreen extends StatefulWidget {
-  const TDEECalculationResultScreen({super.key});
+class TDEECalculationResultScreen extends StatelessWidget {
+  final double tdee;
 
-  @override
-  State<TDEECalculationResultScreen> createState() =>
-      _TDEECalculationResultScreenState();
-}
+  const TDEECalculationResultScreen({super.key, required this.tdee});
 
-class _TDEECalculationResultScreenState
-    extends State<TDEECalculationResultScreen> {
-  bool isChecked = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +35,7 @@ class _TDEECalculationResultScreenState
                     ), //2,346 Calories/day
                     RichText(
                       text: TextSpan(
-                        text: "2,346 ",
+                        text: "${tdee.toStringAsFixed(2)} ",
                         style: TextStyle(
                           fontSize: 41.sp,
                           fontWeight: FontWeight.w600,
@@ -60,10 +54,12 @@ class _TDEECalculationResultScreenState
                     ),
                     SizedBox(height: 50.h),
                     TDEEResultCell(
-                        title: "Energy intake to lose weight", value: "1,846"),
+                        title: "Energy intake to lose weight",
+                        value: (tdee - 500).toStringAsFixed(2)),
                     SizedBox(height: 20.h),
                     TDEEResultCell(
-                        title: "Energy intake to gain weight", value: "2,846"),
+                        title: "Energy intake to gain weight",
+                        value: (tdee + 500).toStringAsFixed(2)),
                     SizedBox(height: 20.h),
                   ],
                 ),
