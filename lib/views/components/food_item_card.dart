@@ -66,122 +66,135 @@ class FoodItemCard extends StatelessWidget {
           ),
           SizedBox(width: 16.w),
           Expanded(
-              child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(foodName,
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
-                      )),
-                  RichText(
-                      text: TextSpan(children: [
-                    TextSpan(
-                      text: "$kcal",
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.primaryTextColor,
-                      ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(foodName,
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w600,
+                        )),
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: RichText(
+                          text: TextSpan(children: [
+                        TextSpan(
+                          text: "$kcal",
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.primaryTextColor,
+                          ),
+                        ),
+                        TextSpan(
+                          text: " kcal",
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.secondaryTextColor,
+                          ),
+                        ),
+                      ])),
                     ),
-                    TextSpan(
-                      text: " kcal",
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.secondaryTextColor,
-                      ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text("$amount bowl",
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.secondaryTextColor,
+                        )),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: RichText(
+                          text: TextSpan(children: [
+                        TextSpan(
+                          text: "Carbs:",
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.secondaryTextColor,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "${carbs}g",
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.primaryTextColor,
+                          ),
+                        ),
+                      ])),
                     ),
-                  ])),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text("$amount bowl",
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.secondaryTextColor,
-                      )),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  RichText(
-                      text: TextSpan(children: [
-                    TextSpan(
-                      text: "Carbs: ",
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.secondaryTextColor,
-                      ),
+                    Container(
+                      height: 10.h,
+                      width: 1.w,
+                      color: Colors.grey,
                     ),
-                    TextSpan(
-                      text: "${carbs}g",
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.primaryTextColor,
-                      ),
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: RichText(
+                          text: TextSpan(children: [
+                        TextSpan(
+                          text: "Protein:",
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.secondaryTextColor,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "${protein}g",
+                          style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.primaryTextColor,
+                          ),
+                        ),
+                      ])),
                     ),
-                  ])),
-                  Container(
-                    height: 10.h,
-                    width: 1.w,
-                    color: Colors.grey,
-                  ),
-                  RichText(
-                      text: TextSpan(children: [
-                    TextSpan(
-                      text: "Protein: ",
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.secondaryTextColor,
-                      ),
+                    Container(
+                      height: 10.h,
+                      width: 1.w,
+                      color: Colors.grey,
                     ),
-                    TextSpan(
-                      text: "${protein}g",
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.primaryTextColor,
+                    RichText(
+                        text: TextSpan(children: [
+                      TextSpan(
+                        text: "Fat:    ",
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.secondaryTextColor,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                    ),
-                  ])),
-                  Container(
-                    height: 10.h,
-                    width: 1.w,
-                    color: Colors.grey,
-                  ),
-                  RichText(
-                      text: TextSpan(children: [
-                    TextSpan(
-                      text: "Fat: ",
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.secondaryTextColor,
+                      TextSpan(
+                        text: "${fat}g",
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.primaryTextColor,
+                        ),
                       ),
-                    ),
-                    TextSpan(
-                      text: "${fat}g",
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.primaryTextColor,
-                      ),
-                    ),
-                  ])),
-                ],
-              ),
-            ],
-          )),
+                    ])),
+                  ],
+                ),
+              ],
+            ),
+          ),
           SizedBox(width: 30.w),
           if (!isAdmins)
             InkWell(

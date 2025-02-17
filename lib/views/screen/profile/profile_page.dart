@@ -38,7 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(100),
                     child: Image.network(
-                      authController.user.value.image!,
+                      imageUrl(authController.user.value.image!),
                       width: 140,
                       height: 140,
                       fit: BoxFit.cover,

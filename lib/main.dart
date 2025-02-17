@@ -6,7 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:zen_active/helpers/firebase_notification_service.dart';
-import 'package:zen_active/services/overlay.dart';
+import 'package:zen_active/services/gemini_service.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/utils/message.dart';
@@ -19,6 +19,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FirebaseNotificationService.initialize();
+  GeminiService.init(apiKey: "AIzaSyC9B4vlJo11df9oGn2LMXudrfW5zDQBtd8");
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: AppColors
         .scaffoldBackgroundColor, // Change this to your preferred color

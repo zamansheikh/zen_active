@@ -21,6 +21,7 @@ class UserInfoController extends GetxController {
   final TextEditingController weightController = TextEditingController();
   final TextEditingController primaryGoalController = TextEditingController();
   final TextEditingController dietController = TextEditingController();
+  final TextEditingController restrictinController = TextEditingController();
   final TextEditingController injuryController = TextEditingController();
   final TextEditingController activityLevelController = TextEditingController();
   final TextEditingController movementDifficultyController =

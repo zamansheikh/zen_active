@@ -1,13 +1,13 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:loader_overlay/loader_overlay.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:zen_active/Utils/app_constants.dart';
 import 'package:zen_active/controllers/user_info_controller.dart';
 import 'package:zen_active/helpers/route.dart';
-import 'package:zen_active/models/user_meal_plan.dart';
 import 'package:zen_active/models/user_model.dart';
 import 'package:zen_active/services/api_checker.dart';
 import 'package:zen_active/services/api_client.dart';
@@ -18,6 +18,7 @@ import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/screen/Splash/controller/splash_controller.dart';
 
 class AuthController extends GetxController implements GetxService {
+  RxBool isEditing = false.obs;
   RxBool isLoading = false.obs;
   Rx<UserModel> user = UserModel().obs;
   final SplashController _splashController = Get.find<SplashController>();
@@ -182,6 +183,7 @@ class AuthController extends GetxController implements GetxService {
       "height": int.tryParse(userInfoController.heightController.text.trim()),
       "gender": userInfoController.gender.value,
       "dateOfBirth": userInfoController.dateTimeStr.value,
+      "restriction": userInfoController.restrictinController.text.trim(),
       "name": {
         "firstName": userInfoController.firstNameController.text.trim(),
         "lastName": userInfoController.firstNameController.text.trim()
@@ -219,6 +221,65 @@ class AuthController extends GetxController implements GetxService {
     isLoading.value = false;
   }
 
+  void updateUserProfile({
+    required String firstName,
+    required String lastName,
+    required String dateOfBirth,
+    required String restriction,
+    required String gender,
+    required String height,
+    required String weight,
+    required String primaryGoal,
+    required String diet,
+    required String activityLevel,
+  }) async {
+    isLoading.value = true;
+    final bearerToken = await PrefsHelper.getString(AppConstants.bearerToken);
+    List<MultipartBody> multipartBody = [];
+    Map<String, dynamic> data = {
+      "activityLevel": activityLevel,
+      "diet": diet,
+      "primaryGoal": primaryGoal,
+      "weight": int.tryParse(weight),
+      "height": int.tryParse(height),
+      "gender": gender,
+      "dateOfBirth": dateOfBirth,
+      "restriction": restriction,
+      "name": {"firstName": firstName, "lastName": lastName},
+    };
+
+    var body = {
+      "data": jsonEncode(data),
+    };
+
+    final headers = {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': 'Bearer $bearerToken',
+    };
+    try {
+      final response = await ApiClient.patchMultipartData(
+        ApiConstant.updateUser,
+        body,
+        multipartBody: multipartBody,
+        headers: headers,
+      );
+      if (response.statusCode == 200) {
+        showSnackBar(
+            message: response.body["message"],
+            isSucess: response.body["status"] == 200);
+        isEditing.value = false;
+        getUserDetails();
+      } else {
+        ApiChecker.checkApi(response);
+      }
+    } catch (e) {
+      debugPrint('Model Convertion Error: ${e.toString()}');
+      isLoading.value = false;
+    }
+
+    isLoading.value = false;
+  }
+
   //GET USER DETAILS
   void getUserDetails() async {
     isLoading.value = true;
@@ -244,5 +305,43 @@ class AuthController extends GetxController implements GetxService {
       debugPrint('------------${e.toString()}');
     }
     isLoading.value = false;
+  }
+
+  pickImage() async {
+    final pickedFile = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedFile != null) {
+      final file = File(pickedFile.path);
+      final bearerToken = await PrefsHelper.getString(AppConstants.bearerToken);
+      List<MultipartBody> multipartBody = [MultipartBody("image", file)];
+      // var body = {
+      //   "data": jsonEncode(data),
+      // };
+      Map<String, String> body = {};
+      final headers = {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': 'Bearer $bearerToken',
+      };
+      try {
+        final response = await ApiClient.patchMultipartData(
+          ApiConstant.updateUser,
+          body,
+          multipartBody: multipartBody,
+          headers: headers,
+        );
+        if (response.statusCode == 200) {
+          showSnackBar(
+              message: response.body["message"],
+              isSucess: response.body["status"] == 200);
+          getUserDetails();
+        } else {
+          ApiChecker.checkApi(response);
+        }
+      } catch (e) {
+        debugPrint('Model Convertion Error: ${e.toString()}');
+        isLoading.value = false;
+      }
+    }
   }
 }

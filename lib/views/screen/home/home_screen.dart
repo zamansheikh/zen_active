@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _showRandomPopup();
+    // _showRandomPopup();
     apiCall();
   }
 
@@ -192,7 +192,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
                                     RichText(
                                         text: TextSpan(
-                                      text: '350',
+                                      text: authController.user.value
+                                          .userAppData!.gainedCalories!
+                                          .toStringAsFixed(0),
                                       style: TextStyle(
                                         fontSize: 16.sp,
                                         fontWeight: FontWeight.w600,
@@ -200,7 +202,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                       children: [
                                         TextSpan(
-                                          text: '/1,800kcal',
+                                          text:
+                                              "/${authController.user.value.userAppData!.tdee!.toStringAsFixed(0)}kcal",
                                           style: TextStyle(
                                             fontSize: 16.sp,
                                             fontWeight: FontWeight.w600,
@@ -216,7 +219,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                           lineWidth: 4.0,
                                           circularStrokeCap:
                                               CircularStrokeCap.round,
-                                          percent: 0.25,
+                                          percent: authController
+                                                  .user
+                                                  .value
+                                                  .userAppData!
+                                                  .gainedCalories! /
+                                              authController.user.value
+                                                  .userAppData!.tdee!,
                                           progressColor: AppColors.splashColor),
                                     ),
                                   ],

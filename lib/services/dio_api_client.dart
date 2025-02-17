@@ -1,5 +1,3 @@
-// ignore_for_file: depend_on_referenced_packages
-
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -90,6 +88,25 @@ class DioApiClient {
       }
       debugPrint('====> API Call: POST Multipart $uri');
       return await _dio.post(uri, data: formData);
+    } catch (e) {
+      return _handleError(e);
+    }
+  }
+
+  static Future<Response> patchMultipartData(
+      String uri, Map<String, String> body,
+      {required List<MultipartBody> multipartBody}) async {
+    await _setAuthHeader();
+    try {
+      FormData formData = FormData.fromMap(body);
+      for (MultipartBody element in multipartBody) {
+        formData.files.add(MapEntry(
+          element.key,
+          await MultipartFile.fromFile(element.file.path),
+        ));
+      }
+      debugPrint('====> API Call: PATCH Multipart $uri');
+      return await _dio.patch(uri, data: formData);
     } catch (e) {
       return _handleError(e);
     }

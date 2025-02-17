@@ -1,4 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:zen_active/controllers/auth_controller.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
@@ -15,17 +19,49 @@ class ProfileInformationScreen extends StatefulWidget {
 }
 
 class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
-  bool isEditing = false;
-  TextEditingController nameController =
-      TextEditingController(text: "Arlene Flores");
-  TextEditingController emailController =
-      TextEditingController(text: "ArleneFlores@mail.com");
-  TextEditingController genderController =
-      TextEditingController(text: "Female");
-  TextEditingController ageController = TextEditingController(text: "24 yrs");
-  TextEditingController heightController =
-      TextEditingController(text: "178 cm");
-  TextEditingController weightController = TextEditingController(text: "55 kg");
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController(
+        text:
+            "${authController.user.value.name!.firstName!} ${authController.user.value.name!.lastName!}");
+    emailController =
+        TextEditingController(text: authController.user.value.email!);
+    genderController =
+        TextEditingController(text: authController.user.value.gender);
+    ageController = TextEditingController(
+        text: authController.user.value.dateOfBirth!.toString());
+    heightController = TextEditingController(
+        text: authController.user.value.height.toString());
+    weightController = TextEditingController(
+        text: authController.user.value.weight.toString());
+    primaryGoalController = TextEditingController(
+        text: authController.user.value.primaryGoal.toString());
+    dietController =
+        TextEditingController(text: authController.user.value.diet.toString());
+    restrictionController = TextEditingController(
+        text: authController.user.value.restriction.toString());
+    activityLevelController = TextEditingController(
+        text: authController.user.value.activityLevel.toString());
+    injuryController = TextEditingController(
+        text: authController.user.value.injury.toString());
+    movementDifficultyController = TextEditingController(
+        text: authController.user.value.movementDifficulty.toString());
+  }
+
+  final authController = Get.find<AuthController>();
+  late TextEditingController nameController;
+  late TextEditingController emailController;
+  late TextEditingController genderController;
+  late TextEditingController ageController;
+  late TextEditingController heightController;
+  late TextEditingController weightController;
+  late TextEditingController primaryGoalController;
+  late TextEditingController dietController;
+  late TextEditingController restrictionController;
+  late TextEditingController activityLevelController;
+  late TextEditingController injuryController;
+  late TextEditingController movementDifficultyController;
 
   @override
   Widget build(BuildContext context) {
@@ -46,65 +82,84 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                   child: Column(
                     spacing: 24,
                     children: [
-                      Align(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: Stack(
-                            children: [
-                              Image.asset(
-                                "assets/images/user.png",
-                                width: 96,
-                                height: 96,
-                                fit: BoxFit.cover,
-                              ),
-                              if (isEditing)
-                                Container(
-                                  height: 96,
-                                  width: 96,
-                                  color: Colors.black.withAlpha(102),
-                                  child: Center(
-                                    child: svgViewer(
-                                      asset: "assets/svg/camera.svg",
+                      Obx(() {
+                        return Align(
+                          child: InkWell(
+                            onTap: () {
+                              if (authController.isEditing.value) {
+                                authController.pickImage();
+                              }
+                            },
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(100),
+                              child: Stack(
+                                children: [
+                                  if (authController.user.value.image != null)
+                                    Image.network(
+                                      imageUrl(
+                                          authController.user.value.image!),
+                                      width: 96,
+                                      height: 96,
+                                      fit: BoxFit.cover,
+                                    )
+                                  else
+                                    Image.asset(
+                                      "assets/images/user.png",
+                                      width: 96,
+                                      height: 96,
+                                      fit: BoxFit.cover,
                                     ),
-                                  ),
-                                ),
-                            ],
+                                  if (authController.isEditing.value)
+                                    Container(
+                                      height: 96,
+                                      width: 96,
+                                      color: Colors.black.withAlpha(102),
+                                      child: Center(
+                                        child: svgViewer(
+                                          asset: "assets/svg/camera.svg",
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
+                        );
+                      }),
                       CustomTextField(
                         title: "Your Name",
-                        isDisabled: !isEditing,
+                        isDisabled: !authController.isEditing.value,
                         controller: nameController,
                       ),
                       CustomTextField(
                         title: "Email",
-                        isDisabled: !isEditing,
+                        isDisabled: true,
                         controller: emailController,
                       ),
                       CustomTextField(
                         title: "Gender",
-                        isDisabled: !isEditing,
+                        isDisabled: !authController.isEditing.value,
                         controller: genderController,
                       ),
                       CustomTextField(
                         title: "Age",
-                        isDisabled: !isEditing,
+                        isDisabled: !authController.isEditing.value,
                         controller: ageController,
                       ),
                       CustomTextField(
                         title: "Height",
-                        isDisabled: !isEditing,
+                        isDisabled: !authController.isEditing.value,
                         controller: heightController,
                       ),
                       CustomTextField(
                         title: "Weight",
-                        isDisabled: !isEditing,
+                        isDisabled: !authController.isEditing.value,
                         controller: weightController,
                       ),
                       CustomDropDown(
                         title: "Primary Goals",
-                        isActive: isEditing,
+                        hintText: authController.user.value.primaryGoal,
+                        isActive: authController.isEditing.value,
                         supportsMultiSelection: true,
                         options: [
                           "Build Muscle",
@@ -124,10 +179,14 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                           "assets/svg/enhance_mental_health.svg",
                           "assets/svg/gain_weight.svg",
                         ],
+                        onChanged: (p0) {
+                          authController.user.value.primaryGoal = p0;
+                        },
                       ),
                       CustomDropDown(
                         title: "Diet Preference",
-                        isActive: isEditing,
+                        hintText: authController.user.value.diet,
+                        isActive: authController.isEditing.value,
                         options: [
                           "No Preference",
                           "Vegan",
@@ -142,10 +201,14 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                           "assets/svg/ketogenic.svg",
                           "assets/svg/high_protein.svg",
                         ],
+                        onChanged: (p0) {
+                          authController.user.value.diet = p0;
+                        },
                       ),
                       CustomDropDown(
                         title: "Restrictions",
-                        isActive: isEditing,
+                        isActive: authController.isEditing.value,
+                        hintText: authController.user.value.restriction,
                         options: [
                           "Gluten-Free",
                           "Nut-Free",
@@ -156,10 +219,14 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                           "assets/svg/nut_free.svg",
                           "assets/svg/dairy_free.svg",
                         ],
+                        onChanged: (p0) {
+                          authController.user.value.restriction = p0;
+                        },
                       ),
                       CustomDropDown(
                         title: "Activity Level",
-                        isActive: isEditing,
+                        isActive: authController.isEditing.value,
+                        hintText: authController.user.value.activityLevel,
                         options: [
                           "Sedentary (little to no excercise)",
                           "Lightly Active (light excercise 1-3 days/week)",
@@ -167,17 +234,26 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
                           "Very Active (hard excercise 6-7 days/week)",
                           "Super Active (intense excercise every day)",
                         ],
-                      ),
-                      CustomButton(
-                        buttonName:
-                            isEditing ? "Update Profile" : "Edit Profile",
-                        isSecondary: !isEditing,
-                        onPressed: () {
-                          setState(() {
-                            isEditing = !isEditing;
-                          });
+                        onChanged: (p0) {
+                          authController.user.value.activityLevel = p0;
                         },
                       ),
+                      Obx(() {
+                        return CustomButton(
+                          buttonName: authController.isEditing.value
+                              ? "Update Profile"
+                              : "Edit Profile",
+                          isSecondary: !authController.isEditing.value,
+                          isLoading: authController.isLoading.value,
+                          onPressed: () {
+                            if (authController.isEditing.value) {
+                              updateProfile();
+                            } else {
+                              authController.isEditing.value = true;
+                            }
+                          },
+                        );
+                      }),
                       const SizedBox(
                         height: 50,
                       ),
@@ -189,6 +265,21 @@ class _ProfileInformationScreenState extends State<ProfileInformationScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  void updateProfile() {
+    authController.updateUserProfile(
+      firstName: nameController.text.split(" ")[0],
+      lastName: nameController.text.split(" ")[1],
+      restriction: restrictionController.text.trim(),
+      diet: dietController.text.trim(),
+      primaryGoal: primaryGoalController.text.trim(),
+      activityLevel: activityLevelController.text.trim(),
+      dateOfBirth: ageController.text.trim(),
+      gender: genderController.text.trim(),
+      height: heightController.text.trim(),
+      weight: weightController.text.trim(),
     );
   }
 }

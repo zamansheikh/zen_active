@@ -36,6 +36,23 @@ class _UserInfoThreeState extends State<UserInfoThree> {
     'Keto/Low Carb': false,
     'Gluten-Free': false,
   };
+  void updateRestriction(String restriction) {
+    controller.restrictinController.text = restriction;
+    restrictions.forEach((key, value) {
+      if (key != restriction) {
+        restrictions[key] = false;
+      } else {
+        restrictions[key] = true;
+      }
+    });
+  }
+
+  Map<String, bool> restrictions = {
+    'Gluten-Free': false,
+    'Nut-Free': false,
+    'Dairy-Free': false,
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,14 +135,56 @@ class _UserInfoThreeState extends State<UserInfoThree> {
                   },
                 ),
                 SizedBox(height: 24.h),
+                Text(
+                  'Allergies & Restrictions',
+                  style: TextStyle(
+                    color: AppColors.splashTextColor,
+                    fontSize: 29.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 24.h),
+                Text(
+                  'Let us know if you have allergies to ensure the best recommendations',
+                  style: TextStyle(
+                    color: AppColors.splashTextColor,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 24.h),
                 CustomSelectionButton(
-                  isSecondary: !diets['Gluten-Free']!,
+                  isSecondary: !restrictions['Gluten-Free']!,
                   hasIcon: true,
                   buttonName: "Gluten-Free",
                   svgPath: AppConstants.glutenIcon,
                   onPressed: () {
                     setState(() {
-                      updateDiet('Gluten-Free');
+                      updateRestriction('Gluten-Free');
+                    });
+                  },
+                ),
+                SizedBox(height: 24.h),
+                CustomSelectionButton(
+                  isSecondary: !restrictions['Nut-Free']!,
+                  hasIcon: true,
+                  buttonName: "Nut-Free",
+                  svgPath: "assets/svg/nut_free.svg",
+                  onPressed: () {
+                    setState(() {
+                      updateRestriction('Nut-Free');
+                    });
+                  },
+                ),
+                SizedBox(height: 24.h),
+                CustomSelectionButton(
+                  isSecondary: !restrictions['Dairy-Free']!,
+                  hasIcon: true,
+                  buttonName: "Dairy-Free",
+                  svgPath: "assets/svg/dairy_free.svg",
+                  onPressed: () {
+                    setState(() {
+                      updateRestriction('Dairy-Free');
                     });
                   },
                 ),
