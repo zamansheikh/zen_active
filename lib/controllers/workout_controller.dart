@@ -2,20 +2,20 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:zen_active/models/exercise_model.dart';
-import 'package:zen_active/models/signle_exercise_model.dart';
+import 'package:zen_active/models/workout_plan_model.dart';
 import 'package:zen_active/services/api_client.dart';
 import 'package:zen_active/services/api_constant.dart';
 import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/utils/prefs_helper.dart';
 
-class ChallengesController extends GetxController implements GetxService {
-  String title = "Challenges Screen";
+class WorkoutController extends GetxController implements GetxService {
+  String title = "WorkOut Screen";
   RxBool isLoading = false.obs;
-  RxList<ExerciseModel> exercises = <ExerciseModel>[].obs;
-  Rx<SingleExerciseModel> singleExercise = SingleExerciseModel().obs;
+  RxBool hasJoined = false.obs;
 
-  void getChallenges() async {
+  RxList<WorkoutModel> workOutPlan = <WorkoutModel>[].obs;
+
+  void getAllWorkOutPlan() async {
     isLoading.value = true;
     final bearerToken = await PrefsHelper.getString(AppConstants.bearerToken);
     final headers = {
@@ -24,18 +24,67 @@ class ChallengesController extends GetxController implements GetxService {
     };
     try {
       final response = await ApiClient.getData(
-        ApiConstant.getExercise,
+        ApiConstant.workoutPlan,
         headers: headers,
       );
       if (response.body["status"] == 200) {
         try {
-          exercises.value = response.body["data"]
-              .map<ExerciseModel>((e) => ExerciseModel.fromJson(e))
+          workOutPlan.value = response.body["data"]
+              .map<WorkoutModel>((e) => WorkoutModel.fromJson(e))
               .toList();
+          hasJoined.value = false;
         } catch (e) {
           debugPrint('Model Convertion Error: ${e.toString()}');
           isLoading.value = false;
+          hasJoined.value = false;
         }
+      }
+    } catch (e) {
+      debugPrint('------------${e.toString()}');
+    }
+    isLoading.value = false;
+  }
+
+  void getSingleWorkOutPlan(String id) async {
+    isLoading.value = true;
+    final bearerToken = await PrefsHelper.getString(AppConstants.bearerToken);
+    final headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer $bearerToken',
+    };
+    try {
+      final response = await ApiClient.getData(
+        ApiConstant.geSignleWorkoutPlan(id),
+        headers: headers,
+      );
+      if (response.statusCode == 200) {
+        print(response.body);
+      }
+    } catch (e) {
+      debugPrint('------------${e.toString()}');
+    }
+    isLoading.value = false;
+  }
+
+  void joinAWorkOutPlan(String workoutId) async {
+    isLoading.value = true;
+    final bearerToken = await PrefsHelper.getString(AppConstants.bearerToken);
+    final headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $bearerToken',
+    };
+
+    var body = {"workoutPlanId": workoutId};
+    try {
+      final response = await ApiClient.postData(
+        ApiConstant.createUserWorkoutPlan,
+        headers: headers,
+        jsonEncode(body),
+      );
+      if (response.statusCode == 200 && response.statusCode == 201) {
+        isLoading.value = false;
+        hasJoined.value = true;
+        getAllWorkOutPlan();
       }
     } catch (e) {
       debugPrint('------------${e.toString()}');
@@ -78,33 +127,6 @@ class ChallengesController extends GetxController implements GetxService {
           ApiConstant.dailyWorkOut, headers: headers, jsonEncode(body));
       if (response.body["status"] == 200) {
         isLoading.value = false;
-      }
-    } catch (e) {
-      debugPrint('------------${e.toString()}');
-    }
-    isLoading.value = false;
-  }
-
-  void getSingleChallege(String id) async {
-    isLoading.value = true;
-    final bearerToken = await PrefsHelper.getString(AppConstants.bearerToken);
-    final headers = {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Bearer $bearerToken',
-    };
-    try {
-      final response = await ApiClient.getData(
-        ApiConstant.getExercise + id,
-        headers: headers,
-      );
-      if (response.body["status"] == 200) {
-        try {
-          singleExercise.value =
-              SingleExerciseModel.fromJson(response.body["data"]);
-        } catch (e) {
-          debugPrint('Model Convertion Error: ${e.toString()}');
-          isLoading.value = false;
-        }
       }
     } catch (e) {
       debugPrint('------------${e.toString()}');

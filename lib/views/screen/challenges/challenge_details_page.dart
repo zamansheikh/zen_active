@@ -35,215 +35,223 @@ class _ChallengeDetailsPageState extends State<ChallengeDetailsPage> {
               title: "Challenge",
               tailingIconPath: "assets/svg/share.svg",
             ),
-            Expanded(
-              child: Stack(
-                children: [
-                  SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
+            Obx(() {
+              if (controller.singleExercise.value.exercise == null) {
+                return Expanded(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              }
+              return Expanded(
+                child: Stack(
+                  children: [
+                    SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 12),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.network(
+                                imageUrl(widget.exercise.image!),
+                                height: 215,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            const SizedBox(height: 24),
+                            Text(
+                              widget.exercise.name!,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 23,
+                                color: Color(0xff222222),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              widget.exercise.description!,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                                color: Color(0xff4B4B4B),
+                              ),
+                            ),
+                            const SizedBox(height: 28),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                svgViewer(
+                                  asset: "assets/svg/goal.svg",
+                                ),
+                                const SizedBox(
+                                  width: 4,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Goal",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Color(0xff757575),
+                                        fontWeight: FontWeight.w600,
+                                        height: 1,
+                                      ),
+                                    ),
+                                    Text(
+                                      controller
+                                          .singleExercise.value.exercise!.goal!,
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        color: Color(0xff3A3A3A),
+                                        fontWeight: FontWeight.w600,
+                                        height: 1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 24),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                svgViewer(
+                                  asset: "assets/svg/duration.svg",
+                                ),
+                                const SizedBox(
+                                  width: 4,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Duration",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Color(0xff757575),
+                                        fontWeight: FontWeight.w600,
+                                        height: 1,
+                                      ),
+                                    ),
+                                    Text(
+                                      secondToFormattedTime(controller
+                                          .singleExercise
+                                          .value
+                                          .exercise!
+                                          .duration!),
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        color: Color(0xff3A3A3A),
+                                        fontWeight: FontWeight.w600,
+                                        height: 1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 24),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                svgViewer(
+                                  asset: "assets/svg/participants.svg",
+                                ),
+                                const SizedBox(
+                                  width: 4,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Participants",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Color(0xff757575),
+                                        fontWeight: FontWeight.w600,
+                                        height: 1,
+                                      ),
+                                    ),
+                                    Text(
+                                      "${controller.singleExercise.value.participant!.toString()} Completed",
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        color: Color(0xff3A3A3A),
+                                        fontWeight: FontWeight.w600,
+                                        height: 1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 24),
+                            Text(
+                              "About this Challenge",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18,
+                                color: Color(0xff2D2D2D),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              controller.singleExercise.value.exercise!.about!,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                                color: Color(0xff525252),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 52,
+                            ),
+                          ],
+                        ),
                       ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 24,
+                      right: 24,
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          const SizedBox(height: 12),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.network(
-                              imageUrl(widget.exercise.image!),
-                              height: 215,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          const SizedBox(height: 24),
-                          Text(
-                            widget.exercise.name!,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 23,
-                              color: Color(0xff222222),
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            widget.exercise.description!,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                              color: Color(0xff4B4B4B),
-                            ),
-                          ),
-                          const SizedBox(height: 28),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              svgViewer(
-                                asset: "assets/svg/goal.svg",
-                              ),
-                              const SizedBox(
-                                width: 4,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Goal",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Color(0xff757575),
-                                      fontWeight: FontWeight.w600,
-                                      height: 1,
-                                    ),
-                                  ),
-                                  Text(
-                                    controller
-                                        .singleExercise.value.exercise!.goal!,
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      color: Color(0xff3A3A3A),
-                                      fontWeight: FontWeight.w600,
-                                      height: 1,
-                                    ),
-                                  ),
+                          Container(
+                            height: 40,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [
+                                  Colors.white.withAlpha(255),
+                                  Colors.white.withAlpha(0),
                                 ],
                               ),
-                            ],
-                          ),
-                          const SizedBox(height: 24),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              svgViewer(
-                                asset: "assets/svg/duration.svg",
-                              ),
-                              const SizedBox(
-                                width: 4,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Duration",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Color(0xff757575),
-                                      fontWeight: FontWeight.w600,
-                                      height: 1,
-                                    ),
-                                  ),
-                                  Text(
-                                    secondToFormattedTime(controller
-                                        .singleExercise
-                                        .value
-                                        .exercise!
-                                        .duration!),
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      color: Color(0xff3A3A3A),
-                                      fontWeight: FontWeight.w600,
-                                      height: 1,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 24),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              svgViewer(
-                                asset: "assets/svg/participants.svg",
-                              ),
-                              const SizedBox(
-                                width: 4,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Participants",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      color: Color(0xff757575),
-                                      fontWeight: FontWeight.w600,
-                                      height: 1,
-                                    ),
-                                  ),
-                                  Text(
-                                    "${controller.singleExercise.value.participant!.toString()} Completed",
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      color: Color(0xff3A3A3A),
-                                      fontWeight: FontWeight.w600,
-                                      height: 1,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 24),
-                          Text(
-                            "About this Challenge",
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18,
-                              color: Color(0xff2D2D2D),
                             ),
                           ),
-                          const SizedBox(height: 8),
-                          Text(
-                            controller.singleExercise.value.exercise!.about!,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 16,
-                              color: Color(0xff525252),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 52,
+                          CustomButton(
+                            buttonName: "Take the Challenge",
+                            onPressed: () async {
+                              Get.to(() => ChallengeProgressPage(
+                                    exercise: controller.singleExercise.value,
+                                  ));
+                            },
                           ),
                         ],
                       ),
                     ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    left: 24,
-                    right: 24,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          height: 40,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.topCenter,
-                              colors: [
-                                Colors.white.withAlpha(255),
-                                Colors.white.withAlpha(0),
-                              ],
-                            ),
-                          ),
-                        ),
-                        CustomButton(
-                          buttonName: "Take the Challenge",
-                          onPressed: () async {
-                            final state =
-                                await Get.to(() => ChallengeProgressPage(
-                                      exercise: controller.singleExercise.value,
-                                    ));
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                  ],
+                ),
+              );
+            }),
           ],
         ),
       ),

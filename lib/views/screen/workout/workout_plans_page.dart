@@ -103,11 +103,11 @@ class WorkoutPlansPage extends StatelessWidget {
                           if (index == 0) {
                             Get.toNamed(AppRoutes.workoutPlansDetailsPage);
                           } else {
-                            Get.to(
-                              PlanDetailsPage(
-                                isJoined: false,
-                              ),
-                            );
+                            // Get.to(
+                            //   PlanDetailsPage(
+                            //     isJoined: false,
+                            //   ),
+                            // );
                           }
                         },
                       ),

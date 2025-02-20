@@ -38,21 +38,21 @@ class CustomAppBar extends StatelessWidget {
             },
             child: svgViewer(asset: "assets/svg/arrow_back.svg"),
           ),
-          const Spacer(),
-          Text(
-            title ?? "",
-            style: kTextStyle.copyWith(
-              fontSize: 20,
-              color: (backgroundColor != null)
-                  ? Color(0xff525252)
-                  : Color(0xff222222),
-            ),
-            textAlign: TextAlign.center,
-            textHeightBehavior: TextHeightBehavior(
-              applyHeightToFirstAscent: false,
+          const SizedBox(width: 16),
+          Expanded(
+            child: Text(
+              title ?? "",
+              style: kTextStyle.copyWith(
+                fontSize: 20,
+                color: (backgroundColor != null)
+                    ? Color(0xff525252)
+                    : Color(0xff222222),
+              ),
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
           ),
-          const Spacer(),
           SizedBox(
             width: 48,
             child: tailingIconPath != null
@@ -65,6 +65,7 @@ class CustomAppBar extends StatelessWidget {
                   )
                 : Container(),
           ),
+          const SizedBox(width: 24), // Add some space at the end
         ],
       ),
     );

@@ -31,20 +31,22 @@ class _CustomLoadingState extends State<CustomLoading>
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: widget.size,
-      width: widget.size,
-      child: AnimatedBuilder(
-        animation: _controller,
-        builder: (context, child) {
-          return Transform.rotate(
-            angle: _controller.value * 2 * pi,
-            child: child,
-          );
-        },
-        child: svgViewer(
-          asset: "assets/svg/loading.svg",
-          color: widget.color,
+    return Center(
+      child: SizedBox(
+        height: widget.size,
+        width: widget.size,
+        child: AnimatedBuilder(
+          animation: _controller,
+          builder: (context, child) {
+            return Transform.rotate(
+              angle: _controller.value * 2 * pi,
+              child: child,
+            );
+          },
+          child: svgViewer(
+            asset: "assets/svg/loading.svg",
+            color: widget.color,
+          ),
         ),
       ),
     );

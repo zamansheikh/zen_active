@@ -6,6 +6,7 @@ import 'package:zen_active/controllers/challenges_controller.dart';
 import 'package:zen_active/models/signle_exercise_model.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
+import 'package:zen_active/views/components/custom_loading.dart';
 import 'package:zen_active/views/components/timer_widget.dart';
 
 class ChallengeProgressPage extends StatefulWidget {
@@ -25,124 +26,135 @@ class _ChallengeProgressPageState extends State<ChallengeProgressPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: controller.isLoading.value
-            ? Container()
-            : Column(
-                children: [
-                  CustomAppBar(
-                    title: "Challenge",
+        child: Obx(
+          () => controller.isLoading.value
+              ? Center(
+                  child: CustomLoading(
+                    size: 24,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
+                )
+              : Column(
+                  children: [
+                    CustomAppBar(
+                      title: "Challenge",
                     ),
-                    child: Column(
-                      children: [
-                        TimerWidget(
-                          timer: const Duration(seconds: 10),
-                          isRunning: isRunning,
-                          title: "Power Push-Up Challenge",
-                          onComplete: () {
-                            setState(() {
-                              isCompleted = !isCompleted;
-                              isRunning = false;
-                              Future.delayed(const Duration(seconds: 3), () {
-                                controller.isLoading.value = false;
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                      ),
+                      child: Column(
+                        children: [
+                          TimerWidget(
+                            timer: Duration(
+                                // seconds: controller
+                                //     .singleExercise.value.exercise!.duration!,
+                                seconds: 5),
+                            isRunning: isRunning,
+                            title: "Power Push-Up Challenge",
+                            onComplete: () {
+                              setState(() {
+                                isCompleted = !isCompleted;
+                                isRunning = false;
+                                Future.delayed(const Duration(seconds: 3), () {
+                                  controller.dailyWorkOutUpdate(
+                                      workOutId: widget.exercise.exercise!.id!);
+                                  controller.isLoading.value = false;
+                                });
+                                Timer(const Duration(seconds: 3), () {
+                                  controller.isLoading.value = false;
+                                  Get.back();
+                                  Get.back();
+                                });
                               });
-                              Timer(const Duration(seconds: 3), () {
-                                controller.isLoading.value = false;
-                                Get.back();
-                                Get.back();
-                              });
-                            });
-                          },
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        isCompleted
-                            ? Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                ),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      "You pass the daily challenge",
-                                      style: TextStyle(
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.w600,
-                                        color: Color(0xff525252),
-                                      ),
-                                    ),
-                                    RichText(
-                                      textAlign: TextAlign.center,
-                                      text: TextSpan(
-                                        text: "and earn ",
+                            },
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          isCompleted
+                              ? Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 12,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        "You pass the daily challenge",
                                         style: TextStyle(
-                                          fontFamily: "khula",
-                                          fontSize: 18,
+                                          fontSize: 26,
                                           fontWeight: FontWeight.w600,
                                           color: Color(0xff525252),
-                                          height: 1,
                                         ),
-                                        children: [
-                                          TextSpan(
-                                            text: "52",
-                                            style: TextStyle(
-                                              fontFamily: "khula",
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w600,
-                                              color: Color(0xff1E648C),
-                                              height: 1,
-                                            ),
+                                      ),
+                                      RichText(
+                                        textAlign: TextAlign.center,
+                                        text: TextSpan(
+                                          text: "and earn ",
+                                          style: TextStyle(
+                                            fontFamily: "khula",
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                            color: Color(0xff525252),
+                                            height: 1,
                                           ),
-                                          TextSpan(
-                                            text: " points",
-                                            style: TextStyle(
-                                              fontFamily: "khula",
-                                              fontSize: 18,
-                                              height: 1,
-                                              fontWeight: FontWeight.w600,
-                                              color: Color(0xff525252),
+                                          children: [
+                                            TextSpan(
+                                              text: "52",
+                                              style: TextStyle(
+                                                fontFamily: "khula",
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                                color: Color(0xff1E648C),
+                                                height: 1,
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                            TextSpan(
+                                              text: " points",
+                                              style: TextStyle(
+                                                fontFamily: "khula",
+                                                fontSize: 18,
+                                                height: 1,
+                                                fontWeight: FontWeight.w600,
+                                                color: Color(0xff525252),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      isRunning = !isRunning;
+                                    });
+                                  },
+                                  borderRadius: BorderRadius.circular(9999),
+                                  child: Container(
+                                    height: 56,
+                                    width: 56,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xffC1E8FF),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Center(
+                                      child: svgViewer(
+                                        asset: !isRunning
+                                            ? "assets/svg/play.svg"
+                                            : "assets/svg/pause.svg",
+                                        height: 32,
+                                        width: 32,
                                       ),
                                     ),
-                                  ],
-                                ),
-                              )
-                            : InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    isRunning = !isRunning;
-                                  });
-                                },
-                                borderRadius: BorderRadius.circular(9999),
-                                child: Container(
-                                  height: 56,
-                                  width: 56,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffC1E8FF),
-                                    shape: BoxShape.circle,
                                   ),
-                                  child: Center(
-                                    child: svgViewer(
-                                      asset: !isRunning
-                                          ? "assets/svg/play.svg"
-                                          : "assets/svg/pause.svg",
-                                      height: 32,
-                                      width: 32,
-                                    ),
-                                  ),
-                                ),
-                              )
-                      ],
+                                )
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+        ),
       ),
     );
   }

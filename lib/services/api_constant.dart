@@ -14,4 +14,11 @@ class ApiConstant {
   static String getMealPlan = "/meal";
   static String updateAsTaken = "/meal-plan/";
   static String getExercise = "/exercise/";
+  static String addWorkOutTime = "/app-data/add-workout-time";
+  static String dailyWorkOut = "/daily-exercise";
+  static String workoutPlan = "/workout-plan/";
+  static String createUserWorkoutPlan =
+      "/workout-plan/create-user-workout-plan";
+  static String geSignleWorkoutPlan(String id) =>
+      "workout-plan/get-user-workout-plan/$id";
 }

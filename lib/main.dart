@@ -19,7 +19,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FirebaseNotificationService.initialize();
-  GeminiService.init(apiKey: "AIzaSyC9B4vlJo11df9oGn2LMXudrfW5zDQBtd8");
+  GeminiService.init(
+      apiKey: "AIzaSyC9B4vlJo11===dkjfkosjdfkjsdkf=df9oGn2LMXudrfW5zDQBtd8");
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: AppColors
         .scaffoldBackgroundColor, // Change this to your preferred color

@@ -35,11 +35,18 @@ class WorkoutPlans extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(4),
-              child: Image.asset(
-                assetPath,
+              child: Image.network(
+                imageUrl(assetPath),
                 height: 80,
                 width: 80,
                 fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.asset(
+                    "assets/logo/zen_logo.png",
+                    width: 46,
+                    height: 33,
+                  );
+                },
               ),
             ),
             const SizedBox(

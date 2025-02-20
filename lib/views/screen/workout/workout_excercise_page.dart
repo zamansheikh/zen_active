@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/controllers/workout_controller.dart';
 import 'package:zen_active/helpers/route.dart';
 import 'package:zen_active/models/workout_plan.dart';
 import 'package:zen_active/utils/uitls.dart';
@@ -7,26 +8,24 @@ import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
 
 class WorkoutExcercisePage extends StatefulWidget {
-  final List<WorkoutPlan> plans;
-  const WorkoutExcercisePage({super.key, required this.plans});
+  final String planId;
+  const WorkoutExcercisePage({super.key, required this.planId});
 
   @override
   State<WorkoutExcercisePage> createState() => _WorkoutExcercisePageState();
 }
 
 class _WorkoutExcercisePageState extends State<WorkoutExcercisePage> {
-  late List<WorkoutPlan> plans;
+  final controller = Get.find<WorkoutController>();
 
   @override
   void initState() {
     super.initState();
-    plans = widget.plans;
+    controller.getSingleWorkOutPlan(widget.planId);
   }
 
   @override
   Widget build(BuildContext context) {
-    WorkoutPlan plan = plans.elementAt(0);
-
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -48,12 +47,12 @@ class _WorkoutExcercisePageState extends State<WorkoutExcercisePage> {
                       borderRadius: BorderRadius.circular(8),
                       child: Stack(
                         children: [
-                          Image.asset(
-                            plan.assetPath,
-                            height: 215,
-                            width: double.infinity,
-                            fit: BoxFit.cover,
-                          ),
+                          // Image.asset(
+                          //   plan.assetPath,
+                          //   height: 215,
+                          //   width: double.infinity,
+                          //   fit: BoxFit.cover,
+                          // ),
                           Positioned(
                             top: 0,
                             bottom: 0,
@@ -84,14 +83,14 @@ class _WorkoutExcercisePageState extends State<WorkoutExcercisePage> {
                     const SizedBox(
                       height: 40,
                     ),
-                    Text(
-                      plan.excercise,
-                      style: TextStyle(
-                        color: Color(0xff222222),
-                        fontSize: 23,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                    // Text(
+                    //   plan.excercise,
+                    //   style: TextStyle(
+                    //     color: Color(0xff222222),
+                    //     fontSize: 23,
+                    //     fontWeight: FontWeight.w600,
+                    //   ),
+                    // ),
                     const SizedBox(
                       height: 16,
                     ),
@@ -118,7 +117,9 @@ class _WorkoutExcercisePageState extends State<WorkoutExcercisePage> {
                                 Transform.translate(
                                   offset: Offset(0, 5),
                                   child: Text(
-                                    plan.sets.toString(),
+                                    // plan.sets.toString(),
+                                    "3",
+
                                     style: TextStyle(
                                       fontSize: 40,
                                       fontWeight: FontWeight.w600,
@@ -146,7 +147,8 @@ class _WorkoutExcercisePageState extends State<WorkoutExcercisePage> {
                                 Transform.translate(
                                   offset: Offset(0, 5),
                                   child: Text(
-                                    plan.reps.toString(),
+                                    // plan.reps.toString(),
+                                    "10",
                                     style: TextStyle(
                                       fontSize: 40,
                                       fontWeight: FontWeight.w600,
@@ -172,16 +174,11 @@ class _WorkoutExcercisePageState extends State<WorkoutExcercisePage> {
                     CustomButton(
                       buttonName: "Next",
                       onPressed: () {
-                        if (plans.length == 1) {
-                          Get.back();
-                          Get.back();
-                          Get.toNamed(AppRoutes.workoutProgressPage);
-                        } else {
-                          setState(() {
-                            plans.remove(plan);
-                          });
-                          Get.to(() => WorkoutExcercisePage(plans: plans));
-                        }
+                        // if (plans.length == 1) {
+                        //   Get.back();
+                        //   Get.back();
+                        //   Get.toNamed(AppRoutes.workoutProgressPage);
+                        // } else {}
                       },
                     ),
                   ],
