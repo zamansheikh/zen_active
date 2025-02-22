@@ -59,6 +59,10 @@ String imageUrl(String? url) {
   }
 }
 
+String nullSafe(String? value) {
+  return value ?? "Null";
+}
+
 String secondToFormattedTime(int second) {
   int hours = second ~/ 3600;
   int minutes = (second % 3600) ~/ 60;

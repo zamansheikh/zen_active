@@ -3,7 +3,7 @@ class ApiConstant {
   static String imageBaseUrl = "http://192.168.10.18:3500";
 
   //  Socket service
-  static String socketUrl = "http://192.168.10.18:3500";
+  static String socketUrl = "http://192.168.10.18:3500/";
   //Auth Service
   static String authLogin = "/auth/login";
   static String getMe = "/user/me";
@@ -17,8 +17,18 @@ class ApiConstant {
   static String addWorkOutTime = "/app-data/add-workout-time";
   static String dailyWorkOut = "/daily-exercise";
   static String workoutPlan = "/workout-plan/";
+  static String allPost = "/post/all-user-post/";
+  static String getAllFriend = "/friend/suggested";
+  static String getMyFriends = "/friend";
+  static String sendRequest = "/friend/send-request";
+  static String acceptRequest = "/friend/accept-request";
+  static String requestedList = "friend/pending";
+  static String addPost = "/post/create/";
   static String createUserWorkoutPlan =
       "/workout-plan/create-user-workout-plan";
   static String geSignleWorkoutPlan(String id) =>
-      "workout-plan/get-user-workout-plan/$id";
+      "/workout-plan/get-user-workout-plan/$id";
+  static String hitNextWorkOut(String id) =>
+      "/workout-plan/update-user-workout-plan/$id";
+  static String getUserMessages(String id) => "chat/get-user-chat/$id";
 }

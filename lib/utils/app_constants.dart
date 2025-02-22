@@ -5,6 +5,8 @@ class AppConstants {
   static String APPNAME = "ZenActive";
   static String logo = "assets/logo/zen_logo.png";
   static String splashImage = "assets/svg/splash.svg";
+  static String fcmToken = "fcmToken";
+  static String user = "user";
 
   //Icons
   static String mailIcon = "assets/svg/mail.svg";

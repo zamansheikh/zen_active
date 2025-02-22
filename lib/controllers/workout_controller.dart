@@ -1,10 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/models/single_workout_model.dart';
 import 'package:zen_active/models/workout_plan_model.dart';
 import 'package:zen_active/services/api_client.dart';
 import 'package:zen_active/services/api_constant.dart';
+import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/app_constants.dart';
 import 'package:zen_active/utils/prefs_helper.dart';
 
@@ -14,6 +17,7 @@ class WorkoutController extends GetxController implements GetxService {
   RxBool hasJoined = false.obs;
 
   RxList<WorkoutModel> workOutPlan = <WorkoutModel>[].obs;
+  Rx<SingleWorkoutModel> singleWorkout = SingleWorkoutModel().obs;
 
   void getAllWorkOutPlan() async {
     isLoading.value = true;
@@ -57,11 +61,48 @@ class WorkoutController extends GetxController implements GetxService {
         ApiConstant.geSignleWorkoutPlan(id),
         headers: headers,
       );
-      if (response.statusCode == 200) {
-        print(response.body);
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        debugPrint('Single Workout Plan: ${response.body}');
+        singleWorkout.value =
+            SingleWorkoutModel.fromJson(response.body["data"]);
+        isLoading.value = false;
       }
     } catch (e) {
       debugPrint('------------${e.toString()}');
+      isLoading.value = false;
+    }
+    isLoading.value = false;
+  }
+
+  void nextExercise(String id) async {
+    isLoading.value = true;
+    final bearerToken = await PrefsHelper.getString(AppConstants.bearerToken);
+    final headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer $bearerToken',
+    };
+    try {
+      final response = await ApiClient.patchData(
+          ApiConstant.hitNextWorkOut(id), headers: headers, {});
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        isLoading.value = false;
+        getSingleWorkOutPlan(id);
+      } else {
+        //Show SnackBar
+        Get.snackbar(
+          'Error',
+          response.body["message"],
+          snackPosition: SnackPosition.BOTTOM,
+          colorText: Colors.white,
+          backgroundColor: AppColors.splashColor,
+        );
+        isLoading.value = false;
+      }
+    } catch (e) {
+      debugPrint('------------${e.toString()}');
+      isLoading.value = false;
     }
     isLoading.value = false;
   }
@@ -81,11 +122,11 @@ class WorkoutController extends GetxController implements GetxService {
         headers: headers,
         jsonEncode(body),
       );
-      if (response.statusCode == 200 && response.statusCode == 201) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         isLoading.value = false;
         hasJoined.value = true;
-        getAllWorkOutPlan();
       }
+      getAllWorkOutPlan();
     } catch (e) {
       debugPrint('------------${e.toString()}');
     }

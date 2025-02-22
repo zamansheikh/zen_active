@@ -27,8 +27,8 @@ void main() async {
     statusBarIconBrightness:
         Brightness.dark, // Use Brightness.dark for dark icons
   ));
-  // await FirebaseNotificationService.printFCMToken();
-  // await FirebaseNotificationService.initializeSocket();
+  await FirebaseNotificationService.printFCMToken();
+  await FirebaseNotificationService.initializeSocket();
   Map<String, Map<String, String>> languages = await di.init();
   runApp(MyApp(
     languages: languages,

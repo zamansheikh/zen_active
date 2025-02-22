@@ -8,7 +8,6 @@ import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:http/http.dart' as http;
 import 'package:zen_active/utils/prefs_helper.dart';
 import 'package:http_parser/http_parser.dart';
-import 'package:zen_active/utils/uitls.dart';
 import '../Utils/app_constants.dart';
 import 'api_constant.dart';
 
@@ -28,12 +27,17 @@ class ApiClient extends GetxService {
       'Content-Type': 'application/x-www-form-urlencoded',
       'Authorization': 'Bearer $bearerToken'
     };
+
+    Uri uriWithQuery = Uri.parse("${ApiConstant.baseUrl}/$uri")
+        .replace(queryParameters: query);
+
     try {
-      debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
+      debugPrint(
+          '====> API Call: $uriWithQuery\nHeader: ${headers ?? mainHeaders}');
 
       http.Response response = await client
           .get(
-            Uri.parse(ApiConstant.baseUrl + uri),
+            uriWithQuery,
             headers: headers ?? mainHeaders,
           )
           .timeout(const Duration(seconds: timeoutInSeconds));
@@ -127,17 +131,6 @@ class ApiClient extends GetxService {
     try {
       debugPrint('====> API Call: $uri\nHeader: ${headers ?? mainHeaders}');
       debugPrint('====> API Body: $body');
-
-      try {
-        http.Response response = await client.patch(
-          Uri.parse(ApiConstant.baseUrl + uri),
-          body: jsonEncode(body), // Ensure JSON encoding
-          headers: headers ?? mainHeaders,
-        );
-      } catch (e) {
-        llg(e.toString());
-      }
-
       http.Response response = await client
           .patch(
             Uri.parse(ApiConstant.baseUrl + uri),

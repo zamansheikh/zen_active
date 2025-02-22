@@ -1,10 +1,28 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:zen_active/controllers/community_feed_controller.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/components/custom_button.dart';
 
-class CommunityPostPage extends StatelessWidget {
+class CommunityPostPage extends StatefulWidget {
   const CommunityPostPage({super.key});
+
+  @override
+  State<CommunityPostPage> createState() => _CommunityPostPageState();
+}
+
+class _CommunityPostPageState extends State<CommunityPostPage> {
+  XFile? pickedFile;
+  void pickImage() async {
+    pickedFile = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+    );
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +41,7 @@ class CommunityPostPage extends StatelessWidget {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 140,
+                      height: 160,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -55,6 +73,9 @@ class CommunityPostPage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   TextField(
+                                    controller:
+                                        Get.find<CommunityFeedController>()
+                                            .postController,
                                     decoration: InputDecoration(
                                       hintText: "Share your fitness journey...",
                                       border: InputBorder.none,
@@ -69,10 +90,15 @@ class CommunityPostPage extends StatelessWidget {
                                   const Spacer(),
                                   GestureDetector(
                                     onTap: () {
-                                      
+                                      pickImage();
                                     },
-                                    child: svgViewer(
-                                        asset: "assets/svg/add_image.svg"),
+                                    child: (pickedFile != null)
+                                        ? Image.file(
+                                            File(pickedFile!.path),
+                                            height: 50,
+                                          )
+                                        : svgViewer(
+                                            asset: "assets/svg/add_image.svg"),
                                   ),
                                 ],
                               ),
@@ -92,6 +118,15 @@ class CommunityPostPage extends StatelessWidget {
                         height: 35,
                         textSize: 16,
                         borderRadius: 4,
+                        onPressed: () {
+                          if (pickedFile != null) {
+                            Get.find<CommunityFeedController>().postwithImage(
+                              pickedFile: pickedFile!,
+                            );
+                          } else {
+                            Get.find<CommunityFeedController>().post();
+                          }
+                        },
                       ),
                     ),
                   ],

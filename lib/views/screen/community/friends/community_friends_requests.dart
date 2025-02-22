@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:zen_active/controllers/community_feed_controller.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/friend_requests.dart';
 
@@ -8,6 +10,8 @@ class CommunityFriendsRequests extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CommunityFeedController controller =
+        Get.find<CommunityFeedController>();
     return Column(
       children: [
         const SizedBox(
@@ -57,7 +61,11 @@ class CommunityFriendsRequests extends StatelessWidget {
                 for (int i = 0; i < 100; i++)
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: FriendRequests(i: i % 10),
+                    child: FriendRequests(
+                      image: "https://i.pravatar.cc/150?img=$i",
+                      name: "User $i",
+                      userId: "4545",
+                    ),
                   ),
               ],
             ),

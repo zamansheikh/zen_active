@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/controllers/auth_controller.dart';
+import 'package:zen_active/controllers/community_feed_controller.dart';
 import 'package:zen_active/utils/app_colors.dart';
+import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_loading.dart';
 import 'package:zen_active/views/components/posts.dart';
 import 'package:zen_active/views/screen/community/community_post_page.dart';
@@ -10,33 +13,36 @@ class CommunityFeedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 24,
-        ),
-        child: Column(
-          spacing: 16,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 24,
-                bottom: 8,
-              ),
-              child: Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(999),
-                    child: Image.asset(
-                      "assets/images/faces/1.png",
-                      height: 40,
+    final CommunityFeedController communityFeedController = Get.find();
+    return RefreshIndicator(
+      onRefresh: () async {
+        communityFeedController.getAllPost();
+      },
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            spacing: 16,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 24, bottom: 8),
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(999),
+                      child: Image.network(
+                        imageUrl(Get.find<AuthController>().user.value.image!),
+                        height: 40,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                            "assets/images/faces/1.png",
+                            height: 40,
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  Expanded(
-                    child: GestureDetector(
+                    const SizedBox(width: 16),
+                    GestureDetector(
                       onTap: () {
                         Get.to(CommunityPostPage());
                       },
@@ -45,9 +51,7 @@ class CommunityFeedPage extends StatelessWidget {
                         height: 40,
                         decoration: BoxDecoration(
                           color: Color(0xffFEFEFF),
-                          border: Border.all(
-                            color: Color(0xff79CDFF),
-                          ),
+                          border: Border.all(color: Color(0xff79CDFF)),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Align(
@@ -60,41 +64,40 @@ class CommunityFeedPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Posts(
-                imagePath: "assets/images/faces/3.png",
-                name: "Alex Johnson",
-                time: "10 min",
-                text:
-                    "Completed my first HIIT session today! 🥵💪 Feeling accomplished. \n#FitnessGoals #NoPainNoGain",
-                likes: 125,
-                comment: 20),
-            Posts(
-                imagePath: "assets/images/faces/5.png",
-                name: "Bessie Cooper",
-                time: "1 hr",
-                text:
-                    "Finally ran my first 10K today! 🏃‍♂️✨ Couldn't have done it without this amazing community pushing me forward. #RunningGoals #KeepMoving",
-                likes: 20,
-                comment: 24),
-            Posts(
-                imagePath: "assets/images/faces/6.png",
-                name: "Leslie Alexander",
-                time: "15 min",
-                text:
-                    "Meal prep for the week done! 🥗🍗 Keeping it clean and colorful. How do you stay on track during busy weeks? #HealthyEating #MealPrepIdeas",
-                likes: 135,
-                comment: 10),
-            CustomLoading(
-              color: AppColors.primaryColor,
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-          ],
+              Obx(() {
+                if (communityFeedController.isLoading.value) {
+                  return CustomLoading(color: AppColors.primaryColor);
+                }
+
+                return ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: communityFeedController.postList.length,
+                  itemBuilder: (context, index) {
+                    final post = communityFeedController.postList[index];
+                    return Column(
+                      children: [
+                        Posts(
+                          userImage: imageUrl(post.userInfo!.image!),
+                          name:
+                              "${post.userInfo!.name!.firstName!} ${post.userInfo!.name!.lastName!}",
+                          time: post.createdAt!,
+                          text: post.text!,
+                          likes: post.likes!.length.toInt(),
+                          comment: post.comments!.length.toInt(),
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    );
+                  },
+                );
+              }),
+              const SizedBox(height: 40),
+            ],
+          ),
         ),
       ),
     );

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:zen_active/controllers/community_feed_controller.dart';
 import 'package:zen_active/utils/uitls.dart';
+import 'package:zen_active/views/components/custom_loading.dart';
 import 'package:zen_active/views/components/friend_requests.dart';
 import 'package:zen_active/views/components/slidable_tab_bar.dart';
 
@@ -9,6 +12,8 @@ class CommunityFriendsDefault extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CommunityFeedController communityController = Get.find();
+    communityController.getRequsted(type: "requestedList");
     return Column(
       children: [
         const SizedBox(
@@ -67,53 +72,7 @@ class CommunityFriendsDefault extends StatelessWidget {
     );
   }
 
-  Widget friendRequestsSection({int count = 52}) {
-    return Column(
-      spacing: 16,
-      children: [
-        GestureDetector(
-          onTap: () {
-            if (onPageChanged != null) {
-              onPageChanged!(2);
-            }
-          },
-          behavior: HitTestBehavior.translucent,
-          child: Row(
-            children: [
-              Text(
-                "Friend Requests",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xff525252),
-                ),
-              ),
-              Text(
-                " 122",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xff1E648C),
-                ),
-              ),
-              const Spacer(),
-              Text(
-                "See All",
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xff525252),
-                ),
-              ),
-              svgViewer(asset: "assets/svg/see_all.svg"),
-            ],
-          ),
-        ),
-        for (int i = 0; i < 3; i++) FriendRequests(i: i),
-      ],
-    );
-  }
-
+  //! Community Page - Online Section 1st Half
   Widget friendsOnlineSection(BuildContext context, {int count = 52}) {
     return Column(
       // spacing: 16,
@@ -364,5 +323,70 @@ class CommunityFriendsDefault extends StatelessWidget {
           ),
       ],
     );
+  }
+
+  //! Community Page - Frined Section 2nd Half
+  Widget friendRequestsSection({int count = 52}) {
+    final CommunityFeedController communityController = Get.find();
+    return Obx(() {
+      return communityController.isLoading.value
+          ? Center(child: CustomLoading())
+          : Column(
+              spacing: 16,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    if (onPageChanged != null) {
+                      onPageChanged!(2);
+                    }
+                  },
+                  behavior: HitTestBehavior.translucent,
+                  child: Row(
+                    children: [
+                      Text(
+                        "Friend Requests",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xff525252),
+                        ),
+                      ),
+                      Text(
+                        " ${communityController.requestList.value.requestedList?.length}",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xff1E648C),
+                        ),
+                      ),
+                      const Spacer(),
+                      Text(
+                        "See All",
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xff525252),
+                        ),
+                      ),
+                      svgViewer(asset: "assets/svg/see_all.svg"),
+                    ],
+                  ),
+                ),
+                for (int i = 0;
+                    i <
+                        communityController
+                            .requestList.value.requestedList!.length;
+                    i++)
+                  FriendRequests(
+                    image: communityController
+                        .requestList.value.requestedList![i].image!,
+                    name:
+                        "${communityController.requestList.value.requestedList![i].name!.firstName!} ${communityController.requestList.value.requestedList![i].name!.lastName!}",
+                    userId: communityController
+                        .requestList.value.requestedList![i].id!,
+                  ),
+              ],
+            );
+    });
   }
 }

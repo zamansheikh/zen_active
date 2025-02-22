@@ -1,107 +1,70 @@
-// ignore: library_prefixes
+// ignore_for_file: library_prefixes
+import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:socket_io_client/socket_io_client.dart';
+import 'package:zen_active/services/api_constant.dart';
+import 'package:zen_active/utils/prefs_helper.dart';
+import '../utils/app_constants.dart';
 
-enum SocketConnectionState {
-  connected,
-  disconnected,
-  connecting,
-}
+class SocketServices {
+  static var token = '';
 
-class SocketService {
-  late IO.Socket _socket;
-  SocketConnectionState _connectionState = SocketConnectionState.disconnected;
-
-  /// Get the current socket connection state
-  SocketConnectionState get connectionState => _connectionState;
-
-  /// Initialize the socket connection
-  void initializeSocket(String url,
-      {String? authToken, Map<String, dynamic>? queryParams}) {
-    try {
-      _connectionState = SocketConnectionState.connecting;
-      final options = IO.OptionBuilder()
-          .setTransports(['websocket']) // Use WebSocket transport
-          .enableForceNew() // Force a new socket connection instance
-          .setQuery(queryParams ?? {}) // Optional query parameters
-          .setExtraHeaders({
-            'Authorization': 'Bearer $authToken'
-          }) // Add auth token to headers
-          .build();
-
-      _socket = IO.io(url, options);
-
-      // Attach event listeners
-      _socket.on('connect', _onConnect);
-      _socket.on('disconnect', _onDisconnect);
-      _socket.on('connect_error', _onConnectError);
-      _socket.on('error', _onError);
-    } catch (e) {
-      // ignore: avoid_print
-      print('Socket initialization error: $e');
-      _connectionState = SocketConnectionState.disconnected;
-    }
+  factory SocketServices() {
+    return _socketApi;
   }
 
-  /// Handle successful connection
-  void _onConnect(dynamic data) {
-    // ignore: avoid_print
-    print('Socket connected');
-    _connectionState = SocketConnectionState.connected;
-  }
+  SocketServices._internal();
 
-  /// Handle disconnection
-  void _onDisconnect(dynamic reason) {
-    // ignore: avoid_print
-    print('Socket disconnected: $reason');
-    _connectionState = SocketConnectionState.disconnected;
-  }
+  static final SocketServices _socketApi = SocketServices._internal();
+  // static IO.Socket socket = IO.io(
+  //     'http://vibely-ifti.sarv.live',
+  //     IO.OptionBuilder().setTransports(['websocket']).setExtraHeaders(
+  //         {"authorization": 'Bearer $token'}).build());
 
-  /// Handle connection errors
-  void _onConnectError(dynamic error) {
-    // ignore: avoid_print
-    print('Connection error: $error');
-    _connectionState = SocketConnectionState.disconnected;
-  }
+  static IO.Socket socket = IO.io(ApiConstant.socketUrl, <String, dynamic>{
+    'transports': ['websocket'],
+    'autoConnect': true,
+  });
 
-  /// Handle general socket errors
-  void _onError(dynamic error) {
-    // ignore: avoid_print
-    print('Socket error: $error');
-  }
+  static void init() async {
+    token = await PrefsHelper.getString(AppConstants.bearerToken);
 
-  /// Emit an event to the server
-  void emit(String event, dynamic data) {
-    if (_connectionState == SocketConnectionState.connected) {
-      _socket.emit(event, data);
+    debugPrint(
+        "-------------------------------------------------------------------------------------------Socket call");
+    if (!socket.connected) {
+      socket.onConnect((_) {
+        debugPrint('========> socket connected: ${socket.connected}');
+      });
+
+      socket.onConnectError((err) {
+        debugPrint('========> socket connect error: $err');
+      });
+
+      socket.onDisconnect((_) {
+        debugPrint('========> socket disconnected');
+      });
     } else {
-      // ignore: avoid_print
-      print('Cannot emit event. Socket is not connected.');
+      debugPrint("=======> socket already connected");
     }
   }
 
-  /// Listen for an event from the server
-  void on(String event, Function(dynamic data) callback) {
-    _socket.on(event, callback);
+  static Future<dynamic> emitWithAck(String event, dynamic body) async {
+    Completer<dynamic> completer = Completer<dynamic>();
+    socket.emitWithAck(event, body, ack: (data) {
+      if (data != null) {
+        completer.complete(data);
+      } else {
+        completer.complete(1);
+      }
+    });
+    return completer.future;
   }
 
-  /// Remove a specific event listener
-  void off(String event) {
-    _socket.off(event);
-  }
-
-  /// Check if the socket is currently connected
-  bool isConnected() {
-    return _socket.connected;
-  }
-
-  /// Disconnect the socket
-  void disconnect() {
-    _socket.disconnect();
-  }
-
-  /// Dispose the socket
-  void dispose() {
-    _socket.dispose();
-    _connectionState = SocketConnectionState.disconnected;
+  static emit(String event, dynamic body) {
+    if (body != null) {
+      socket.emit(event, body);
+      debugPrint('===========> Emit $event and \n $body');
+    }
   }
 }

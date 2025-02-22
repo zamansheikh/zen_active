@@ -122,7 +122,7 @@ class CommunityGroupDetails extends StatelessWidget {
                         ],
                       ),
                       Posts(
-                        imagePath: "assets/images/faces/3.png",
+                        userImage: "assets/images/faces/3.png",
                         name: "Sample Name",
                         time: "2 min",
                         text:
@@ -131,7 +131,7 @@ class CommunityGroupDetails extends StatelessWidget {
                         comment: 40,
                       ),
                       Posts(
-                        imagePath: "assets/images/faces/3.png",
+                        userImage: "assets/images/faces/3.png",
                         name: "Sample Name",
                         time: "2 min",
                         text:
@@ -140,7 +140,7 @@ class CommunityGroupDetails extends StatelessWidget {
                         comment: 40,
                       ),
                       Posts(
-                        imagePath: "assets/images/faces/3.png",
+                        userImage: "assets/images/faces/3.png",
                         name: "Sample Name",
                         time: "2 min",
                         text:

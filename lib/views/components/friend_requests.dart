@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:zen_active/controllers/community_feed_controller.dart';
+import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_button.dart';
 
 class FriendRequests extends StatelessWidget {
   final bool isAddFreind;
   const FriendRequests({
     super.key,
-    required this.i,
+    required this.image,
     this.isAddFreind = false,
+    required this.name,
+    required this.userId,
   });
 
-  final int i;
+  final String image;
+  final String name;
+  final String userId;
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +24,21 @@ class FriendRequests extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(999),
-          child: Image.asset(
-            "assets/images/faces/${(i % 10) + 1}.png",
+          child: Image.network(
+            imageUrl(image),
             height: 80,
+            width: 80,
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return Container(
+                height: 80,
+                width: 80,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(999),
+                ),
+              );
+            },
           ),
         ),
         const SizedBox(
@@ -29,7 +48,7 @@ class FriendRequests extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Random Name",
+              name,
               style: TextStyle(
                 color: Color(0xff222222),
                 fontSize: 16,
@@ -46,7 +65,17 @@ class FriendRequests extends StatelessWidget {
                   height: 35,
                   width: 125,
                   textSize: 16,
-                  onPressed: () {},
+                  onPressed: () {
+                    if (isAddFreind) {
+                      Get.find<CommunityFeedController>().sendRequest(
+                        userId: userId,
+                      );
+                    } else {
+                      Get.find<CommunityFeedController>().confirmFriendRequest(
+                        userId: userId,
+                      );
+                    }
+                  },
                 ),
                 const SizedBox(
                   width: 8,
@@ -57,7 +86,13 @@ class FriendRequests extends StatelessWidget {
                   width: 125,
                   textSize: 16,
                   isSecondary: true,
-                  onPressed: () {},
+                  onPressed: () {
+                    if (isAddFreind) {
+                      // Remove friend
+                    } else {
+                      // Cancel friend request
+                    }
+                  },
                 ),
               ],
             ),

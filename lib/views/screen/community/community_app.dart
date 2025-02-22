@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:zen_active/controllers/community_feed_controller.dart';
 import 'package:zen_active/views/components/community_app_bar.dart';
 import 'package:zen_active/views/screen/community/Groups/community_groups_page.dart';
 import 'package:zen_active/views/screen/community/community_feed_page.dart';
@@ -19,7 +21,8 @@ class _CommunityAppState extends State<CommunityApp> {
     keepPage: false,
   );
   int index = 0;
-
+  final CommunityFeedController communityFeedController =
+      Get.put(CommunityFeedController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(

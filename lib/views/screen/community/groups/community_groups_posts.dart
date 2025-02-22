@@ -15,7 +15,7 @@ class CommunityGroupsPosts extends StatelessWidget {
           spacing: 16,
           children: [
             Posts(
-                imagePath: "assets/images/faces/3.png",
+                userImage: "assets/images/faces/3.png",
                 name: "Alex Johnson",
                 time: "10 min",
                 text:
@@ -23,7 +23,7 @@ class CommunityGroupsPosts extends StatelessWidget {
                 likes: 125,
                 comment: 20),
             Posts(
-                imagePath: "assets/images/faces/5.png",
+                userImage: "assets/images/faces/5.png",
                 name: "Bessie Cooper",
                 time: "1 hr",
                 text:
@@ -31,7 +31,7 @@ class CommunityGroupsPosts extends StatelessWidget {
                 likes: 20,
                 comment: 24),
             Posts(
-                imagePath: "assets/images/faces/6.png",
+                userImage: "assets/images/faces/6.png",
                 name: "Leslie Alexander",
                 time: "15 min",
                 text:

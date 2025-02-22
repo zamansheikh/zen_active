@@ -308,6 +308,7 @@ class ChatBubble extends StatelessWidget {
   final bool isMe;
   final bool showImage;
   final bool showTime;
+  final DateTime? time;
 
   const ChatBubble({
     super.key,
@@ -315,6 +316,7 @@ class ChatBubble extends StatelessWidget {
     this.isMe = false,
     this.showImage = true,
     this.showTime = false,
+    this.time,
   });
 
   @override
@@ -372,7 +374,7 @@ class ChatBubble extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: isMe ? 32 : 96),
               child: Text(
-                "9:25 AM",
+                time != null ? "${time!.hour}:${time!.minute}" : "12:00",
                 style: TextStyle(
                   color: Color(0xff797C7B),
                   fontSize: 10,

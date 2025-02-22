@@ -7,7 +7,7 @@ import 'package:zen_active/views/screen/community/community_comment_page.dart';
 class Posts extends StatelessWidget {
   const Posts({
     super.key,
-    required this.imagePath,
+    required this.userImage,
     required this.name,
     required this.time,
     required this.text,
@@ -15,7 +15,7 @@ class Posts extends StatelessWidget {
     required this.comment,
   });
 
-  final String imagePath;
+  final String userImage;
   final String name;
   final String time;
   final String text;
@@ -45,9 +45,19 @@ class Posts extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(999),
-                  child: Image.asset(
-                    imagePath,
+                  child: Image.network(
+                    userImage,
                     height: 32,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        height: 32,
+                        width: 32,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.amber,
+                        ),
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(
