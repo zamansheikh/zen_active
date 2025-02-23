@@ -41,7 +41,6 @@ class CommunityFeedController extends GetxController implements GetxService {
           postList.value = response.body["data"]
               .map<PostModel>((e) => PostModel.fromJson(e))
               .toList();
-          llg(postList.length);
           isLoading.value = false;
         } catch (e) {
           debugPrint('Model Convertion Error: ${e.toString()}');
@@ -72,7 +71,6 @@ class CommunityFeedController extends GetxController implements GetxService {
           userList.value = response.body["data"]
               .map<UserListModel>((e) => UserListModel.fromJson(e))
               .toList();
-          llg(userList.length);
           isLoading.value = false;
         } catch (e) {
           debugPrint('Model Convertion Error: ${e.toString()}');
@@ -103,7 +101,6 @@ class CommunityFeedController extends GetxController implements GetxService {
           myFriends.value = response.body["data"]
               .map<MyFriendModel>((e) => MyFriendModel.fromJson(e))
               .toList();
-          llg(myFriends.length);
           isLoading.value = false;
         } catch (e) {
           debugPrint('Model Convertion Error: ${e.toString()}');
@@ -137,7 +134,6 @@ class CommunityFeedController extends GetxController implements GetxService {
         try {
           requestList.value = RequestModel.fromJson(response.body["data"]);
 
-          llg(requestList.value.requestedList?.length);
           isLoading.value = false;
         } catch (e) {
           debugPrint('Model Convertion Error: ${e.toString()}');

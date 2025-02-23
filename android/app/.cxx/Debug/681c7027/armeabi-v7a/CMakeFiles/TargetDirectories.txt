@@ -1,0 +1,2 @@
+C:/Users/zaman/Documents/flutter_projects/zen_active/android/app/.cxx/Debug/681c7027/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/zaman/Documents/flutter_projects/zen_active/android/app/.cxx/Debug/681c7027/armeabi-v7a/CMakeFiles/rebuild_cache.dir

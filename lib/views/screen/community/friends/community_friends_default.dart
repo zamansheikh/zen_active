@@ -13,7 +13,16 @@ class CommunityFriendsDefault extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final CommunityFeedController communityController = Get.find();
-    communityController.getRequsted(type: "requestedList");
+    // if (WidgetsBinding.instance.lifecycleState == AppLifecycleState.resumed) {
+    //   communityController.getRequsted(type: "requestedList");
+    // } else {
+    //   WidgetsBinding.instance.addPostFrameCallback((_) {
+    //     communityController.getRequsted(type: "requestedList");
+    //   });
+    // }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      communityController.getRequsted(type: "requestedList");
+    });
     return Column(
       children: [
         const SizedBox(
@@ -374,8 +383,9 @@ class CommunityFriendsDefault extends StatelessWidget {
                 ),
                 for (int i = 0;
                     i <
-                        communityController
-                            .requestList.value.requestedList!.length;
+                        (communityController
+                                .requestList.value.requestedList?.length ??
+                            0);
                     i++)
                   FriendRequests(
                     image: communityController

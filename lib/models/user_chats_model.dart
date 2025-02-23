@@ -24,6 +24,78 @@ class UserChatsModel {
       'userFriendShipStatus': userFriendShipStatus?.toJson(),
     };
   }
+
+  // Add a message to the chat list.  Crucially, returns a *new* UserChatsModel.
+  UserChatsModel addMessage({
+    required String message,
+    required String senderId,
+    required String receiverId,
+  }) {
+    // Find sender and receiver info.  Important: We're making the assumption here
+    // that the sender and receiver *already exist* in either the existing
+    // userChat list or the userFriendShipStatus.  If they don't, we need to
+    // handle that case (see below).
+    UserInfo? senderInfo;
+    UserInfo? receiverInfo;
+
+    // Check existing chats first
+    for (final chat in userChat ?? <UserChat>[]) {
+      if (chat.senderId?.id == senderId) {
+        senderInfo = chat.senderId;
+      }
+      if (chat.receiverId?.id == senderId) {
+        // Corrected: Check *receiverId*
+        senderInfo = chat.receiverId;
+      }
+      if (chat.senderId?.id == receiverId) {
+        // Corrected
+        receiverInfo = chat.senderId;
+      }
+
+      if (chat.receiverId?.id == receiverId) {
+        receiverInfo = chat.receiverId;
+      }
+    }
+
+    // If not found in chats, check friendship status (less efficient, but necessary)
+    senderInfo ??= userFriendShipStatus?.senderId?.id == senderId
+        ? userFriendShipStatus?.senderId
+        : userFriendShipStatus?.receiverId?.id == senderId
+            ? userFriendShipStatus?.receiverId
+            : null;
+
+    receiverInfo ??= userFriendShipStatus?.senderId?.id == receiverId
+        ? userFriendShipStatus?.senderId
+        : userFriendShipStatus?.receiverId?.id == receiverId
+            ? userFriendShipStatus?.receiverId
+            : null;
+
+    // Create a new UserChat object.
+    final newUserChat = UserChat(
+      id: DateTime.now().millisecondsSinceEpoch.toString(), // Unique ID
+      senderId: senderInfo, // Use the found UserInfo objects
+      receiverId: receiverInfo,
+      message: message,
+      createdAt: DateTime.now()
+          .toUtc()
+          .toIso8601String(), // Use current time in UTC, ISO 8601 format
+      updatedAt: DateTime.now()
+          .toUtc()
+          .toIso8601String(), // Same as createdAt initially
+      v: 0, // You might want to handle __v differently in a real app.
+    );
+
+    // Create a *new* list containing the existing chats plus the new chat.
+    // This is important for immutability, which is good practice in Flutter.
+    final updatedUserChatList = List<UserChat>.from(userChat ?? [])
+      ..add(newUserChat);
+
+    // Return a *new* UserChatsModel with the updated chat list.
+    return UserChatsModel(
+      userChat: updatedUserChatList,
+      userFriendShipStatus: userFriendShipStatus,
+    );
+  }
 }
 
 class UserChat {

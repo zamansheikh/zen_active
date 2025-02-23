@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/controllers/auth_controller.dart';
 import 'package:zen_active/controllers/community_feed_controller.dart';
 import 'package:zen_active/controllers/message_controller.dart';
-import 'package:zen_active/helpers/socket_service.dart';
 import 'package:zen_active/models/my_friend_model.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_loading.dart';
@@ -87,9 +87,15 @@ class _ConversationScreenState extends State<ConversationScreen> {
   @override
   void initState() {
     messageController.getAllMessage(id: widget.friend.id!);
-    print("Friend ID: ${widget.friend.id}");
-    SocketServices.init();
+    debugPrint("Friend ID: ${widget.friend.id}");
+    messageController.listenMessage();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    messageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -258,8 +264,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
                       children: [
                         Expanded(
                           child: TextField(
-                            controller: TextEditingController(
-                                text: "Hello How are you?"),
+                            controller: messageController.textController,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                             ),
@@ -277,7 +282,10 @@ class _ConversationScreenState extends State<ConversationScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    //! TODO: Send Message
+                    messageController.sendMessage(
+                        rcvId: widget.friend.id!,
+                        message: messageController.textController.text,
+                        senderId: Get.find<AuthController>().user.value.id!);
                   },
                   child: Container(
                     height: 40,

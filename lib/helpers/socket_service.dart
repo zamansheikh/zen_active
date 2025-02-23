@@ -10,6 +10,9 @@ import '../utils/app_constants.dart';
 class SocketServices {
   static var token = '';
 
+  // Flag to check if socket is already initialized
+  static bool _isInitialized = false;
+
   factory SocketServices() {
     return _socketApi;
   }
@@ -24,15 +27,22 @@ class SocketServices {
 
   static IO.Socket socket = IO.io(ApiConstant.socketUrl, <String, dynamic>{
     'transports': ['websocket'],
-    'autoConnect': true,
+    'autoConnect': false,
   });
 
   static void init() async {
-    token = await PrefsHelper.getString(AppConstants.bearerToken);
+    // Ensure that the socket is initialized only once
+    if (!_isInitialized) {
+      token = await PrefsHelper.getString(AppConstants.bearerToken);
 
-    debugPrint(
-        "-------------------------------------------------------------------------------------------Socket call");
-    if (!socket.connected) {
+      debugPrint(
+          "-------------------------------------------------------------------------------------------Socket call");
+
+      socket = IO.io(ApiConstant.socketUrl, <String, dynamic>{
+        'transports': ['websocket'],
+        'autoConnect': true,
+      });
+
       socket.onConnect((_) {
         debugPrint('========> socket connected: ${socket.connected}');
       });
@@ -44,8 +54,10 @@ class SocketServices {
       socket.onDisconnect((_) {
         debugPrint('========> socket disconnected');
       });
+
+      _isInitialized = true; // Mark as initialized
     } else {
-      debugPrint("=======> socket already connected");
+      debugPrint("=======> socket already initialized");
     }
   }
 
