@@ -88,13 +88,12 @@ class _ConversationScreenState extends State<ConversationScreen> {
   void initState() {
     messageController.getAllMessage(id: widget.friend.id!);
     debugPrint("Friend ID: ${widget.friend.id}");
-    messageController.listenMessage();
     super.initState();
   }
 
   @override
   void dispose() {
-    messageController.dispose();
+    // messageController.dispose();
     super.dispose();
   }
 

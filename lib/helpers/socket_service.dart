@@ -21,7 +21,7 @@ class SocketServices {
 
   static final SocketServices _socketApi = SocketServices._internal();
   // static IO.Socket socket = IO.io(
-  //     'http://vibely-ifti.sarv.live',
+  //     'ApiConstant.socketUrl',
   //     IO.OptionBuilder().setTransports(['websocket']).setExtraHeaders(
   //         {"authorization": 'Bearer $token'}).build());
 
@@ -35,29 +35,35 @@ class SocketServices {
     if (!_isInitialized) {
       token = await PrefsHelper.getString(AppConstants.bearerToken);
 
-      debugPrint(
-          "-------------------------------------------------------------------------------------------Socket call");
-
+      debugPrint("✨--------> Socket call");
       socket = IO.io(ApiConstant.socketUrl, <String, dynamic>{
         'transports': ['websocket'],
         'autoConnect': true,
       });
 
+      socket.connect();
       socket.onConnect((_) {
-        debugPrint('========> socket connected: ${socket.connected}');
+        debugPrint('✅ Connected to socket server');
       });
 
       socket.onConnectError((err) {
-        debugPrint('========> socket connect error: $err');
+        debugPrint('❌ Socket connection error: $err');
+      });
+      socket.onDisconnect((_) {
+        debugPrint('❌ Disconnected from socket server');
       });
 
-      socket.onDisconnect((_) {
-        debugPrint('========> socket disconnected');
+      socket.onReconnect((attempt) {
+        debugPrint('✅ Reconnected to socket server on attempt $attempt');
+      });
+
+      socket.onReconnectAttempt((attempt) {
+        debugPrint('🔄 Reconnecting to socket server, attempt $attempt');
       });
 
       _isInitialized = true; // Mark as initialized
     } else {
-      debugPrint("=======> socket already initialized");
+      debugPrint("✨--------> Socket already initialized");
     }
   }
 
@@ -76,7 +82,7 @@ class SocketServices {
   static emit(String event, dynamic body) {
     if (body != null) {
       socket.emit(event, body);
-      debugPrint('===========> Emit $event and \n $body');
+      debugPrint('✨--------> Socket emitted: $event');
     }
   }
 }

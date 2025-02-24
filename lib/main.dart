@@ -6,6 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:zen_active/helpers/firebase_notification_service.dart';
+import 'package:zen_active/helpers/socket_service.dart';
 import 'package:zen_active/services/gemini_service.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/app_constants.dart';
@@ -27,8 +28,9 @@ void main() async {
     statusBarIconBrightness:
         Brightness.dark, // Use Brightness.dark for dark icons
   ));
-  await FirebaseNotificationService.printFCMToken();
-  await FirebaseNotificationService.initializeSocket();
+  // await FirebaseNotificationService.printFCMToken();
+  // await FirebaseNotificationService.initializeSocket();
+  SocketServices.init();
   Map<String, Map<String, String>> languages = await di.init();
   runApp(MyApp(
     languages: languages,
