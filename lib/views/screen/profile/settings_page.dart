@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/controllers/settings_controller.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
 import 'package:zen_active/views/screen/profile/about_us_page.dart';
@@ -12,7 +13,11 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<List<dynamic>> data = [
-      ["assets/svg/privacy_policy.svg", "Privacy Policy", PrivaryPolicyPage()],
+      [
+        "assets/svg/privacy_policy.svg",
+        "Privacy Policy",
+        PrivaryPolicyPage(),
+      ],
       [
         "assets/svg/terms_of_services.svg",
         "Terms of Services",
@@ -20,6 +25,7 @@ class SettingsPage extends StatelessWidget {
       ],
       ["assets/svg/about_us.svg", "About Us", AboutUsPage()],
     ];
+    Get.put(SettingsController());
     return Scaffold(
       body: SafeArea(
         child: Column(

@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -21,7 +22,7 @@ void main() async {
   await Firebase.initializeApp();
   await FirebaseNotificationService.initialize();
   GeminiService.init(
-      apiKey: "AIzaSyC9B4vlJo11===dkjfkosjdfkjsdkf=df9oGn2LMXudrfW5zDQBtd8");
+      apiKey: "AIzaSyCP7WPliATqW=======AZnEBCg===GS6Xm7XVWteSShM");
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: AppColors
         .scaffoldBackgroundColor, // Change this to your preferred color
@@ -31,6 +32,7 @@ void main() async {
   // await FirebaseNotificationService.printFCMToken();
   // await FirebaseNotificationService.initializeSocket();
   SocketServices.init();
+  await FlutterDownloader.initialize();
   Map<String, Map<String, String>> languages = await di.init();
   runApp(MyApp(
     languages: languages,

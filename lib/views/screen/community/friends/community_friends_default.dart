@@ -361,7 +361,7 @@ class CommunityFriendsDefault extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        " ${communityController.requestList.value.requestedList?.length}",
+                        " ${communityController.requestList.length}",
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -382,18 +382,13 @@ class CommunityFriendsDefault extends StatelessWidget {
                   ),
                 ),
                 for (int i = 0;
-                    i <
-                        (communityController
-                                .requestList.value.requestedList?.length ??
-                            0);
+                    i < (communityController.requestList.length);
                     i++)
                   FriendRequests(
-                    image: communityController
-                        .requestList.value.requestedList![i].image!,
+                    image: communityController.requestList[i].image!,
                     name:
-                        "${communityController.requestList.value.requestedList![i].name!.firstName!} ${communityController.requestList.value.requestedList![i].name!.lastName!}",
-                    userId: communityController
-                        .requestList.value.requestedList![i].id!,
+                        "${communityController.requestList[i].name!.firstName!} ${communityController.requestList[i].name!.lastName!}",
+                    userId: communityController.requestList[i].id!,
                   ),
               ],
             );

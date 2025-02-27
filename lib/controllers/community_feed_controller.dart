@@ -21,7 +21,7 @@ class CommunityFeedController extends GetxController implements GetxService {
   RxList<PostModel> postList = <PostModel>[].obs;
   RxList<UserListModel> userList = <UserListModel>[].obs;
   RxList<MyFriendModel> myFriends = <MyFriendModel>[].obs;
-  Rx<RequestModel> requestList = RequestModel().obs;
+  RxList<RequestModel> requestList = <RequestModel>[].obs;
 
   final TextEditingController postController = TextEditingController();
   void getAllPost() async {
@@ -132,8 +132,9 @@ class CommunityFeedController extends GetxController implements GetxService {
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         try {
-          requestList.value = RequestModel.fromJson(response.body["data"]);
-
+          requestList.value = response.body["data"]
+              .map<RequestModel>((e) => RequestModel.fromJson(e))
+              .toList();
           isLoading.value = false;
         } catch (e) {
           debugPrint('Model Convertion Error: ${e.toString()}');

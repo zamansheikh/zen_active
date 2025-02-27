@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:zen_active/controllers/community_group_controller.dart';
+import 'package:zen_active/utils/uitls.dart';
+import 'package:zen_active/views/components/custom_loading.dart';
 
 class CommentSection extends StatelessWidget {
   const CommentSection({super.key});
@@ -24,55 +28,39 @@ class CommentSection extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                spacing: 8,
-                children: [
-                  comment(
-                    "Henry Aurther",
-                    "Ask CDCR San Quintin State Prison 2008. We installed Purex dispensers throughout the prison.....",
-                    2,
-                  ),
-                  comment(
-                    "Flores Juanita",
-                    "Even factoring differences in body weight between children and adults into account, it would still n",
-                    3,
-                  ),
-                  comment(
-                    "Cooper Kristin",
-                    "An average healthy 7 year old boy weighs about 50 lb (23 kg). If we suppose the same amount of alcoh",
-                    8,
-                  ),
-                  comment(
-                    "Black Marvin",
-                    "An interesting implication of the 2007 study concerns the use of hand sanitizers by observant Muslim",
-                    6,
-                  ),
-                  comment(
-                    "Henry Aurther",
-                    "Ask CDCR San Quintin State Prison 2008. We installed Purex dispensers throughout the prison.....",
-                    2,
-                  ),
-                  comment(
-                    "Flores Juanita",
-                    "Even factoring differences in body weight between children and adults into account, it would still n",
-                    3,
-                  ),
-                  comment(
-                    "Cooper Kristin",
-                    "An average healthy 7 year old boy weighs about 50 lb (23 kg). If we suppose the same amount of alcoh",
-                    8,
-                  ),
-                  comment(
-                    "Black Marvin",
-                    "An interesting implication of the 2007 study concerns the use of hand sanitizers by observant Muslim",
-                    6,
-                  ),
-                ],
-              ),
-            ),
-          ),
+          Obx(() {
+            return Get.find<CommunityGroupController>().isLoading.value
+                ? Center(child: CustomLoading())
+                : Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        spacing: 8,
+                        children: [
+                          for (int i = 0;
+                              i <
+                                  Get.find<CommunityGroupController>()
+                                      .postList
+                                      .length;
+                              i++)
+                            comment(
+                              Get.find<CommunityGroupController>()
+                                  .postList[i]
+                                  .user!
+                                  .name!
+                                  .firstName!,
+                              Get.find<CommunityGroupController>()
+                                  .postList[i]
+                                  .text!,
+                              imageUrl(Get.find<CommunityGroupController>()
+                                  .postList[i]
+                                  .user!
+                                  .image!),
+                            ),
+                        ],
+                      ),
+                    ),
+                  );
+          }),
           Container(
             height: 1,
             color: Color(0xff79CDFF),
@@ -131,7 +119,7 @@ class CommentSection extends StatelessWidget {
     );
   }
 
-  Widget comment(String name, String comment, int faceNo) {
+  Widget comment(String name, String comment, String userDp) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: Row(
@@ -139,10 +127,20 @@ class CommentSection extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(999),
-            child: Image.asset(
-              "assets/images/faces/$faceNo.png",
+            child: Image.network(
+              userDp,
               height: 24,
               width: 24,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  height: 24,
+                  width: 24,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.amber,
+                  ),
+                );
+              },
             ),
           ),
           const SizedBox(width: 8),

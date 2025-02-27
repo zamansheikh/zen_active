@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zen_active/helpers/route.dart';
+import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
+import 'package:zen_active/views/components/custom_video_player.dart';
 import 'package:zen_active/views/components/workout_videos.dart';
 
 class WorkoutVideoPlayingPage extends StatelessWidget {
@@ -26,15 +28,11 @@ class WorkoutVideoPlayingPage extends StatelessWidget {
                     spacing: 16,
                     children: [
                       Hero(
-                        tag: "playing",
-                        child: WorkoutVideos(
-                          isPlaying: true,
-                          assetPath: "assets/images/workout_videos/1.png",
-                          onTap: () {
-                            Get.toNamed(AppRoutes.workoutVideoPlayingPage);
-                          },
-                        ),
-                      ),
+                          tag: "playing",
+                          child: CustomVideoPlayer(
+                            videoPath: imageUrl(
+                                "/medias/8084750-uhd_3840_2160_25fps-1739262146617.mp4"),
+                          )),
                       GestureDetector(
                         onTap: () {
                           Get.toNamed(AppRoutes.workoutVideoCommentsPage);

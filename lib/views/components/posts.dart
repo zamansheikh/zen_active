@@ -13,6 +13,7 @@ class Posts extends StatelessWidget {
     required this.text,
     required this.likes,
     required this.comment,
+    required this.postId,
   });
 
   final String userImage;
@@ -21,6 +22,7 @@ class Posts extends StatelessWidget {
   final String text;
   final int likes;
   final int comment;
+  final String postId;
 
   @override
   Widget build(BuildContext context) {
@@ -156,7 +158,7 @@ class Posts extends StatelessWidget {
                 Expanded(
                   child: InkWell(
                     onTap: () {
-                      Get.to(() => CommunityCommentPage());
+                      Get.to(() => CommunityCommentPage(postId: postId));
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

@@ -18,6 +18,13 @@ class ApiConstant {
   static String dailyWorkOut = "/daily-exercise";
   static String workoutPlan = "/workout-plan/";
   static String allPost = "/post/all-user-post/";
+  static String allGroupPost = "/post/user-all-group-post/?page=1";
+  static String getSinglePostCommnent(String id) => "/comment/post/$id";
+  static String allMyGroup = "/user-group/all-user-group";
+  static String getAllGroup = "/group/";
+  static String joinAGroup(String id) => "/user-group/join/$id";
+  static String allMyGroupWithSearch(String searchKey) =>
+      "/user-group/all-user-group?searchTerm=$searchKey";
   static String getAllFriend = "/friend/suggested";
   static String getMyFriends = "/friend";
   static String sendRequest = "/friend/send-request";
@@ -31,4 +38,12 @@ class ApiConstant {
   static String hitNextWorkOut(String id) =>
       "/workout-plan/update-user-workout-plan/$id";
   static String getUserMessages(String id) => "chat/get-user-chat/$id";
+
+  //Settings
+  static String getPrivacy = "/privacy&terms/privacy";
+  static String getTerms = "/privacy&terms/terms";
+  static String getAboutUs = "/privacy&terms/about-us";
+
+  //LeaderBoard
+  static String getLeaderBoard = "/app-data/leaderboard";
 }

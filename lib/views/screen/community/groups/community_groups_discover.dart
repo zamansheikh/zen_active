@@ -1,8 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:zen_active/controllers/community_group_controller.dart';
+import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_button.dart';
+import 'package:zen_active/views/components/custom_loading.dart';
 
-class CommunityGroupsDiscover extends StatelessWidget {
+class CommunityGroupsDiscover extends StatefulWidget {
   const CommunityGroupsDiscover({super.key});
+
+  @override
+  State<CommunityGroupsDiscover> createState() =>
+      _CommunityGroupsDiscoverState();
+}
+
+class _CommunityGroupsDiscoverState extends State<CommunityGroupsDiscover> {
+  final CommunityGroupController _controller =
+      Get.find<CommunityGroupController>();
+  @override
+  void initState() {
+    _controller.getAllDiscoverGroups();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,24 +40,39 @@ class CommunityGroupsDiscover extends StatelessWidget {
           const SizedBox(
             height: 8,
           ),
-          Expanded(
-            child: GridView.count(
-              padding: EdgeInsets.only(bottom: 24,),
-              crossAxisCount: 2,
-              mainAxisSpacing: 18,
-              crossAxisSpacing: 18,
-              childAspectRatio: (168 / 226),
-              children: [
-                for (int i = 0; i < 10; i++) groupInfo(),
-              ],
-            ),
+          Obx(
+            () => _controller.isLoading.value
+                ? Center(
+                    child: CustomLoading(),
+                  )
+                : Expanded(
+                    child: GridView.count(
+                      padding: EdgeInsets.only(
+                        bottom: 24,
+                      ),
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 18,
+                      crossAxisSpacing: 18,
+                      childAspectRatio: (168 / 226),
+                      children: [
+                        for (int i = 0;
+                            i < _controller.discoverGroups.length;
+                            i++)
+                          groupInfo(
+                            _controller.discoverGroups[i].name,
+                            _controller.discoverGroups[i].totalMembers,
+                            _controller.discoverGroups[i].image,
+                          ),
+                      ],
+                    ),
+                  ),
           ),
         ],
       ),
     );
   }
 
-  Widget groupInfo() {
+  Widget groupInfo(String? groupName, int? groupMembers, String? coverImage) {
     return Container(
       decoration: BoxDecoration(
         color: Color(0xffFEFEFF),
@@ -58,16 +91,27 @@ class CommunityGroupsDiscover extends StatelessWidget {
               borderRadius: BorderRadius.vertical(
                 top: Radius.circular(8),
               ),
-              child: Image.asset(
-                "assets/images/challenges/1.png",
+              child: Image.network(
+                imageUrl(coverImage),
                 fit: BoxFit.fitHeight,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    color: Colors.grey,
+                    child: Center(
+                      child: Icon(
+                        Icons.error_outline_rounded,
+                        color: Colors.white,
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: Text(
-              "Group Name",
+              groupName ?? "Group Name",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
@@ -78,7 +122,7 @@ class CommunityGroupsDiscover extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: Text(
-              "Public group · 520 members",
+              "Public group · ${groupMembers ?? 0} members",
               style: TextStyle(
                 fontSize: 11,
                 fontWeight: FontWeight.w600,
@@ -92,6 +136,7 @@ class CommunityGroupsDiscover extends StatelessWidget {
               buttonName: "Join",
               height: 35,
               textSize: 16,
+              onPressed: () {},
             ),
           ),
         ],

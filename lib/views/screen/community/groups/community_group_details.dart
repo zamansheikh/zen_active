@@ -122,6 +122,7 @@ class CommunityGroupDetails extends StatelessWidget {
                         ],
                       ),
                       Posts(
+                        postId: "1",
                         userImage: "assets/images/faces/3.png",
                         name: "Sample Name",
                         time: "2 min",
@@ -131,6 +132,7 @@ class CommunityGroupDetails extends StatelessWidget {
                         comment: 40,
                       ),
                       Posts(
+                        postId: "1",
                         userImage: "assets/images/faces/3.png",
                         name: "Sample Name",
                         time: "2 min",
@@ -140,6 +142,7 @@ class CommunityGroupDetails extends StatelessWidget {
                         comment: 40,
                       ),
                       Posts(
+                        postId: "1",
                         userImage: "assets/images/faces/3.png",
                         name: "Sample Name",
                         time: "2 min",

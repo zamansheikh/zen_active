@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zen_active/controllers/community_group_controller.dart';
+import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_search_bar.dart';
 import 'package:zen_active/views/screen/community/Groups/community_groups_create_group.dart';
 
-class CommunityGroupsYourGroups extends StatelessWidget {
+class CommunityGroupsYourGroups extends StatefulWidget {
   const CommunityGroupsYourGroups({super.key});
+
+  @override
+  State<CommunityGroupsYourGroups> createState() =>
+      _CommunityGroupsYourGroupsState();
+}
+
+class _CommunityGroupsYourGroupsState extends State<CommunityGroupsYourGroups> {
+  @override
+  void initState() {
+    Get.find<CommunityGroupController>().getAllMyGroups();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,23 +68,49 @@ class CommunityGroupsYourGroups extends StatelessWidget {
                 ],
               ),
             ),
-            for (int i = 1; i <= 100; i++) groupNames("$i"),
+            Obx(() {
+              return Get.find<CommunityGroupController>().isLoading.value
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Column(
+                      spacing: 15,
+                      children: Get.find<CommunityGroupController>()
+                          .myGroups
+                          .map((e) =>
+                              groupNames(e.name, imageUrl(e.image), e.newPost))
+                          .toList(),
+                    );
+            }),
           ],
         ),
       ),
     );
   }
 
-  Row groupNames(String? name) {
+  Row groupNames(String? name, String? groupImage, int? newPosts) {
     return Row(
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(4),
-          child: Image.asset(
-            "assets/images/offline_videos/1.png",
+          child: Image.network(
+            groupImage ?? "https://via.placeholder.com/150",
             height: 44,
             width: 44,
             fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return Container(
+                height: 44,
+                width: 44,
+                color: Colors.grey,
+                child: Center(
+                  child: Icon(
+                    Icons.error_outline_rounded,
+                    color: Colors.white,
+                  ),
+                ),
+              );
+            },
           ),
         ),
         const SizedBox(
@@ -92,7 +131,7 @@ class CommunityGroupsYourGroups extends StatelessWidget {
               spacing: 4,
               children: [
                 Text(
-                  "25+ new posts",
+                  "${newPosts ?? 0}+ new posts",
                   style: TextStyle(
                     fontSize: 11,
                     color: Color(0xff525252),

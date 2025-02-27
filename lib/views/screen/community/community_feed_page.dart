@@ -81,6 +81,7 @@ class CommunityFeedPage extends StatelessWidget {
                     return Column(
                       children: [
                         Posts(
+                          postId: post.id!,
                           userImage: imageUrl(post.userInfo!.image!),
                           name:
                               "${post.userInfo!.name!.firstName!} ${post.userInfo!.name!.lastName!}",

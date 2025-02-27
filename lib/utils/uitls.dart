@@ -47,6 +47,10 @@ void llg(dynamic message) {
   }
 }
 
+String checkNull(String? value, String defaultValue) {
+  return value ?? defaultValue;
+}
+
 String imageUrl(String? url) {
   if (url == null || url.isEmpty) {
     return "https://via.placeholder.com/150";
