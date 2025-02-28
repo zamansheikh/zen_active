@@ -31,6 +31,22 @@ class DownloadService extends GetxController {
         .toList());
   }
 
+  //Fetch only video files from storage
+  Future<void> fetchDownloadedVideos() async {
+    Directory? dir = await getExternalStorageDirectory();
+    if (dir == null) return;
+
+    List<FileSystemEntity> files = dir.listSync();
+    savedDownloads.assignAll(files
+        .where((e) => e.path.endsWith('.mp4'))
+        .map((e) => SavedFile(
+              path: e.path,
+              fileName: e.path.split('/').last,
+              fileType: e.statSync().type.toString(),
+            ))
+        .toList());
+  }
+
   // Start a new file download and add it to the queue
   Future<void> startDownload(String url, String? fileName) async {
     await requestPermissions();

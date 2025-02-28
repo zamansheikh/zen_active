@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:zen_active/helpers/firebase_notification_service.dart';
 import 'package:zen_active/helpers/socket_service.dart';
+import 'package:zen_active/services/download_service.dart';
 import 'package:zen_active/services/gemini_service.dart';
 import 'package:zen_active/utils/app_colors.dart';
 import 'package:zen_active/utils/app_constants.dart';
@@ -21,6 +22,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FirebaseNotificationService.initialize();
+  Get.put(DownloadService());
   GeminiService.init(
       apiKey: "AIzaSyCP7WPliATqW=======AZnEBCg===GS6Xm7XVWteSShM");
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
