@@ -1,9 +1,8 @@
 import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zen_active/models/single_workout_model.dart';
+import 'package:zen_active/models/video_model.dart';
 import 'package:zen_active/models/workout_plan_model.dart';
 import 'package:zen_active/services/api_client.dart';
 import 'package:zen_active/services/api_constant.dart';
@@ -18,6 +17,7 @@ class WorkoutController extends GetxController implements GetxService {
 
   RxList<WorkoutModel> workOutPlan = <WorkoutModel>[].obs;
   Rx<SingleWorkoutModel> singleWorkout = SingleWorkoutModel().obs;
+  RxList<VideoModel> allWorkOutVideo = <VideoModel>[].obs;
 
   void getAllWorkOutPlan() async {
     isLoading.value = true;
@@ -168,6 +168,34 @@ class WorkoutController extends GetxController implements GetxService {
           ApiConstant.dailyWorkOut, headers: headers, jsonEncode(body));
       if (response.body["status"] == 200) {
         isLoading.value = false;
+      }
+    } catch (e) {
+      debugPrint('------------${e.toString()}');
+    }
+    isLoading.value = false;
+  }
+
+  void getALlWorkoutVideo() async {
+    isLoading.value = true;
+    final bearerToken = await PrefsHelper.getString(AppConstants.bearerToken);
+    final headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer $bearerToken',
+    };
+    try {
+      final response = await ApiClient.getData(
+        ApiConstant.getWorkOutVideos,
+        headers: headers,
+      );
+      if (response.body["status"] == 200) {
+        try {
+          allWorkOutVideo.value = response.body["data"]
+              .map<VideoModel>((e) => VideoModel.fromJson(e))
+              .toList();
+        } catch (e) {
+          debugPrint('Model Convertion Error: ${e.toString()}');
+          isLoading.value = false;
+        }
       }
     } catch (e) {
       debugPrint('------------${e.toString()}');

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/posts.dart';
 import 'package:zen_active/views/components/custom_button.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
@@ -7,11 +8,23 @@ import 'package:zen_active/controllers/community_group_controller.dart';
 import 'package:zen_active/views/screen/community/groups/community_group_information.dart';
 import 'package:zen_active/views/screen/community/groups/community_groups_invite.dart';
 
-class CommunityGroupDetails extends StatelessWidget {
-  const CommunityGroupDetails({super.key});
+class CommunityGroupDetails extends StatefulWidget {
+  final String groupId;
+  const CommunityGroupDetails({super.key, required this.groupId});
+
+  @override
+  State<CommunityGroupDetails> createState() => _CommunityGroupDetailsState();
+}
+
+class _CommunityGroupDetailsState extends State<CommunityGroupDetails> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    Get.find<CommunityGroupController>().fetchSingleGroupData(widget.groupId);
     return Column(
       children: [
         CustomAppBar(
@@ -23,11 +36,21 @@ class CommunityGroupDetails extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Image.asset(
-                  "assets/images/challenges/2.png",
+                Image.network(
+                  imageUrl(
+                    Get.find<CommunityGroupController>().groupInfo.value.image!,
+                  ),
                   height: 200,
                   width: double.infinity,
                   fit: BoxFit.fitWidth,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Image.asset(
+                      "assets/images/challenges/2.png",
+                      height: 200,
+                      width: double.infinity,
+                      fit: BoxFit.fitWidth,
+                    );
+                  },
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
@@ -39,16 +62,22 @@ class CommunityGroupDetails extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Flex and Flow",
+                            Get.find<CommunityGroupController>()
+                                .groupInfo
+                                .value
+                                .name!,
+                            textAlign: TextAlign.left,
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 29,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          Text("Public group · 65 members"),
+                          Text(
+                              "${Get.find<CommunityGroupController>().groupInfo.value.type!} Group · ${Get.find<CommunityGroupController>().groupInfo.value.totalMembers!} members"),
                         ],
                       ),
                       Row(

@@ -1,9 +1,9 @@
 class ApiConstant {
-  static String baseUrl = "http://192.168.10.170:3500/api";
-  static String imageBaseUrl = "http://192.168.10.170:3500";
+  static String baseUrl = "http://192.168.10.18:3500/api";
+  static String imageBaseUrl = "http://192.168.10.18:3500";
 
   //  Socket service
-  static String socketUrl = "http://192.168.10.170:3500/";
+  static String socketUrl = "http://192.168.10.18:3500/";
   //Auth Service
   static String authLogin = "/auth/login";
   static String getMe = "/user/me";
@@ -46,4 +46,14 @@ class ApiConstant {
 
   //LeaderBoard
   static String getLeaderBoard = "/app-data/leaderboard";
+  //Video Section
+  static String getWorkOutVideos = "/workout-video/";
+  static String getCommnentOfASignleVideo(String id) => "/comment/video/$id";
+
+  //Community
+  static String getNotifications = "/notification";
+  static String readNotification(String id) => "/notification/$id";
+  static String updateGroup(String id) => "/group/$id";
+  static String getSingleGroupDetails(String id) => "/group/$id";
+  static String createGroup = "/group/create-group";
 }

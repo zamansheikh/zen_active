@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zen_active/controllers/community_group_controller.dart';
 import 'package:zen_active/views/components/comment_section.dart';
+import 'package:zen_active/views/components/custom_app_bar.dart';
 
 class CommunityCommentPage extends StatefulWidget {
   const CommunityCommentPage({super.key, required this.postId});
@@ -25,13 +26,20 @@ class _CommunityCommentPageState extends State<CommunityCommentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            children: [
-              Expanded(child: CommentSection()),
-            ],
-          ),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 32,
+              child: CustomAppBar(
+                title: "Commnets",
+              ),
+            ),
+            Expanded(
+                child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: CommentSection(),
+            )),
+          ],
         ),
       ),
     );

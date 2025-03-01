@@ -22,6 +22,7 @@ class _OfflineVideosPageState extends State<OfflineVideosPage> {
 
   @override
   Widget build(BuildContext context) {
+    videoController.fetchDownloadedVideos();
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -50,18 +51,26 @@ class _OfflineVideosPageState extends State<OfflineVideosPage> {
                             motion: const DrawerMotion(),
                             children: [
                               Flexible(
-                                child: Container(
-                                  width: 75,
-                                  height: 85,
-                                  decoration: BoxDecoration(
-                                    color: Color(0xffC1E8FF),
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                  child: Center(
-                                    child: svgViewer(
-                                      asset: "assets/svg/delete.svg",
-                                      height: 24,
-                                      width: 24,
+                                child: InkWell(
+                                  onTap: () {
+                                    // videoController.deleteFile(videoController
+                                    //     .savedDownloads[index].path);
+                                    videoController.deleteFile(
+                                        '/storage/emulated/0/Android/data/com.example.zen_active/files/workout video  low low');
+                                  },
+                                  child: Container(
+                                    width: 75,
+                                    height: 85,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xffC1E8FF),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Center(
+                                      child: svgViewer(
+                                        asset: "assets/svg/delete.svg",
+                                        height: 24,
+                                        width: 24,
+                                      ),
                                     ),
                                   ),
                                 ),

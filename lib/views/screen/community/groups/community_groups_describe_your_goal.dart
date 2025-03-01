@@ -53,14 +53,18 @@ class CommunityGroupsDescribeYourGoal extends StatelessWidget {
             child: Column(
               children: [
                 TextField(
+                  controller: Get.find<CommunityGroupController>()
+                      .groupDescriptionController,
                   decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Tell us more about your goal.......",
-                      hintStyle: TextStyle(
-                        color: Color(0xff8B8B8B),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      )),
+                    border: InputBorder.none,
+                    hintText: "Tell us more about your goal.......",
+                    hintStyle: TextStyle(
+                      color: Color(0xff8B8B8B),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  maxLines: 5,
                 ),
               ],
             ),
@@ -71,8 +75,9 @@ class CommunityGroupsDescribeYourGoal extends StatelessWidget {
           CustomButton(
             buttonName: "Next",
             onPressed: () {
-              Get.find<CommunityGroupController>()
-                  .push(CommunityGroupDetails());
+              Get.find<CommunityGroupController>().createGroup();
+              // Get.find<CommunityGroupController>()
+              //     .push(CommunityGroupDetails());
             },
           ),
         ],

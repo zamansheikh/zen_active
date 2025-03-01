@@ -29,6 +29,8 @@ class CommunityGroupsCreateGroup extends StatelessWidget {
               CustomTextField(
                 title: "Name",
                 hintText: "Name your group",
+                controller:
+                    Get.find<CommunityGroupController>().groupNameController,
               ),
               // CustomDropDown(
               //   title: "Set Group Type",

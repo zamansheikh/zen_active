@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zen_active/controllers/workout_controller.dart';
 import 'package:zen_active/helpers/route.dart';
+import 'package:zen_active/services/download_service.dart';
 import 'package:zen_active/utils/uitls.dart';
 import 'package:zen_active/views/components/custom_app_bar.dart';
+import 'package:zen_active/views/components/custom_video_player.dart';
 import 'package:zen_active/views/components/workout_videos.dart';
 
-class WorkoutVideosPage extends StatelessWidget {
+class WorkoutVideosPage extends StatefulWidget {
   const WorkoutVideosPage({super.key});
 
+  @override
+  State<WorkoutVideosPage> createState() => _WorkoutVideosPageState();
+}
+
+class _WorkoutVideosPageState extends State<WorkoutVideosPage> {
+  final WorkoutController workoutController = Get.find();
+  final DownloadService videoController = Get.find();
   @override
   Widget build(BuildContext context) {
     List<String> plans = ["HIIT", "Cardio", "Dance"];
@@ -25,7 +35,7 @@ class WorkoutVideosPage extends StatelessWidget {
                     horizontal: 24,
                   ),
                   child: Column(
-                    spacing: 16,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 4),
                       SizedBox(
@@ -67,6 +77,7 @@ class WorkoutVideosPage extends StatelessWidget {
                           },
                         ),
                       ),
+                      const SizedBox(height: 16),
                       Container(
                         height: 40,
                         decoration: BoxDecoration(
@@ -103,24 +114,170 @@ class WorkoutVideosPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      WorkoutVideos(
-                        assetPath: "assets/images/workout_videos/1.png",
-                        onTap: () {
-                          Get.toNamed(AppRoutes.workoutVideoPlayingPage);
+                      const SizedBox(height: 16),
+                      ListView.builder(
+                        itemCount: workoutController.allWorkOutVideo.length,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: EdgeInsets.only(bottom: 16),
+                            height: 280,
+                            width: MediaQuery.of(context).size.width - 48,
+                            decoration: BoxDecoration(
+                              color: Color(0xffFEFEFF),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      // Video player with fixed dimensions
+                                      SizedBox(
+                                        width: double.infinity,
+                                        height: 200,
+                                        child: CustomVideoPlayer(
+                                          showSeekbar: true,
+                                          borderRadius: 16,
+                                          thumbnailPath: imageUrl(
+                                              workoutController
+                                                  .allWorkOutVideo[index]
+                                                  .image!),
+                                          videoPath: imageUrl(workoutController
+                                              .allWorkOutVideo[index].video!),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      // Content beside video
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                  top: 10,
+                                                  left: 20,
+                                                  right: 20,
+                                                ),
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Expanded(
+                                                      child: Text(
+                                                        workoutController
+                                                            .allWorkOutVideo[
+                                                                index]
+                                                            .name!,
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color:
+                                                              Color(0xff2d2d2d),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(width: 8),
+                                                    Obx(() {
+                                                      // Find if there's an active download for this video
+                                                      final downloadItem = videoController
+                                                          .downloads
+                                                          .firstWhereOrNull((item) =>
+                                                              item.url ==
+                                                              imageUrl(
+                                                                  workoutController
+                                                                      .allWorkOutVideo[
+                                                                          index]
+                                                                      .video!));
+
+                                                      // If there's an active download, show progress
+                                                      if (downloadItem !=
+                                                              null &&
+                                                          !downloadItem
+                                                              .isCompleted
+                                                              .value) {
+                                                        return Stack(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          children: [
+                                                            SizedBox(
+                                                              width: 24,
+                                                              height: 24,
+                                                              child:
+                                                                  CircularProgressIndicator(
+                                                                strokeWidth: 2,
+                                                                value: downloadItem
+                                                                        .progress
+                                                                        .value /
+                                                                    100,
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              "${downloadItem.progress.value.toStringAsFixed(0)}%",
+                                                              style: TextStyle(
+                                                                  fontSize: 10),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      }
+                                                      // If download is complete, show a checkmark
+                                                      else if (downloadItem !=
+                                                              null &&
+                                                          downloadItem
+                                                              .isCompleted
+                                                              .value) {
+                                                        return Icon(
+                                                            Icons.check_circle,
+                                                            color: Colors.green,
+                                                            size: 24);
+                                                      }
+                                                      // Otherwise show download button
+                                                      else {
+                                                        return GestureDetector(
+                                                          behavior:
+                                                              HitTestBehavior
+                                                                  .translucent,
+                                                          onTap: () {
+                                                            videoController
+                                                                .startDownload(
+                                                              imageUrl(
+                                                                  workoutController
+                                                                      .allWorkOutVideo[
+                                                                          index]
+                                                                      .video!),
+                                                              "${workoutController.allWorkOutVideo[index].name!}.${workoutController.allWorkOutVideo[index].video!.split('.').last}",
+                                                            );
+                                                          },
+                                                          child: svgViewer(
+                                                              asset:
+                                                                  "assets/svg/download.svg"),
+                                                        );
+                                                      }
+                                                    })
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
                         },
                       ),
-                      WorkoutVideos(
-                        assetPath: "assets/images/workout_videos/2.png",
-                        onTap: () {
-                          Get.toNamed(AppRoutes.workoutVideoPlayingPage);
-                        },
-                      ),
-                      WorkoutVideos(
-                        assetPath: "assets/images/workout_videos/3.png",
-                        onTap: () {
-                          Get.toNamed(AppRoutes.workoutVideoPlayingPage);
-                        },
-                      ),
+
+                      // Add some bottom padding
+                      const SizedBox(height: 16),
                     ],
                   ),
                 ),

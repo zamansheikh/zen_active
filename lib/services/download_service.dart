@@ -38,7 +38,12 @@ class DownloadService extends GetxController {
 
     List<FileSystemEntity> files = dir.listSync();
     savedDownloads.assignAll(files
-        .where((e) => e.path.endsWith('.mp4'))
+        .where((e) {
+          return e.path.endsWith('.mp4') ||
+              e.path.endsWith('.3gp') ||
+              e.path.endsWith('.avi') ||
+              e.path.endsWith('.mkv');
+        })
         .map((e) => SavedFile(
               path: e.path,
               fileName: e.path.split('/').last,
@@ -71,8 +76,6 @@ class DownloadService extends GetxController {
           }
         },
       );
-      downloadItem.progress.value = 20.0;
-
       downloadItem.isCompleted.value = true;
       Get.snackbar("Download Complete", "File saved at: $filePath");
 

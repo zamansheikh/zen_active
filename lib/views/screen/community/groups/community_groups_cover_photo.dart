@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zen_active/controllers/community_group_controller.dart';
@@ -39,15 +41,34 @@ class CommunityGroupsCoverPhoto extends StatelessWidget {
           const SizedBox(
             height: 24,
           ),
-          Container(
-            height: 170,
-            decoration: BoxDecoration(
-              color: Color(0xffDBE1E4),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Center(
-              child: svgViewer(asset: "assets/svg/add_image.svg"),
-            ),
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              Get.find<CommunityGroupController>().pickImage();
+            },
+            child: Get.find<CommunityGroupController>().file == null
+                ? Container(
+                    height: 170,
+                    decoration: BoxDecoration(
+                      color: Color(0xffDBE1E4),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Center(
+                      child: svgViewer(asset: "assets/svg/add_image.svg"),
+                    ),
+                  )
+                : Container(
+                    height: 170,
+                    decoration: BoxDecoration(
+                      color: Color(0xffDBE1E4),
+                      borderRadius: BorderRadius.circular(8),
+                      image: DecorationImage(
+                        image: FileImage(File(
+                            Get.find<CommunityGroupController>().file!.path)),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
           ),
           const SizedBox(
             height: 30,
