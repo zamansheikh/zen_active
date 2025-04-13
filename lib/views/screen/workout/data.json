@@ -1,0 +1,149 @@
+{
+    "_id": "67d92e22020cd2c672825ef6",
+    "userId": "67a46c7a9acfc1193a983220",
+    "workoutPlanId": {
+        "_id": "67b96e6ebf20c42928715723",
+        "name": "8 Week Full Body Workout",
+        "description": "A comprehensive 8-week full body workout plan designed to build strength and endurance.",
+        "duration": 56,
+        "workouts": [
+            {
+                "_id": "67ab0e7cb7729f93df93214d",
+                "name": "Full-Body Quick",
+                "description": "A quick full-body workout to build strength and endurance.",
+                "exercises": [
+                    {
+                        "_id": "67ab08c260290b662d9f626f",
+                        "name": "Push-Up",
+                        "sets": 3,
+                        "reps": 12,
+                        "restTime": 60,
+                        "video": "https://res.cloudinary.com/dgqnr6nsy/video/upload/c_scale,h_720,q_auto,w_1280/v1740890027/videos/8084750-uhd_3840_2160_25fps-1740890012225.mp4",
+                        "points": 15,
+                        "description": "A basic push-up to build upper body strength.",
+                        "image": "/images/pexels-photo-176782-1741661199777.png",
+                        "goal": "Strength",
+                        "duration": 25200,
+                        "isDeleted": false,
+                        "__v": 0,
+                        "about": "about"
+                    },
+                    {
+                        "_id": "67ab0b45f557176ee736343f",
+                        "name": "Squat",
+                        "sets": 4,
+                        "reps": 15,
+                        "restTime": 60,
+                        "video": "https://res.cloudinary.com/dgqnr6nsy/video/upload/c_scale,h_720,q_auto,w_1280/v1740890027/videos/8084750-uhd_3840_2160_25fps-1740890012225.mp4",
+                        "points": 12,
+                        "description": "A bodyweight squat to strengthen legs and core.",
+                        "image": "/images/pexels-photo-176782-1741661199777.png",
+                        "goal": "Strength",
+                        "duration": 300,
+                        "isDeleted": false,
+                        "__v": 0,
+                        "about": "about"
+                    },
+                    {
+                        "_id": "67ab0b87f557176ee736344b",
+                        "name": "Burpees",
+                        "sets": 3,
+                        "reps": 10,
+                        "restTime": 60,
+                        "video": "https://res.cloudinary.com/dgqnr6nsy/video/upload/c_scale,h_720,q_auto,w_1280/v1740890027/videos/8084750-uhd_3840_2160_25fps-1740890012225.mp4",
+                        "points": 15,
+                        "description": "A full-body explosive exercise for strength and endurance.",
+                        "image": "/images/pexels-photo-176782-1741661199777.png",
+                        "goal": "Full Body",
+                        "duration": 240,
+                        "isDeleted": false,
+                        "__v": 0,
+                        "about": "about"
+                    }
+                ]
+            },
+            {
+                "_id": "67ab0ea0b7729f93df932153",
+                "name": "Upper Body Pump",
+                "description": "An effective upper-body session to develop chest, arms, and back.",
+                "exercises": [
+                    {
+                        "_id": "67ab08c260290b662d9f626f",
+                        "name": "Push-Up",
+                        "sets": 3,
+                        "reps": 12,
+                        "restTime": 60,
+                        "video": "https://res.cloudinary.com/dgqnr6nsy/video/upload/c_scale,h_720,q_auto,w_1280/v1740890027/videos/8084750-uhd_3840_2160_25fps-1740890012225.mp4",
+                        "points": 15,
+                        "description": "A basic push-up to build upper body strength.",
+                        "image": "/images/pexels-photo-176782-1741661199777.png",
+                        "goal": "Strength",
+                        "duration": 25200,
+                        "isDeleted": false,
+                        "__v": 0,
+                        "about": "about"
+                    },
+                    {
+                        "_id": "67ab0b8cf557176ee736344e",
+                        "name": "Pull-Up",
+                        "sets": 4,
+                        "reps": 8,
+                        "restTime": 75,
+                        "video": "https://res.cloudinary.com/dgqnr6nsy/video/upload/c_scale,h_720,q_auto,w_1280/v1740890027/videos/8084750-uhd_3840_2160_25fps-1740890012225.mp4",
+                        "points": 20,
+                        "description": "A pull-up to build upper body strength, especially in the back and arms.",
+                        "image": "/images/pexels-photo-176782-1741661199777.png",
+                        "goal": "Strength",
+                        "duration": 300,
+                        "isDeleted": false,
+                        "__v": 0,
+                        "about": "about"
+                    },
+                    {
+                        "_id": "67ab0b93f557176ee7363451",
+                        "name": "Dips",
+                        "sets": 3,
+                        "reps": 10,
+                        "restTime": 60,
+                        "video": "https://res.cloudinary.com/dgqnr6nsy/video/upload/c_scale,h_720,q_auto,w_1280/v1740890027/videos/8084750-uhd_3840_2160_25fps-1740890012225.mp4",
+                        "points": 15,
+                        "description": "A bodyweight dip exercise to strengthen triceps and chest.",
+                        "image": "/images/pexels-photo-176782-1741661199777.png",
+                        "goal": "Strength",
+                        "duration": 180,
+                        "isDeleted": false,
+                        "__v": 0,
+                        "about": "about"
+                    }
+                ]
+            }         
+        ],
+        "image": "/images/images-1742277725569.jpeg",
+        "about": "This plan consists of 56 workouts, one per day for 8 weeks.  Each workout is selected from a provided list of IDs.  The plan focuses on full-body training to promote balanced muscle development."
+    },
+    "currentWorkoutIndex": 0,
+    "currentExerciseIndex": 2,
+    "startedAt": "2025-03-18T08:26:10.766Z",
+    "endAt": "2025-05-13T08:26:10.766Z",
+    "isCompleted": "InProgress",
+    "completedExercises": [
+        {
+            "workoutIndex": 0,
+            "exerciseIndex": 0,
+            "completedAt": "2025-03-18T08:40:14.782Z",
+            "_id": "67d9316e020cd2c672825f10"
+        },
+        {
+            "workoutIndex": 0,
+            "exerciseIndex": 1,
+            "completedAt": "2025-03-18T09:17:39.464Z",
+            "_id": "67d93a33b8d123a75a76ee02"
+        }
+    ],
+    "createdAt": "2025-03-18T08:26:10.865Z",
+    "updatedAt": "2025-03-18T09:17:39.609Z",
+    "__v": 2,
+    "missedDays": [
+        "2025-03-17"
+    ]
+}

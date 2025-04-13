@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "913269041676",
+    "project_id": "zen-active",
+    "storage_bucket": "zen-active.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:913269041676:android:fc5831f5dc502f82f41c29",
+        "android_client_info": {
+          "package_name": "com.decodersfamily.zenactive"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ9ItiZAf2dC4hWuSNW1le70eFpbslAmM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
