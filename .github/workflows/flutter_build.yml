@@ -3,7 +3,7 @@ name: Build Flutter APK and Create Release
 on:
   push:
     branches:
-      - api  # or use 'release' or any branch you prefer
+      - main  # or use 'release' or any branch you prefer
 
 jobs:
   build:
