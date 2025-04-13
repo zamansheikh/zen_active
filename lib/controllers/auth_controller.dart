@@ -129,7 +129,7 @@ class AuthController extends GetxController implements GetxService {
         },
         headers: headers,
       );
-      if (response.body["status"] == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         showSnackBar(
             message: response.body["message"],
             isSucess: response.body["status"] == 200);
@@ -157,7 +157,6 @@ class AuthController extends GetxController implements GetxService {
       final headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
       };
-      otp.logE();
       final response = await ApiClient.patchData(
         ApiConstant.otpVerify,
         {
@@ -166,6 +165,7 @@ class AuthController extends GetxController implements GetxService {
         },
         headers: headers,
       );
+      print(response.statusCode);
       if (response.statusCode == 200 || response.statusCode == 201) {
         showSnackBar(
             message: response.body["message"],
