@@ -1,9 +1,9 @@
 class ApiConstant {
-  static String baseUrl = "http://192.168.10.18:3500/api";
-  static String imageBaseUrl = "http://192.168.10.18:3500";
-
+  static String baseUrl = "http://82.25.85.126:3500/api";
+  static String imageBaseUrl = "http://82.25.85.126:3500/";
+  
   //  Socket service
-  static String socketUrl = "http://192.168.10.18:3500/";
+  static String socketUrl = "http://82.25.85.126:3500/";
   //Auth Service
   static String authLogin = "/auth/login";
   static String getMe = "/user/me";
