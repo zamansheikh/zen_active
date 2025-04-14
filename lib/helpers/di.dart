@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zenactive/controllers/auth_controller.dart';
-import 'package:zenactive/views/screen/Splash/controller/splash_controller.dart';
+import 'package:zenactive/views/screen/splash/controller/splash_controller.dart';
 import 'package:zenactive/controllers/community_group_controller.dart';
 import '../controllers/home_controller.dart';
 import '../controllers/localization_controller.dart';
