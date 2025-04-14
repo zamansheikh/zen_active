@@ -17,7 +17,7 @@ import 'package:zenactive/services/api_constant.dart';
 import 'package:zenactive/utils/app_logger.dart';
 import 'package:zenactive/utils/prefs_helper.dart';
 import 'package:zenactive/utils/uitls.dart';
-import 'package:zenactive/views/screen/Splash/controller/splash_controller.dart';
+import 'package:zenactive/views/screen/splash/controller/splash_controller.dart';
 import 'package:zenactive/views/screen/profile/reward_confirmation_page.dart';
 
 class AuthController extends GetxController implements GetxService {
