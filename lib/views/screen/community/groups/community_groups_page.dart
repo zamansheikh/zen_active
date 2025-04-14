@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zenactive/controllers/community_group_controller.dart';
 import 'package:zenactive/views/components/slidable_tab_bar.dart';
-import 'package:zenactive/views/screen/community/Groups/community_groups_your_groups.dart';
+import 'package:zenactive/views/screen/community/groups/community_groups_your_groups.dart';
 import 'package:zenactive/views/screen/community/groups/community_groups_discover.dart';
 import 'package:zenactive/views/screen/community/groups/community_groups_posts.dart';
 
