@@ -17,15 +17,21 @@ import 'controllers/localization_controller.dart';
 import 'controllers/theme_controller.dart';
 import 'helpers/di.dart' as di;
 import 'helpers/route.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
+  await dotenv.load(fileName: ".env"); // Load environment variables
   WidgetsFlutterBinding.ensureInitialized();
+  final apiKey = dotenv.env['GEMINI_API_KEY'];
+  if (apiKey == null || apiKey.isEmpty) {
+    throw Exception('Gemini API key not found in .env file');
+  }
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await FirebaseNotificationService.initialize();
   Get.put(DownloadService());
-  GeminiService.init(apiKey: "AIzaSyCP7WPliATqWAZnEBCgGS6Xm7XVWteSShM");
+  GeminiService.init(apiKey: apiKey);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: AppColors
         .scaffoldBackgroundColor, // Change this to your preferred color

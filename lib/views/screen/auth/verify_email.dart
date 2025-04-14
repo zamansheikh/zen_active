@@ -39,7 +39,10 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                       ),
                       SizedBox(height: 48.h),
                       CustomOTPField(
-                        onPressed: (otp) {},
+                        isLoading: false,
+                        onPressed: (otp) {
+                          print('OTP: $otp');
+                        },
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

@@ -114,12 +114,14 @@ class _UserInfoFiveState extends State<UserInfoFive> {
                   },
                 ),
                 SizedBox(height: 24.h),
-                CustomButton(
-                    isLoading: _authController.isLoading.value,
-                    buttonName: 'Submit',
-                    onPressed: () {
-                      _authController.updateUserDetails();
-                    }),
+                Obx(() {
+                  return CustomButton(
+                      isLoading: _authController.isLoading.value,
+                      buttonName: 'Submit',
+                      onPressed: () {
+                        _authController.updateUserDetails();
+                      });
+                }),
                 SizedBox(height: 40.h),
               ],
             ),

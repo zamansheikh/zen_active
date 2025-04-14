@@ -52,16 +52,19 @@ class _SignupScreenState extends State<SignupScreen> {
                   controller: _authController.confirmPasswordController,
                 ),
                 SizedBox(height: 20.h),
-                CustomButton(
-                    buttonName: 'Sign Up',
-                    onPressed: () {
-                      _authController.signUp(
-                        email: _authController.emailController.text,
-                        password: _authController.passwordController.text,
-                        confirmPassword:
-                            _authController.confirmPasswordController.text,
-                      );
-                    }),
+                Obx(() {
+                  return CustomButton(
+                      buttonName: 'Sign Up',
+                      isLoading: _authController.isLoading.value,
+                      onPressed: () {
+                        _authController.signUp(
+                          email: _authController.emailController.text,
+                          password: _authController.passwordController.text,
+                          confirmPassword:
+                              _authController.confirmPasswordController.text,
+                        );
+                      });
+                }),
                 SizedBox(height: 10.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

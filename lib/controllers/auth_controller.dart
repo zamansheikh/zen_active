@@ -132,8 +132,7 @@ class AuthController extends GetxController implements GetxService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         showSnackBar(
             message: response.body["message"],
-            isSucess: response.body["status"] == 200);
-        response.body.toString().logE();
+            isSucess: response.statusCode == 200 || response.statusCode == 201);
         isLoading.value = false;
         Get.offNamed(
           AppRoutes.otpVerify,
@@ -165,7 +164,6 @@ class AuthController extends GetxController implements GetxService {
         },
         headers: headers,
       );
-      print(response.statusCode);
       if (response.statusCode == 200 || response.statusCode == 201) {
         showSnackBar(
             message: response.body["message"],
@@ -176,6 +174,7 @@ class AuthController extends GetxController implements GetxService {
           AppRoutes.signInScreen,
         );
       } else {
+        ApiChecker.checkApi(response);
         isLoading.value = false;
       }
     } catch (e) {

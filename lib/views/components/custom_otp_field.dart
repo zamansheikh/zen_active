@@ -4,8 +4,9 @@ import 'package:zenactive/utils/app_colors.dart';
 import 'package:zenactive/views/components/custom_button.dart';
 
 class CustomOTPField extends StatefulWidget {
-  const CustomOTPField({super.key, this.onPressed});
+  const CustomOTPField({super.key, this.onPressed, this.isLoading = false});
   final Function(String)? onPressed;
+  final bool isLoading;
 
   @override
   CustomOTPFieldState createState() => CustomOTPFieldState();
@@ -96,6 +97,7 @@ class CustomOTPFieldState extends State<CustomOTPField> {
           SizedBox(height: 24),
           CustomButton(
             buttonName: "Verify",
+            isLoading: widget.isLoading,
             onPressed: widget.onPressed != null
                 ? () => widget.onPressed!(pinController.text)
                 : null,
