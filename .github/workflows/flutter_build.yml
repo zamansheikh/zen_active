@@ -3,7 +3,7 @@ name: Build Flutter APK and Create Release
 on:
   push:
     branches:
-      - main  # or use 'release' or any branch you prefer
+      - main  # or your preferred branch
 
 jobs:
   build:
@@ -12,13 +12,16 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4  # Updated to latest version
+        uses: actions/checkout@v4
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          # flutter-version: '3.29.2'  # Updated to latest stable Flutter version
+
+      # 👇 NEW STEP: Generate .env file from GitHub secret
+      - name: Generate .env file
+        run: echo "${{ secrets.ENV_FILE }}" > .env
 
       - name: Install dependencies
         run: flutter pub get
@@ -27,7 +30,7 @@ jobs:
         run: flutter build apk --release
 
       - name: Upload Release Asset
-        uses: softprops/action-gh-release@v2  # Updated to latest version
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: v1.0.${{ github.run_number }}
           name: Release v1.0.${{ github.run_number }}
