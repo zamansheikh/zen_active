@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:zenactive/controllers/community_group_controller.dart';
 import 'package:zenactive/utils/uitls.dart';
 import 'package:zenactive/views/components/custom_search_bar.dart';
-import 'package:zenactive/views/screen/community/Groups/community_groups_create_group.dart';
+import 'package:zenactive/views/screen/community/groups/community_groups_create_group.dart';
 import 'package:zenactive/views/screen/community/groups/community_group_details.dart';
 
 class CommunityGroupsYourGroups extends StatefulWidget {
