@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zenactive/controllers/community_feed_controller.dart';
 import 'package:zenactive/views/components/community_app_bar.dart';
-import 'package:zenactive/views/screen/community/Groups/community_groups_page.dart';
+import 'package:zenactive/views/screen/community/groups/community_groups_page.dart';
 import 'package:zenactive/views/screen/community/community_feed_page.dart';
-import 'package:zenactive/views/screen/community/Friends/community_friends_page.dart';
+import 'package:zenactive/views/screen/community/friends/community_friends_page.dart';
 import 'package:zenactive/views/screen/community/community_messages_page.dart';
 import 'package:zenactive/views/screen/community/community_notifications_page.dart';
 

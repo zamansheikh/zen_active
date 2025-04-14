@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:zenactive/controllers/community_group_controller.dart';
 import 'package:zenactive/utils/uitls.dart';
 import 'package:zenactive/views/components/custom_button.dart';
-import 'package:zenactive/views/screen/community/Groups/community_groups_describe_your_goal.dart';
+import 'package:zenactive/views/screen/community/groups/community_groups_describe_your_goal.dart';
 
 class CommunityGroupsCoverPhoto extends StatelessWidget {
   const CommunityGroupsCoverPhoto({super.key});

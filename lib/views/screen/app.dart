@@ -4,7 +4,7 @@ import 'package:zenactive/views/screen/challenges/challenges_page.dart';
 import 'package:zenactive/views/screen/community/community_app.dart';
 import 'package:zenactive/views/screen/home/home_screen.dart';
 import 'package:zenactive/views/screen/profile/profile_page.dart';
-import 'package:zenactive/views/screen/Workout/workout_page.dart';
+import 'package:zenactive/views/screen/workout/workout_page.dart';
 
 class App extends StatefulWidget {
   const App({super.key});

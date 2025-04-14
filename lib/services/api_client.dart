@@ -8,7 +8,7 @@ import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:http/http.dart' as http;
 import 'package:zenactive/utils/prefs_helper.dart';
 import 'package:http_parser/http_parser.dart';
-import '../Utils/app_constants.dart';
+import '../utils/app_constants.dart';
 import 'api_constant.dart';
 
 class ApiClient extends GetxService {
