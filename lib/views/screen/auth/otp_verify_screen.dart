@@ -42,13 +42,16 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                         width: 100.w,
                       ),
                       SizedBox(height: 48.h),
-                      CustomOTPField(
-                        onPressed: (otp) {
-                          _authController.verifyOTP(
-                            email: email,
-                            otp: otp,
-                          );
-                        },
+                      Obx(
+                        () => CustomOTPField(
+                          isLoading: _authController.isLoading.value,
+                          onPressed: (otp) {
+                            _authController.verifyOTP(
+                              email: email,
+                              otp: otp,
+                            );
+                          },
+                        ),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -63,6 +66,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                           ),
                           TextButton(
                             onPressed: () {
+                              // _authController.resendOTP(email);
                               Get.snackbar(
                                 'Resend OTP',
                                 'OTP has been resent to your mobile number',
