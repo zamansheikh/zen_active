@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:zenactive/Utils/app_constants.dart';
+import 'package:zenactive/utils/app_constants.dart';
 import 'package:zenactive/controllers/user_info_controller.dart';
 import 'package:zenactive/helpers/route.dart';
 import 'package:zenactive/helpers/socket_service.dart';

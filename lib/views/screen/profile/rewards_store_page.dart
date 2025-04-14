@@ -4,7 +4,7 @@ import 'package:zenactive/controllers/auth_controller.dart';
 import 'package:zenactive/utils/uitls.dart';
 import 'package:zenactive/views/components/custom_app_bar.dart';
 import 'package:zenactive/views/components/custom_loading.dart';
-import 'package:zenactive/views/screen/Profile/redeem_rewards_store_page.dart';
+import 'package:zenactive/views/screen/profile/redeem_rewards_store_page.dart';
 
 class RewardsStorePage extends StatefulWidget {
   const RewardsStorePage({super.key});

@@ -6,7 +6,7 @@ import 'package:zenactive/views/components/custom_app_bar.dart';
 import 'package:zenactive/views/components/custom_button.dart';
 import 'package:zenactive/views/components/custom_loading.dart';
 import 'package:zenactive/views/components/custom_search_bar.dart';
-import 'package:zenactive/views/screen/community/Groups/community_groups_cover_photo.dart';
+import 'package:zenactive/views/screen/community/groups/community_groups_cover_photo.dart';
 
 class CommunityGroupsInvite extends StatefulWidget {
   final bool hasNext;

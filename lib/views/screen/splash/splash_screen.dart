@@ -8,7 +8,7 @@ import 'package:zenactive/utils/app_colors.dart';
 import 'package:zenactive/utils/app_constants.dart';
 import 'package:zenactive/utils/uitls.dart';
 import 'package:zenactive/views/components/custom_button.dart';
-import 'package:zenactive/views/screen/Splash/controller/splash_controller.dart';
+import 'package:zenactive/views/screen/splash/controller/splash_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
