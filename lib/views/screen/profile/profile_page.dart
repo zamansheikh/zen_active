@@ -52,7 +52,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             return Container(
                               width: 140,
                               height: 140,
-                              color: Colors.transparent,
+                              color: AppColors.splashColor,
                               child: Center(
                                 child: Icon(
                                   Icons.error,
