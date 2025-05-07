@@ -25,9 +25,9 @@ Welcome to **Zen Active**, your ultimate fitness companion designed to inspire a
   <img src="assets/view/1.png" alt="Screenshot 1" width="100%">
 </p>
 <p align="center">
-  <img src="assets/view/2.png" alt="Screenshot 2" width="33%">
-  <img src="assets/view/3.png" alt="Screenshot 3" width="33%">
-  <img src="assets/view/4.png" alt="Screenshot 4" width="33%">
+  <img src="assets/view/2.png" alt="Screenshot 2" width="32%">
+  <img src="assets/view/3.png" alt="Screenshot 3" width="32%">
+  <img src="assets/view/4.png" alt="Screenshot 4" width="32%">
 </p>
 
 
