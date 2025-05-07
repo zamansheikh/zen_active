@@ -1,5 +1,7 @@
 # Zen Active
-![App Logo](assets/view/0.png)
+<p align="center">
+  <img src="assets/view/0.png" alt="App Logo">
+</p>
 
 Welcome to **Zen Active**, your ultimate fitness companion designed to inspire a healthier, more balanced lifestyle! Built with Flutter, Zen Active is a cross-platform mobile app for Android and iOS, offering personalized tools and an AI-powered fitness chatbot to help you crush workouts, plan meals, track progress, and manage stress.
 
