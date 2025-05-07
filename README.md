@@ -19,12 +19,15 @@ Welcome to **Zen Active**, your ultimate fitness companion designed to inspire a
 
 ## 📸 Screenshots
 
-  
-![Screenshot 1](assets/view/1.png)  
-![Screenshot 2](assets/view/2.png)  
-![Screenshot 3](assets/view/3.png)
+<p align="center">
+  <img src="assets/view/1.png" alt="Screenshot 1" width="100%">
+</p>
+<p align="center">
+  <img src="assets/view/2.png" alt="Screenshot 2" width="33%">
+  <img src="assets/view/3.png" alt="Screenshot 3" width="33%">
+  <img src="assets/view/4.png" alt="Screenshot 4" width="33%">
+</p>
 
----
 
 ## 🛠️ Tech Stack
 
