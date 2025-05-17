@@ -48,6 +48,19 @@ class _ProfilePageState extends State<ProfilePage> {
                           width: 140,
                           height: 140,
                           fit: BoxFit.cover,
+                          errorBuilder: (_, error, stackTrace) {
+                            return Container(
+                              width: 140,
+                              height: 140,
+                              color: AppColors.splashColor,
+                              child: Center(
+                                child: Icon(
+                                  Icons.error,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       );
                     }),
