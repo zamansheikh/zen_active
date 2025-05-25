@@ -43,6 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   bool checkPoint = false;
   late Future<void> _userFuture; // Add a future
+  bool _isPopupShowing = false; // Track popup state
+  Timer? _popupTimer; // Track the timer
 
   List<String> reminders = [
     'Feeling tired? A quick nap could recharge you!',
@@ -72,14 +74,21 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _showRandomPopup() {
+    // Don't schedule new popup if one is already showing
+    if (_isPopupShowing) return;
+
     final random = Random();
     final delay =
         Duration(seconds: random.nextInt(checkPoint ? 100 : 2000) + 100);
 
-    Timer(delay, () {
-      if (mounted) {
+    _popupTimer = Timer(delay, () {
+      // Double check that no popup is showing and widget is still mounted
+      if (mounted && !_isPopupShowing) {
+        _isPopupShowing = true; // Mark popup as showing
+
         showDialog(
           context: context,
+          barrierDismissible: true, // Allow dismissing by tapping outside
           builder: (BuildContext context) {
             return AlertDialog(
               //Make color transparent padding: EdgeInsets.zero,
@@ -91,12 +100,15 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             );
           },
-        );
-
-        setState(() {
-          checkPoint = false;
+        ).then((_) {
+          // When dialog is dismissed (either by user action or programmatically)
+          _isPopupShowing = false; // Mark popup as closed
+          setState(() {
+            checkPoint = false;
+          });
+          // Schedule the next popup only after current one is closed
+          _showRandomPopup();
         });
-        _showRandomPopup(); // Schedule the next popup
       }
     });
   }
@@ -104,6 +116,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _refreshData() async {
     homeController.getUserMealPlan();
     homeController.getDailyChallenges();
+  }
+
+  @override
+  void dispose() {
+    // Cancel any pending timer to prevent memory leaks
+    _popupTimer?.cancel();
+    super.dispose();
   }
 
   @override
