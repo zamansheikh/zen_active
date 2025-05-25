@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int slidableIndex = 0;
   List<String> images = [];
 
-  bool checkPoint = true;
+  bool checkPoint = false;
   late Future<void> _userFuture; // Add a future
 
   List<String> reminders = [
@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void _showRandomPopup() {
     final random = Random();
     final delay =
-        Duration(seconds: random.nextInt(checkPoint ? 100 : 1000) + 50);
+        Duration(seconds: random.nextInt(checkPoint ? 100 : 2000) + 100);
 
     Timer(delay, () {
       if (mounted) {
