@@ -31,7 +31,8 @@ class CommunityFeedPage extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(999),
                       child: Image.network(
-                        imageUrl(Get.find<AuthController>().user.value.image!),
+                        imageUrl(
+                            Get.find<AuthController>().user.value.image ?? ""),
                         height: 40,
                         width: 40,
                         fit: BoxFit.cover,

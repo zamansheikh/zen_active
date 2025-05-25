@@ -44,7 +44,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       return ClipRRect(
                         borderRadius: BorderRadius.circular(100),
                         child: Image.network(
-                          imageUrl(authController.user.value.image!),
+                          imageUrl(authController.user.value.image ?? ""),
                           width: 140,
                           height: 140,
                           fit: BoxFit.cover,
@@ -98,7 +98,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 Obx(() {
                   return Text(
-                    "${authController.user.value.name!.firstName!} ${authController.user.value.name!.lastName!}",
+                    "${authController.user.value.name?.firstName ?? ""} ${authController.user.value.name?.lastName ?? ""}",
                     style: kTextStyle.copyWith(
                       fontSize: 26,
                       color: Color(0xff3a3a3a),
@@ -128,14 +128,14 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       achievement(
                         "Calorie Burned",
-                        "You have burned ${authController.user.value.userAppData!.gainedCalories!.toStringAsFixed(0)} calories.",
+                        "You have burned ${authController.user.value.userAppData?.gainedCalories?.toStringAsFixed(0) ?? "0"} calories.",
                       ),
                       const SizedBox(
                         width: 12,
                       ),
                       achievement(
                         "Points",
-                        "You have earned ${authController.user.value.userAppData!.points!} points",
+                        "You have earned ${authController.user.value.userAppData?.points ?? 0} points",
                       ),
                     ],
                   ),
